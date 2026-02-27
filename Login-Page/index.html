@@ -1,0 +1,77 @@
+<!-- ======================= index.html ======================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ElderCare Connect - Login</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app-container">
+
+
+<!-- Step Indicator -->
+<div class="step-indicator">
+<span id="stepText">Step 1 of 2</span>
+</div>
+
+
+<!-- ================= STEP 1 ================ -->
+<div class="card" id="step1">
+<h2>Welcome to ElderCare Connect</h2>
+<p class="subtitle">Create your account</p>
+
+
+<input type="text" placeholder="Full Name" />
+<input type="email" placeholder="Email Address" />
+<input type="password" placeholder="Password" />
+
+
+<button onclick="goToStep2()">Continue</button>
+</div>
+
+
+<!-- ================= STEP 2 ================= -->
+<div class="card hidden" id="step2">
+<h2>Personal Details</h2>
+<p class="subtitle">Help us care better</p>
+
+
+<input type="tel" placeholder="Mobile Number" />
+
+
+<select>
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+
+<input type="number" placeholder="Age" />
+<input type="text" placeholder="City" />
+<input type="text" placeholder="State" />
+
+
+<!-- Extra useful for elderly care -->
+<input type="text" placeholder="Primary Health Condition (optional)" />
+
+
+<button onclick="submitForm()">Finish</button>
+</div>
+
+
+<!-- Success Message -->
+<div class="card hidden" id="success">
+<h2>Account Created ✅</h2>
+<p>You can now access your health dashboard.</p>
+</div>
+
+
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>

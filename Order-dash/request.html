@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediQuick - Order Medicine</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons (free CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="request.css" />
+  <link rel="stylesheet" href="location.css" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+    <a href="#"><i class="fa-solid fa-bell"></i> Reminders</a>
+    <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+  </div>
+
+  <!-- Sidebar dark backdrop -->
+  <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- EMERGENCY BANNER (hidden by default) -->
+  <div id="emergencyBanner" class="emergency-banner hidden">
+    <i class="fa-solid fa-siren-on"></i>
+    <span>🚨 EMERGENCY MODE ACTIVE &nbsp;—&nbsp; Priority Dispatch Enabled • Avg. 10 min</span>
+    <i class="fa-solid fa-siren-on"></i>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <!-- Left side: menu + location -->
+    <div class="left-group">
+      <button class="menu-btn" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <button class="location-btn" onclick="openMiniPanel()">
+        <i class="fa-solid fa-location-dot"></i>
+        <span id="locationText">Your Location</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+
+    <!-- Right side: cart + profile -->
+    <div class="right-icons">
+      <a href="cart.html" class="cart-btn">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cartCount" class="cart-badge">0</span>
+      </a>
+
+      <button class="profile-btn">
+        <i class="fa-solid fa-user"></i>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- Location mini panel (small dropdown) -->
+  <div id="miniPanel" class="mini-panel hidden">
+    <button onclick="openPopup()">Change Location</button>
+  </div>
+
+  <!-- Location popup overlay (dark background) -->
+  <div id="overlay" class="overlay hidden" onclick="closePopup()"></div>
+
+  <!-- Location popup box -->
+  <div id="locationPopup" class="popup hidden">
+    <h2>Set Your Location</h2>
+
+    <button class="gps-btn" onclick="useGPS()">
+      <i class="fa-solid fa-location-dot"></i>
+      Use Current Location (GPS)
+    </button>
+
+    <p class="popup-or">— OR —</p>
+
+    <input id="pincodeInput" type="text" maxlength="6" placeholder="Enter 6-digit pincode" />
+    <button class="confirm-btn" onclick="usePincode()">Confirm Location</button>
+
+    <p class="helper-text">We use your location to find nearby medical stores.</p>
+
+    <button class="popup-close-btn" onclick="closePopup()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- Greeting + Emergency Toggle Row -->
+    <div class="greeting-row">
+      <p class="greeting" id="greetingText">Good day! What medicine do you need?</p>
+      <button class="emergency-toggle" id="emergencyToggle" onclick="toggleEmergency()">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span id="emergencyLabel">Emergency</span>
+      </button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-wrap">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <div class="search-divider"></div>
+      <input class="search-input" type="text" placeholder="Search For Medicine" id="searchInput" />
+    </div>
+
+    <!-- OR divider -->
+    <p class="or-text">— OR —</p>
+
+    <!-- Prescription Upload Box -->
+    <div class="upload-box">
+      <i class="fa-solid fa-file-medical upload-icon"></i>
+      <p class="upload-title">Scan / Upload your Rx</p>
+      <p class="upload-sub">Upload a photo of your prescription</p>
+      <button class="upload-btn">
+        <i class="fa-solid fa-upload"></i>
+        Upload Prescription
+      </button>
+    </div>
+
+    <!-- Demo button (just for hackathon demo) -->
+    <button class="demo-btn" onclick="addToCart({ id: 1, name: 'Paracetamol 500mg', price: 20 })">
+      + Add Paracetamol (Demo)
+    </button>
+
+  </main>
+
+  <!-- ===== VERIFIED PARTNER PHARMACIES SECTION ===== -->
+  <section class="pharmacy-section">
+
+    <!-- Section Header -->
+    <div class="pharmacy-header">
+      <div class="pharmacy-header-left">
+        <span class="pharmacy-shield">🛡</span>
+        <h2 class="pharmacy-title">Verified Partner Pharmacies</h2>
+      </div>
+      <div class="pharmacy-sort">
+        Sorted by distance <span class="sort-arrow">↓</span>
+      </div>
+    </div>
+    <p class="pharmacy-subtext">All stores are licensed &amp; integrated with MediQuick</p>
+
+    <!-- Store Cards Grid -->
+    <div class="pharmacy-grid">
+
+      <!-- Card 1 -->
+      <div class="store-card">
+        <div class="store-img-wrap">
+          <div class="store-img-placeholder">
+            <i class="fa-solid fa-capsules"></i>
+          </div>
+          <span class="store-open-badge">Open</span>
+        </div>
+        <div class="store-info">
+          <h3 class="store-name">Shree Ganesh Medical</h3>
+          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.6 <span class="review-count">(124 reviews)</span>
+          </p>
+          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 1.2 km away</p>
+          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 11:00 PM</p>
+          <div class="store-delivery">
+            <i class="fa-solid fa-circle-check"></i> 20–30 min delivery
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="store-card">
+        <div class="store-img-wrap">
+          <div class="store-img-placeholder store-img-green">
+            <i class="fa-solid fa-pills"></i>
+          </div>
+          <span class="store-open-badge">Open</span>
+        </div>
+        <div class="store-info">
+          <h3 class="store-name">Apollo Pharmacy</h3>
+          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.8 <span class="review-count">(312 reviews)</span>
+          </p>
+          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 1.8 km away</p>
+          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 10:00 PM</p>
+          <div class="store-delivery">
+            <i class="fa-solid fa-circle-check"></i> 15–25 min delivery
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="store-card">
+        <div class="store-img-wrap">
+          <div class="store-img-placeholder store-img-blue">
+            <i class="fa-solid fa-kit-medical"></i>
+          </div>
+          <span class="store-open-badge">Open</span>
+        </div>
+        <div class="store-info">
+          <h3 class="store-name">Medline Drug Store</h3>
+          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.3 <span class="review-count">(87 reviews)</span>
+          </p>
+          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 2.1 km away</p>
+          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 9:30 PM</p>
+          <div class="store-delivery">
+            <i class="fa-solid fa-circle-check"></i> 25–35 min delivery
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="store-card">
+        <div class="store-img-wrap">
+          <div class="store-img-placeholder store-img-purple">
+            <i class="fa-solid fa-prescription-bottle-medical"></i>
+          </div>
+          <span class="store-open-badge">Open</span>
+        </div>
+        <div class="store-info">
+          <h3 class="store-name">LifeCare Pharmacy</h3>
+          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.5 <span class="review-count">(205 reviews)</span>
+          </p>
+          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 2.5 km away</p>
+          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 12:00 AM</p>
+          <div class="store-delivery">
+            <i class="fa-solid fa-circle-check"></i> 20–40 min delivery
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="store-card">
+        <div class="store-img-wrap">
+          <div class="store-img-placeholder store-img-orange">
+            <i class="fa-solid fa-syringe"></i>
+          </div>
+          <span class="store-open-badge">Open</span>
+        </div>
+        <div class="store-info">
+          <h3 class="store-name">Wellness Plus Medical</h3>
+          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.7 <span class="review-count">(178 reviews)</span>
+          </p>
+          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 3.0 km away</p>
+          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 10:30 PM</p>
+          <div class="store-delivery">
+            <i class="fa-solid fa-circle-check"></i> 30–45 min delivery
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="store-card">
+        <div class="store-img-wrap">
+          <div class="store-img-placeholder store-img-teal">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <span class="store-closed-badge">Closed</span>
+        </div>
+        <div class="store-info store-info-closed">
+          <h3 class="store-name">HealthMart Pharmacy</h3>
+          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.4 <span class="review-count">(99 reviews)</span>
+          </p>
+          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 3.4 km away</p>
+          <p class="store-hours"><i class="fa-regular fa-clock"></i> Opens 8:00 AM</p>
+          <div class="store-delivery store-delivery-inactive">
+            <i class="fa-solid fa-ban"></i> Currently Closed
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="store-card">
+        <div class="store-img-wrap">
+          <div class="store-img-placeholder store-img-red">
+            <i class="fa-solid fa-stethoscope"></i>
+          </div>
+          <span class="store-open-badge">Open</span>
+        </div>
+        <div class="store-info">
+          <h3 class="store-name">CityMed Drugstore</h3>
+          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.2 <span class="review-count">(66 reviews)</span>
+          </p>
+          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 3.9 km away</p>
+          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 11:30 PM</p>
+          <div class="store-delivery">
+            <i class="fa-solid fa-circle-check"></i> 35–50 min delivery
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="store-card">
+        <div class="store-img-wrap">
+          <div class="store-img-placeholder store-img-indigo">
+            <i class="fa-solid fa-tablets"></i>
+          </div>
+          <span class="store-open-badge">Open</span>
+        </div>
+        <div class="store-info">
+          <h3 class="store-name">QuickMeds 24/7</h3>
+          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.9 <span class="review-count">(430 reviews)</span>
+          </p>
+          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 4.3 km away</p>
+          <p class="store-hours"><i class="fa-regular fa-clock"></i> Open 24 hours</p>
+          <div class="store-delivery">
+            <i class="fa-solid fa-circle-check"></i> 40–55 min delivery
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .pharmacy-grid -->
+  </section>
+
+  <script src="request.js"></script>
+  <script src="location.js"></script>
+  <script src="cart.js"></script>
+  <script src="emergency.js"></script>
+
+</body>
+
+</html>

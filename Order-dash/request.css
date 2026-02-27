@@ -1,0 +1,837 @@
+/* ===================================================
+   MediQuick - request.css
+   Simple, beginner-friendly styles
+   =================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+body {
+  background-color: #edf8f9;
+}
+
+
+/* ========== SIDEBAR ========== */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  /* hidden off screen */
+  width: 260px;
+  height: 100%;
+  background: white;
+  box-shadow: 3px 0 12px rgba(0, 0, 0, 0.12);
+  padding-top: 80px;
+  transition: left 0.3s;
+  z-index: 1300;
+}
+
+.sidebar.open {
+  left: 0;
+  /* slide in */
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  text-decoration: none;
+  color: #333;
+  font-size: 17px;
+}
+
+.sidebar a:hover {
+  background: #e0f7f9;
+  color: #0ea5b0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #f0f0f0;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1200;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+
+/* ========== HEADER ========== */
+
+.header {
+  width: 100%;
+  height: 64px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.right-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Hamburger button */
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #333;
+  padding: 6px;
+}
+
+/* Location pill button */
+.location-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #e0f7f9;
+  border: 1.5px solid #b2dfe4;
+  border-radius: 30px;
+  padding: 7px 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0b8f99;
+  cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cart button */
+.cart-btn {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #333;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 6px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Profile button */
+.profile-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #333;
+  cursor: pointer;
+  padding: 6px;
+}
+
+
+/* ========== MINI LOCATION PANEL ========== */
+
+.mini-panel {
+  position: absolute;
+  top: 68px;
+  left: 70px;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 900;
+}
+
+.mini-panel.hidden {
+  display: none;
+}
+
+.mini-panel button {
+  background: #0ea5b0;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+/* ========== LOCATION POPUP ========== */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1400;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  z-index: 1500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup.show {
+  opacity: 1;
+  pointer-events: all;
+  transform: translate(-50%, -50%);
+}
+
+.popup h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  color: #1a2332;
+}
+
+.gps-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+  background: #e0f7f9;
+  color: #0b8f99;
+  border: 2px solid #b2dfe4;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.popup-or {
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  margin: 16px 0;
+}
+
+.popup input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #cde8eb;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+.popup input:focus {
+  border-color: #0ea5b0;
+}
+
+.confirm-btn {
+  width: 100%;
+  padding: 14px;
+  background: #0ea5b0;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.helper-text {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+}
+
+.popup-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #f0f0f0;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/* ========== MAIN CONTENT ========== */
+
+.main {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 36px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.greeting {
+  font-size: 20px;
+  font-weight: 600;
+  color: #4a5568;
+  text-align: center;
+}
+
+/* Search bar */
+.search-wrap {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #cde8eb;
+  border-radius: 50px;
+  padding: 10px 20px;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #0ea5b0;
+}
+
+.search-divider {
+  width: 1.5px;
+  height: 22px;
+  background: #cde8eb;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  color: #333;
+  background: transparent;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+/* OR label */
+.or-text {
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Upload box */
+.upload-box {
+  background: white;
+  border: 2px dashed #b2dfe4;
+  border-radius: 20px;
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 48px;
+  color: #0ea5b0;
+}
+
+.upload-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #1a2332;
+}
+
+.upload-sub {
+  font-size: 15px;
+  color: #718096;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 14px 28px;
+  background: #0ea5b0;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Demo button */
+.demo-btn {
+  background: #f4f4f4;
+  color: #555;
+  border: 1.5px dashed #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+
+/* ========== MOBILE ========== */
+
+@media (max-width: 480px) {
+  .location-btn {
+    max-width: 150px;
+    font-size: 13px;
+  }
+}
+
+
+/* ========== VERIFIED PARTNER PHARMACIES SECTION ========== */
+
+.pharmacy-section {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  padding: 0 18px;
+}
+
+/* ---- Section header row ---- */
+.pharmacy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.pharmacy-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pharmacy-shield {
+  font-size: 22px;
+}
+
+.pharmacy-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a2332;
+}
+
+.pharmacy-sort {
+  font-size: 13px;
+  color: #0b8f99;
+  font-weight: 600;
+  background: #e0f7f9;
+  border: 1.5px solid #b2dfe4;
+  border-radius: 20px;
+  padding: 5px 14px;
+  white-space: nowrap;
+}
+
+.sort-arrow {
+  font-weight: 700;
+}
+
+.pharmacy-subtext {
+  font-size: 13px;
+  color: #9aacb5;
+  margin-bottom: 20px;
+}
+
+/* ---- 3-column grid ---- */
+.pharmacy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* ---- Individual store card ---- */
+.store-card {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  transition: transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+}
+
+.store-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(14, 165, 176, 0.15);
+}
+
+/* ---- Store image / icon area ---- */
+.store-img-wrap {
+  position: relative;
+}
+
+.store-img-placeholder {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  background: linear-gradient(135deg, #e0f7f9, #b2dfe4);
+  color: #0ea5b0;
+}
+
+/* Colour variants for icon backgrounds */
+.store-img-green {
+  background: linear-gradient(135deg, #d4f5e9, #a8e6cf);
+  color: #27ae60;
+}
+
+.store-img-blue {
+  background: linear-gradient(135deg, #dce8ff, #b3ccf7);
+  color: #2563eb;
+}
+
+.store-img-purple {
+  background: linear-gradient(135deg, #ede9fe, #c4b5fd);
+  color: #7c3aed;
+}
+
+.store-img-orange {
+  background: linear-gradient(135deg, #fff0d9, #fcd9a5);
+  color: #d97706;
+}
+
+.store-img-teal {
+  background: linear-gradient(135deg, #ccfbf1, #99f6e4);
+  color: #0d9488;
+}
+
+.store-img-red {
+  background: linear-gradient(135deg, #ffe4e6, #fca5a5);
+  color: #dc2626;
+}
+
+.store-img-indigo {
+  background: linear-gradient(135deg, #e0e7ff, #a5b4fc);
+  color: #4338ca;
+}
+
+/* ---- Open / Closed badge ---- */
+.store-open-badge,
+.store-closed-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.4px;
+}
+
+.store-open-badge {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.store-closed-badge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ---- Store info area ---- */
+.store-info {
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.store-info-closed {
+  opacity: 0.6;
+}
+
+.store-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a2332;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.store-rating {
+  font-size: 13px;
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.store-rating .review-count {
+  color: #9aacb5;
+  font-weight: 400;
+}
+
+.store-distance,
+.store-hours {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.store-distance i {
+  color: #0ea5b0;
+}
+
+.store-hours i {
+  color: #9aacb5;
+}
+
+/* ---- Delivery tag ---- */
+.store-delivery {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #e0f7f9;
+  color: #0b8f99;
+  border-radius: 8px;
+  padding: 5px 10px;
+  width: fit-content;
+}
+
+.store-delivery i {
+  color: #0ea5b0;
+}
+
+.store-delivery-inactive {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+
+.store-delivery-inactive i {
+  color: #9ca3af;
+}
+
+
+/* ---- Responsive: 2 columns on tablet ---- */
+@media (max-width: 860px) {
+  .pharmacy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---- Responsive: 1 column on mobile ---- */
+@media (max-width: 520px) {
+  .pharmacy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pharmacy-title {
+    font-size: 17px;
+  }
+
+  .store-img-placeholder {
+    height: 90px;
+    font-size: 34px;
+  }
+}
+
+
+/* ========== EMERGENCY MODE ========== */
+
+/* ---- Top banner ---- */
+.emergency-banner {
+  background: linear-gradient(90deg, #c0392b, #e74c3c, #c0392b);
+  background-size: 200% 100%;
+  animation: emergencyPulse 1.4s ease-in-out infinite;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  letter-spacing: 0.4px;
+  position: sticky;
+  top: 64px;
+  /* below the header */
+  z-index: 999;
+}
+
+.emergency-banner.hidden {
+  display: none;
+}
+
+@keyframes emergencyPulse {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* ---- Greeting row (greeting + toggle) ---- */
+.greeting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---- Emergency toggle button (default: calm teal) ---- */
+.emergency-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.emergency-toggle:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+/* ---- Active state when emergency is ON ---- */
+.emergency-toggle.active {
+  background: #e74c3c;
+  border-color: #e74c3c;
+  color: white;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.2);
+  animation: togglePulse 1.2s ease-in-out infinite;
+}
+
+@keyframes togglePulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(231, 76, 60, 0.08);
+  }
+}
+
+/* ---- Header tint when emergency is ON ---- */
+body.emergency-on .header {
+  background: linear-gradient(90deg, #fff5f5, #fff);
+  border-bottom: 2px solid #fca5a5;
+}
+
+/* ---- Red glow on store cards in emergency mode ---- */
+body.emergency-on .store-card:hover {
+  box-shadow: 0 8px 24px rgba(231, 76, 60, 0.18);
+}
+
+/* ---- Emergency delivery tag override (JS adds this class) ---- */
+.store-delivery.emergency-active {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1.5px solid #fca5a5;
+}
+
+.store-delivery.emergency-active i {
+  color: #dc2626;
+}
+
+/* ---- Mobile: stack greeting + toggle vertically ---- */
+@media (max-width: 480px) {
+  .location-btn {
+    max-width: 150px;
+    font-size: 13px;
+  }
+
+  .greeting-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

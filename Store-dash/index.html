@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – Store Manager</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="store.css" />
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="sm-header">
+        <div class="sm-header-left">
+            <div class="sm-logo">
+                <i class="fa-solid fa-store"></i>
+            </div>
+            <div>
+                <h1 class="sm-store-name">Shree Ganesh Medical</h1>
+                <p class="sm-store-loc"><i class="fa-solid fa-location-dot"></i> Akola, Maharashtra</p>
+            </div>
+        </div>
+        <div class="sm-header-right">
+            <!-- Open / Closed toggle -->
+            <div class="store-status-wrap">
+                <span class="store-status-label" id="statusLabel">Store Open</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="storeToggle" checked onchange="toggleStoreStatus()" />
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="sm-avatar"><i class="fa-solid fa-user-tie"></i></div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN LAYOUT ===== -->
+    <div class="sm-layout">
+
+        <!-- ===== LEFT: STOCK PANEL ===== -->
+        <aside class="stock-panel">
+            <div class="panel-header">
+                <h2><i class="fa-solid fa-boxes-stacked"></i> Stock Manager</h2>
+                <button class="add-stock-btn" onclick="openAddStockModal()">
+                    <i class="fa-solid fa-plus"></i> Add Item
+                </button>
+            </div>
+
+            <div class="stock-search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="stockSearchInput" placeholder="Search stock..." oninput="filterStock()" />
+            </div>
+
+            <!-- Stock list -->
+            <div class="stock-list" id="stockList">
+                <!-- Populated by JS -->
+            </div>
+        </aside>
+
+        <!-- ===== RIGHT: ORDERS PANEL ===== -->
+        <main class="orders-panel">
+
+            <!-- Stats row -->
+            <div class="stats-row">
+                <div class="stat-card stat-pending">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <p class="stat-number" id="statPending">0</p>
+                        <p class="stat-label">Pending</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-accepted">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div>
+                        <p class="stat-number" id="statAccepted">0</p>
+                        <p class="stat-label">Accepted</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-delivered">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <div>
+                        <p class="stat-number" id="statDelivered">0</p>
+                        <p class="stat-label">Delivered</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-revenue">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <div>
+                        <p class="stat-number" id="statRevenue">₹0</p>
+                        <p class="stat-label">Today's Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders header -->
+            <div class="orders-header">
+                <h2><i class="fa-solid fa-bell"></i> Incoming Orders
+                    <span class="orders-live-dot"></span>
+                </h2>
+                <span class="orders-count-badge" id="orderCountBadge">0 new</span>
+            </div>
+
+            <!-- Order list -->
+            <div class="order-list" id="orderList">
+                <div class="orders-empty">
+                    <i class="fa-solid fa-inbox"></i>
+                    <p>Waiting for orders...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== ADD STOCK MODAL ===== -->
+    <div class="modal-overlay hidden" id="modalOverlay" onclick="closeAddStockModal()"></div>
+    <div class="modal hidden" id="addStockModal">
+        <h3><i class="fa-solid fa-capsules"></i> Add New Stock Item</h3>
+        <label>Medicine Name</label>
+        <input type="text" id="newItemName" placeholder="e.g. Paracetamol 500mg" />
+        <label>Quantity</label>
+        <input type="number" id="newItemQty" placeholder="e.g. 100" min="0" />
+        <label>Unit Price (₹)</label>
+        <input type="number" id="newItemPrice" placeholder="e.g. 25" min="0" />
+        <div class="modal-actions">
+            <button class="modal-cancel" onclick="closeAddStockModal()">Cancel</button>
+            <button class="modal-save" onclick="saveNewStockItem()">Add to Stock</button>
+        </div>
+    </div>
+
+    <script src="store.js"></script>
+
+</body>
+
+</html>

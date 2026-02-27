@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediQuick - Your Cart</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="cart.css" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="request.html"><i class="fa-solid fa-pills"></i> Order Medicine</a>
+    <a href="#"><i class="fa-solid fa-bell"></i> Reminders</a>
+    <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+  </div>
+
+  <!-- Sidebar dark backdrop -->
+  <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <!-- Left: menu + location -->
+    <div class="left-group">
+      <button class="menu-btn" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="location-pill">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Your Location</span>
+      </div>
+    </div>
+
+    <!-- Right: cart + profile -->
+    <div class="right-icons">
+      <a href="cart.html" class="cart-btn">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cartCount" class="cart-badge">0</span>
+      </a>
+      <button class="profile-btn">
+        <i class="fa-solid fa-user"></i>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <h1>Your Cart</h1>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <main class="cart-items-page">
+
+    <!-- LEFT: Cart Items -->
+    <section class="cart-items">
+
+      <!-- Empty cart message (shown when cart is empty) -->
+      <div id="emptyCart" class="empty-cart">
+        <i class="fa-solid fa-cart-shopping empty-icon"></i>
+        <h2>Your cart is empty</h2>
+        <p>Search for medicine to add items here</p>
+        <button class="explore-btn" onclick="window.location.href='request.html'">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          Find Medicine
+        </button>
+      </div>
+
+      <!-- Cart items list (filled by cart-ui.js) -->
+      <div id="cartList"></div>
+
+      <!-- Place Order button — shown only when cart has items -->
+      <button id="placeOrderBtn" class="place-order-btn" style="display: none;">
+        <i class="fa-solid fa-check"></i>
+        Place Order
+      </button>
+
+    </section>
+
+
+
+
+  </main>
+
+  <script src="cart.js"></script>
+  <script src="cart-ui.js"></script>
+
+</body>
+
+</html>

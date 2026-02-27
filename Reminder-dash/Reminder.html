@@ -1,0 +1,70 @@
+<!-- ======================= dashboard.html ======================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElderCare Connect - Dashboard</title>
+  <link rel="stylesheet" href="reminder.css" />
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>ElderCare Connect</h1>
+      <span class="profile">👤</span>
+    </div>
+
+    <!-- Greeting Card -->
+    <div class="greeting-card">
+      <h2>Good Morning,  👵</h2>
+      <p>Monday, 17 February</p>
+    </div>
+
+    <!-- Medicines Card -->
+    <div class="card">
+      <h3>Today’s Medicines</h3>
+
+      <div class="medicine">
+        <div class="dot taken"></div>
+        <div class="info">
+          <p class="time">8:00 AM - BP Tablet</p>
+          <span class="note">After breakfast</span>
+        </div>
+        <span class="status done">✓ Taken</span>
+      </div>
+
+      <div class="medicine">
+        <div class="dot pending"></div>
+        <div class="info">
+          <p class="time">2:00 PM - Diabetes Tablet</p>
+          <span class="note">Before lunch</span>
+        </div>
+        <button class="take-btn">Take Now</button>
+      </div>
+
+      <div class="medicine">
+        <div class="dot pending"></div>
+        <div class="info">
+          <p class="time">8:00 PM - Vitamin Tablet</p>
+          <span class="note">After dinner</span>
+        </div>
+        <button class="take-btn">Take Now</button>
+      </div>
+    </div>
+
+    <!-- Request Medicine Button -->
+    <button class="request-btn" onclick="goToRequest()">Request Medicine</button>
+
+    <p class="helper-text">
+      Running low on medicines? Request from your trusted pharmacy in one tap.
+    </p>
+
+  </div>
+
+  <script src="reminder.js"></script>
+
+</body>
+</html>
+
