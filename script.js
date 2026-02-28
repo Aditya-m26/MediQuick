@@ -70,10 +70,10 @@ function handleLogin(event, role) {
   showRoutingOverlay(msg, function () {
     if (role === 'patient') {
       /* Route to patient order dashboard */
-      window.location.href = '../Order-dash/request.html';
+      window.location.href = 'Order-dash/request.html';
     } else {
       /* Route to store manager dashboard */
-      window.location.href = '../Store-dash/index.html';
+      window.location.href = 'Store-dash/index.html';
     }
   });
 }
@@ -90,9 +90,9 @@ function handleSignup(event, role) {
 
   showRoutingOverlay(msg, function () {
     if (role === 'patient') {
-      window.location.href = '../Order-dash/request.html';
+      window.location.href = 'Order-dash/request.html';
     } else {
-      window.location.href = '../Store-dash/index.html';
+      window.location.href = 'Store-dash/index.html';
     }
   });
 }
