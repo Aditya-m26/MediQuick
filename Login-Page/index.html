@@ -1,77 +1,379 @@
-<!-- ======================= index.html ======================= -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ElderCare Connect - Login</title>
-<link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-<div class="app-container">
 
+    <!-- ===== SPLIT LAYOUT ===== -->
+    <div class="page-wrap">
 
-<!-- Step Indicator -->
-<div class="step-indicator">
-<span id="stepText">Step 1 of 2</span>
-</div>
+        <!-- LEFT PANEL – branding -->
+        <div class="brand-panel">
+            <div class="brand-content">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-kit-medical"></i>
+                </div>
+                <h1 class="brand-name">MediQuick</h1>
+                <p class="brand-tagline">City-wide rapid medicine delivery.<br />Smart. Fast. Trusted.</p>
 
+                <ul class="brand-features">
+                    <li><i class="fa-solid fa-circle-check"></i> 15–20 min delivery</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Verified partner pharmacies</li>
+                    <li><i class="fa-solid fa-circle-check"></i> AI prescription scanning</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Emergency priority dispatch</li>
+                </ul>
+            </div>
+            <!-- decorative circles -->
+            <div class="deco-circle deco-1"></div>
+            <div class="deco-circle deco-2"></div>
+        </div>
 
-<!-- ================= STEP 1 ================ -->
-<div class="card" id="step1">
-<h2>Welcome to ElderCare Connect</h2>
-<p class="subtitle">Create your account</p>
+        <!-- RIGHT PANEL – auth forms -->
+        <div class="auth-panel">
+            <div class="auth-card">
 
+                <!-- Logo (mobile only) -->
+                <div class="mobile-logo">
+                    <i class="fa-solid fa-kit-medical"></i>
+                    <span>MediQuick</span>
+                </div>
 
-<input type="text" placeholder="Full Name" />
-<input type="email" placeholder="Email Address" />
-<input type="password" placeholder="Password" />
+                <!-- ===== ROLE SELECTOR ===== -->
+                <p class="auth-label">I am a…</p>
+                <div class="role-selector" id="roleSelector">
+                    <button class="role-btn active" id="rolePatient" onclick="selectRole('patient')">
+                        <i class="fa-solid fa-user-injured"></i>
+                        <span>Patient</span>
+                    </button>
+                    <button class="role-btn" id="roleManager" onclick="selectRole('manager')">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Store Manager</span>
+                    </button>
+                </div>
 
+                <!-- ===== TAB BAR (Sign In / Sign Up) ===== -->
+                <div class="tab-bar">
+                    <button class="tab-btn active" id="tabSignIn" onclick="switchTab('signin')">Sign In</button>
+                    <button class="tab-btn" id="tabSignUp" onclick="switchTab('signup')">Sign Up</button>
+                </div>
 
-<button onclick="goToStep2()">Continue</button>
-</div>
+                <!-- ========================================
+             PATIENT FORMS
+             ======================================== -->
+                <div id="patientForms">
 
+                    <!-- Patient Sign In -->
+                    <form class="auth-form" id="patientSignIn" onsubmit="handleLogin(event, 'patient')">
+                        <h2 class="form-title">Welcome back</h2>
+                        <p class="form-sub">Sign in to order medicines & track deliveries</p>
 
-<!-- ================= STEP 2 ================= -->
-<div class="card hidden" id="step2">
-<h2>Personal Details</h2>
-<p class="subtitle">Help us care better</p>
+                        <div class="field-group">
+                            <label>Email Address</label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" placeholder="you@example.com" required />
+                            </div>
+                        </div>
 
+                        <div class="field-group">
+                            <label>Password</label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="patientSignInPwd" placeholder="Enter password" required />
+                                <button type="button" class="eye-btn" onclick="togglePwd('patientSignInPwd', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
 
-<input type="tel" placeholder="Mobile Number" />
+                        <a href="#" class="forgot-link">Forgot password?</a>
 
+                        <button type="submit" class="submit-btn">
+                            <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                        </button>
 
-<select>
-<option value="">Select Gender</option>
-<option>Male</option>
-<option>Female</option>
-<option>Other</option>
-</select>
+                        <p class="switch-text">
+                            Don't have an account? <a href="#" onclick="switchTab('signup'); return false;">Sign Up</a>
+                        </p>
+                    </form>
 
+                    <!-- Patient Sign Up -->
+                    <form class="auth-form hidden" id="patientSignUp" onsubmit="handleSignup(event, 'patient')">
+                        <h2 class="form-title">Create account</h2>
+                        <p class="form-sub">Complete your profile to get started</p>
 
-<input type="number" placeholder="Age" />
-<input type="text" placeholder="City" />
-<input type="text" placeholder="State" />
+                        <div class="form-section-label">Personal Info</div>
 
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Full Name <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-user"></i>
+                                    <input type="text" name="fullName" placeholder="Rahul Sharma" required />
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Mobile Number <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="tel" name="mobile" placeholder="9876543210" maxlength="10"
+                                        pattern="[0-9]{10}" required />
+                                </div>
+                            </div>
+                        </div>
 
-<!-- Extra useful for elderly care -->
-<input type="text" placeholder="Primary Health Condition (optional)" />
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Gender <span class="req">*</span></label>
+                                <div class="input-wrap select-wrap">
+                                    <i class="fa-solid fa-venus-mars"></i>
+                                    <select name="gender" required>
+                                        <option value="">Select gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                        <option value="prefer_not">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Age <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-cake-candles"></i>
+                                    <input type="number" name="age" placeholder="e.g. 45" min="1" max="120" required />
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>City <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-city"></i>
+                                    <input type="text" name="city" placeholder="Akola" required />
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>State <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-map"></i>
+                                    <input type="text" name="state" placeholder="Maharashtra" required />
+                                </div>
+                            </div>
+                        </div>
 
-<button onclick="submitForm()">Finish</button>
-</div>
+                        <div class="field-group">
+                            <label>Primary Health Condition <span class="opt">(optional)</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                                <input type="text" name="healthCondition" placeholder="e.g. Diabetes, Hypertension" />
+                            </div>
+                        </div>
 
+                        <div class="form-section-label" style="margin-top:4px;">Account Credentials</div>
 
-<!-- Success Message -->
-<div class="card hidden" id="success">
-<h2>Account Created ✅</h2>
-<p>You can now access your health dashboard.</p>
-</div>
+                        <div class="field-group">
+                            <label>Email Address <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" name="email" placeholder="you@example.com" required />
+                            </div>
+                        </div>
 
+                        <div class="field-group">
+                            <label>Password <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="patientSignUpPwd" name="password"
+                                    placeholder="Min. 8 characters" minlength="8" required />
+                                <button type="button" class="eye-btn" onclick="togglePwd('patientSignUpPwd', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
 
-</div>
+                        <p class="terms-text">By signing up you agree to our <a href="#">Terms of Service</a> and <a
+                                href="#">Privacy Policy</a>.</p>
 
+                        <button type="submit" class="submit-btn">
+                            <i class="fa-solid fa-user-plus"></i> Create Account
+                        </button>
 
-<script src="script.js"></script>
+                        <p class="switch-text">
+                            Already have an account? <a href="#" onclick="switchTab('signin'); return false;">Sign
+                                In</a>
+                        </p>
+                    </form>
+
+                </div><!-- /patientForms -->
+
+                <!-- ========================================
+             STORE MANAGER FORMS
+             ======================================== -->
+                <div id="managerForms" class="hidden">
+
+                    <!-- Manager Sign In -->
+                    <form class="auth-form" id="managerSignIn" onsubmit="handleLogin(event, 'manager')">
+                        <h2 class="form-title">Manager portal</h2>
+                        <p class="form-sub">Sign in to manage stock &amp; incoming orders</p>
+
+                        <div class="field-group">
+                            <label>Email Address <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" name="email" placeholder="store@example.com" required />
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Password <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="managerSignInPwd" name="password"
+                                    placeholder="Enter password" required />
+                                <button type="button" class="eye-btn" onclick="togglePwd('managerSignInPwd', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <a href="#" class="forgot-link">Forgot password?</a>
+
+                        <button type="submit" class="submit-btn submit-btn-manager">
+                            <i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard
+                        </button>
+
+                        <p class="switch-text">
+                            New store? <a href="#" onclick="switchTab('signup'); return false;">Register here</a>
+                        </p>
+                    </form>
+
+                    <!-- Manager Sign Up -->
+                    <form class="auth-form hidden" id="managerSignUp" onsubmit="handleSignup(event, 'manager')">
+                        <h2 class="form-title">Register your store</h2>
+                        <p class="form-sub">Join the MediQuick partner network</p>
+
+                        <div class="form-section-label">Store Details</div>
+
+                        <div class="field-group">
+                            <label>Store / Pharmacy Name <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-store"></i>
+                                <input type="text" name="storeName" placeholder="e.g. Shree Ganesh Medical" required />
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Full Address <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <input type="text" name="address" placeholder="Shop no., Street, Area" required />
+                            </div>
+                        </div>
+
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>City <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-city"></i>
+                                    <input type="text" name="city" placeholder="Akola" required />
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Pincode <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-hashtag"></i>
+                                    <input type="text" name="pincode" placeholder="444001" maxlength="6"
+                                        pattern="[0-9]{6}" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Store Phone <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="tel" name="phone" placeholder="9876543210" maxlength="10"
+                                        pattern="[0-9]{10}" required />
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Drug Licence No. <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fa-solid fa-id-card"></i>
+                                    <input type="text" name="licenceNo" placeholder="MH-AK-12345" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section-label" style="margin-top:4px;">Account Credentials</div>
+
+                        <div class="field-group">
+                            <label>Owner / Manager Name <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-user-tie"></i>
+                                <input type="text" name="managerName" placeholder="Suresh Patil" required />
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Email Address <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" name="email" placeholder="manager@store.com" required />
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Password <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="managerSignUpPwd" name="password"
+                                    placeholder="Min. 8 characters" minlength="8" required />
+                                <button type="button" class="eye-btn" onclick="togglePwd('managerSignUpPwd', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <p class="terms-text">By registering you agree to our <a href="#">Partner Terms</a> and <a
+                                href="#">Privacy Policy</a>.</p>
+
+                        <button type="submit" class="submit-btn submit-btn-manager">
+                            <i class="fa-solid fa-store"></i> Register Store
+                        </button>
+
+                        <p class="switch-text">
+                            Already registered? <a href="#" onclick="switchTab('signin'); return false;">Sign In</a>
+                        </p>
+                    </form>
+
+                </div><!-- /managerForms -->
+
+            </div><!-- /auth-card -->
+        </div><!-- /auth-panel -->
+
+    </div><!-- /page-wrap -->
+
+    <!-- Loading overlay for routing animation -->
+    <div class="route-overlay hidden" id="routeOverlay">
+        <div class="route-spinner">
+            <i class="fa-solid fa-kit-medical"></i>
+        </div>
+        <p id="routeMsg">Signing in…</p>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>

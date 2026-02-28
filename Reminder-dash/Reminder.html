@@ -1,70 +1,244 @@
-<!-- ======================= dashboard.html ======================= -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ElderCare Connect - Dashboard</title>
+  <title>MediQuick – Reminders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="reminder.css" />
 </head>
+
 <body>
-  <div class="app-container">
 
-    <!-- Header -->
-    <div class="header">
-      <h1>ElderCare Connect</h1>
-      <span class="profile">👤</span>
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-kit-medical"></i></div>
+      <span>MediQuick</span>
     </div>
 
-    <!-- Greeting Card -->
-    <div class="greeting-card">
-      <h2>Good Morning,  👵</h2>
-      <p>Monday, 17 February</p>
+    <nav class="sidebar-nav">
+      <a href="../Order-dash/request.html" class="nav-link">
+        <i class="fa-solid fa-house"></i> <span>Home</span>
+      </a>
+      <a href="Reminder.html" class="nav-link active">
+        <i class="fa-solid fa-bell"></i> <span>Reminders</span>
+      </a>
+      <a href="../Order-dash/cart.html" class="nav-link">
+        <i class="fa-solid fa-cart-shopping"></i> <span>Cart</span>
+      </a>
+      <a href="../Profile-dash/index.html" class="nav-link">
+        <i class="fa-solid fa-user"></i> <span>Profile</span>
+      </a>
+    </nav>
+
+    <!-- Notification permission button -->
+    <button class="notif-btn" id="notifBtn" onclick="requestNotifPermission()">
+      <i class="fa-solid fa-bell-slash" id="notifIcon"></i>
+      <span id="notifText">Enable Alerts</span>
+    </button>
+
+    <!-- Today's summary box -->
+    <div class="sidebar-summary">
+      <p class="ss-title">Today</p>
+      <div class="ss-row">
+        <div class="ss-stat">
+          <span id="sideTaken">0</span>
+          <small>Taken</small>
+        </div>
+        <div class="ss-divider"></div>
+        <div class="ss-stat">
+          <span id="sideMissed">0</span>
+          <small>Missed</small>
+        </div>
+        <div class="ss-divider"></div>
+        <div class="ss-stat">
+          <span id="sidePending">0</span>
+          <small>Pending</small>
+        </div>
+      </div>
+      <!-- Ring -->
+      <div class="ring-wrap">
+        <svg class="progress-ring" viewBox="0 0 80 80">
+          <circle class="ring-bg" cx="40" cy="40" r="30" />
+          <circle class="ring-fill" id="progressRing" cx="40" cy="40" r="30" stroke-dasharray="188.5"
+            stroke-dashoffset="188.5" />
+        </svg>
+        <div class="ring-label">
+          <span id="ringPct">0%</span>
+          <small>done</small>
+        </div>
+      </div>
+      <div class="streak-row">
+        <i class="fa-solid fa-fire"></i>
+        <span id="streakNum">4</span>
+        <small>day streak</small>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN AREA ===== -->
+  <div class="main-area">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div>
+          <h1 class="topbar-title">My Reminders</h1>
+          <p class="topbar-date" id="topbarDate">—</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="add-fab-btn" onclick="openModal()">
+          <i class="fa-solid fa-plus"></i> Add Reminder
+        </button>
+      </div>
+    </header>
+
+    <!-- Tab bar -->
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tabDaily" onclick="switchTab('daily')">
+        <i class="fa-solid fa-clock"></i> Daily Schedule
+      </button>
+      <button class="tab-btn" id="tabRefill" onclick="switchTab('refill')">
+        <i class="fa-solid fa-triangle-exclamation"></i> Refill Alerts
+        <span class="tab-badge" id="tabBadge" style="display:none">0</span>
+      </button>
     </div>
 
-    <!-- Medicines Card -->
-    <div class="card">
-      <h3>Today’s Medicines</h3>
-
-      <div class="medicine">
-        <div class="dot taken"></div>
-        <div class="info">
-          <p class="time">8:00 AM - BP Tablet</p>
-          <span class="note">After breakfast</span>
-        </div>
-        <span class="status done">✓ Taken</span>
-      </div>
-
-      <div class="medicine">
-        <div class="dot pending"></div>
-        <div class="info">
-          <p class="time">2:00 PM - Diabetes Tablet</p>
-          <span class="note">Before lunch</span>
-        </div>
-        <button class="take-btn">Take Now</button>
-      </div>
-
-      <div class="medicine">
-        <div class="dot pending"></div>
-        <div class="info">
-          <p class="time">8:00 PM - Vitamin Tablet</p>
-          <span class="note">After dinner</span>
-        </div>
-        <button class="take-btn">Take Now</button>
+    <!-- DAILY TAB -->
+    <div id="dailyTab" class="tab-content">
+      <div id="reminderGrid" class="reminder-grid"></div>
+      <div id="dailyEmpty" class="empty-state hidden">
+        <i class="fa-solid fa-bell-slash"></i>
+        <p>No reminders yet.</p>
+        <button onclick="openModal()">Add your first reminder</button>
       </div>
     </div>
 
-    <!-- Request Medicine Button -->
-    <button class="request-btn" onclick="goToRequest()">Request Medicine</button>
+    <!-- REFILL TAB -->
+    <div id="refillTab" class="tab-content hidden">
+      <div id="refillGrid" class="refill-grid"></div>
+      <div id="refillEmpty" class="empty-state hidden">
+        <i class="fa-solid fa-circle-check"></i>
+        <p>All medicines well-stocked!</p>
+      </div>
+    </div>
 
-    <p class="helper-text">
-      Running low on medicines? Request from your trusted pharmacy in one tap.
-    </p>
+  </div><!-- /main-area -->
 
+  <!-- ===== ADD REMINDER MODAL ===== -->
+  <div class="overlay hidden" id="overlay" onclick="closeModal()"></div>
+  <div class="modal hidden" id="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle"><i class="fa-solid fa-bell"></i> Add Reminder</h3>
+      <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <div class="mf">
+        <label>Medicine Name <span class="req">*</span></label>
+        <div class="mi"><i class="fa-solid fa-capsules"></i><input type="text" id="mName"
+            placeholder="e.g. Paracetamol 500mg" /></div>
+      </div>
+
+      <div class="mf-row">
+        <div class="mf">
+          <label>Dose <span class="req">*</span></label>
+          <div class="mi"><i class="fa-solid fa-pills"></i><input type="text" id="mDose" placeholder="e.g. 1 tablet" />
+          </div>
+        </div>
+        <div class="mf">
+          <label>Time <span class="req">*</span></label>
+          <div class="mi"><i class="fa-solid fa-clock"></i><input type="time" id="mTime" /></div>
+        </div>
+      </div>
+
+      <div class="mf-row">
+        <div class="mf">
+          <label>Instruction</label>
+          <div class="mi">
+            <i class="fa-solid fa-utensils"></i>
+            <select id="mInstruction">
+              <option>After breakfast</option>
+              <option>Before breakfast</option>
+              <option>After lunch</option>
+              <option>Before lunch</option>
+              <option>After dinner</option>
+              <option>Before dinner</option>
+              <option>Empty stomach</option>
+              <option>Anytime</option>
+            </select>
+          </div>
+        </div>
+        <div class="mf">
+          <label>Frequency</label>
+          <div class="mi">
+            <i class="fa-solid fa-calendar-days"></i>
+            <select id="mFrequency">
+              <option>Daily</option>
+              <option>Twice daily</option>
+              <option>Every alternate day</option>
+              <option>Weekly</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="mf">
+        <label>Colour Tag</label>
+        <div class="colour-row" id="colourPicker">
+          <button class="cdot active" data-c="teal" style="background:#0ea5b0" onclick="pickColour(this)"></button>
+          <button class="cdot" data-c="green" style="background:#27ae60" onclick="pickColour(this)"></button>
+          <button class="cdot" data-c="purple" style="background:#7c3aed" onclick="pickColour(this)"></button>
+          <button class="cdot" data-c="orange" style="background:#f59e0b" onclick="pickColour(this)"></button>
+          <button class="cdot" data-c="red" style="background:#e74c3c" onclick="pickColour(this)"></button>
+          <button class="cdot" data-c="blue" style="background:#2563eb" onclick="pickColour(this)"></button>
+        </div>
+      </div>
+
+      <!-- Refill alert -->
+      <div class="refill-toggle-row">
+        <div>
+          <p class="rt-label">Enable Refill Alert</p>
+          <p class="rt-sub">Remind me when stock is low</p>
+        </div>
+        <label class="toggle-sw">
+          <input type="checkbox" id="mRefill" />
+          <span class="sw-track"></span>
+        </label>
+      </div>
+
+      <div id="refillExtra" class="refill-extra hidden">
+        <div class="mf-row">
+          <div class="mf">
+            <label>Current Stock</label>
+            <div class="mi"><i class="fa-solid fa-box"></i><input type="number" id="mStock" placeholder="e.g. 10"
+                min="0" /></div>
+          </div>
+          <div class="mf">
+            <label>Alert when below</label>
+            <div class="mi"><i class="fa-solid fa-triangle-exclamation"></i><input type="number" id="mAlertAt"
+                placeholder="e.g. 5" min="1" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" id="saveBtn" onclick="saveReminder()">
+        <i class="fa-solid fa-bell"></i> Save
+      </button>
+    </div>
   </div>
 
   <script src="reminder.js"></script>
-
 </body>
-</html>
 
+</html>

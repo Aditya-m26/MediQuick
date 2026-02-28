@@ -748,25 +748,18 @@ body {
   }
 }
 
-/* ---- Greeting row (greeting + toggle) ---- */
-.greeting-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+/* ---- Greeting row no longer needed (button moved to header) ---- */
 
-/* ---- Emergency toggle button (default: calm teal) ---- */
+/* ---- Emergency toggle button (lives in header) ---- */
 .emergency-toggle {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 9px 16px;
+  gap: 6px;
+  padding: 7px 13px;
   background: white;
   border: 2px solid #e5e7eb;
   border-radius: 50px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #6b7280;
   cursor: pointer;

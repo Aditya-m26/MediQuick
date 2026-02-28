@@ -24,8 +24,8 @@
       <i class="fa-solid fa-xmark"></i>
     </button>
     <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
-    <a href="#"><i class="fa-solid fa-bell"></i> Reminders</a>
-    <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="../Reminder-dash/reminder.html"><i class="fa-solid fa-bell"></i> Reminders</a>
+    <a href="../Profile-dash/index.html"><i class="fa-solid fa-user"></i> Profile</a>
   </div>
 
   <!-- Sidebar dark backdrop -->
@@ -54,16 +54,21 @@
       </button>
     </div>
 
-    <!-- Right side: cart + profile -->
+    <!-- Right side: emergency + cart + profile -->
     <div class="right-icons">
+      <button class="emergency-toggle" id="emergencyToggle" onclick="toggleEmergency()" title="Emergency Mode">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span id="emergencyLabel">Emergency</span>
+      </button>
+
       <a href="cart.html" class="cart-btn">
         <i class="fa-solid fa-cart-shopping"></i>
         <span id="cartCount" class="cart-badge">0</span>
       </a>
 
-      <button class="profile-btn">
+      <a href="../Profile-dash/index.html" class="profile-btn">
         <i class="fa-solid fa-user"></i>
-      </button>
+      </a>
     </div>
 
   </header>
@@ -100,14 +105,7 @@
   <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- Greeting + Emergency Toggle Row -->
-    <div class="greeting-row">
-      <p class="greeting" id="greetingText">Good day! What medicine do you need?</p>
-      <button class="emergency-toggle" id="emergencyToggle" onclick="toggleEmergency()">
-        <i class="fa-solid fa-truck-fast"></i>
-        <span id="emergencyLabel">Emergency</span>
-      </button>
-    </div>
+    <p class="greeting" id="greetingText">Good day! What medicine do you need?</p>
 
     <!-- Search Bar -->
     <div class="search-wrap">

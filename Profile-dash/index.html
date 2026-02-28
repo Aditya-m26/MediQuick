@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – My Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="profile.css" />
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon"><i class="fa-solid fa-kit-medical"></i></div>
+            <span>MediQuick</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../Order-dash/request.html" class="nav-link"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="../Reminder-dash/Reminder.html" class="nav-link"><i
+                    class="fa-solid fa-bell"></i><span>Reminders</span></a>
+            <a href="../Order-dash/cart.html" class="nav-link"><i
+                    class="fa-solid fa-cart-shopping"></i><span>Cart</span></a>
+            <a href="index.html" class="nav-link active"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+        </nav>
+
+        <!-- Avatar + name in sidebar -->
+        <div class="sidebar-avatar-block">
+            <div class="sidebar-avatar" id="sideAvatar">RK</div>
+            <p class="sidebar-name" id="sideName">Rahul Kumar</p>
+            <p class="sidebar-email" id="sideEmail">rahul@example.com</p>
+        </div>
+
+        <!-- Quick health summary -->
+        <div class="sidebar-health">
+            <p class="sh-label">Health Summary</p>
+            <div class="sh-item"><i class="fa-solid fa-droplet" style="color:#e74c3c"></i><span id="shBlood">—</span>
+            </div>
+            <div class="sh-item"><i class="fa-solid fa-weight-scale" style="color:#0ea5b0"></i><span
+                    id="shWeight">—</span></div>
+            <div class="sh-item"><i class="fa-solid fa-heart-pulse" style="color:#f59e0b"></i><span
+                    id="shCondition">—</span></div>
+            <div class="sh-item"><i class="fa-solid fa-syringe" style="color:#7c3aed"></i><span id="shAllergy">—</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN ===== -->
+    <div class="main-area">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+                <div>
+                    <h1 class="topbar-title">My Profile</h1>
+                    <p class="topbar-sub">Your health identity on MediQuick</p>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <button class="edit-toggle-btn" id="editToggleBtn" onclick="toggleEdit()">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+                </button>
+            </div>
+        </header>
+
+        <!-- Content grid -->
+        <div class="profile-grid">
+
+            <!-- ===== COL 1 – Avatar card ===== -->
+            <div class="avatar-card">
+                <div class="avatar-ring">
+                    <div class="big-avatar" id="bigAvatar">AM</div>
+                </div>
+                <h2 class="profile-name" id="dispName">Aditya Morey</h2>
+                <p class="profile-role">Patient <span class="verified-badge"><i class="fa-solid fa-circle-check"></i>
+                        Verified</span></p>
+                <p class="profile-since">Member since Feb 2026</p>
+
+                <div class="avatar-stats">
+                    <div class="as-item">
+                        <span id="statOrders">12</span>
+                        <small>Orders</small>
+                    </div>
+                    <div class="as-divider"></div>
+                    <div class="as-item">
+                        <span id="statReminders">6</span>
+                        <small>Reminders</small>
+                    </div>
+                    <div class="as-divider"></div>
+                    <div class="as-item">
+                        <span id="statStreak">4</span>
+                        <small>Day Streak</small>
+                    </div>
+                </div>
+
+                <!-- Emergency contact quick action -->
+                <button class="sos-btn" id="sosBtn">
+                    <i class="fa-solid fa-phone-flip"></i> SOS Contact
+                </button>
+                <p class="sos-name" id="sosDisplay">Name · 1234567890</p>
+            </div>
+
+            <!-- ===== COL 2 – Sections ===== -->
+            <div class="sections-col">
+
+                <!-- Personal Info -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <i class="fa-solid fa-user-circle" style="color:#0ea5b0"></i>
+                        <h3>Personal Information</h3>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Full Name</label>
+                            <p class="info-val" id="v-fullName">Aditya Morey</p>
+                            <input class="info-input hidden" id="e-fullName" type="text" value="Aditya Morey" />
+                        </div>
+                        <div class="info-item">
+                            <label>Mobile Number</label>
+                            <p class="info-val" id="v-mobile">1234567890</p>
+                            <input class="info-input hidden" id="e-mobile" type="tel" value="1234567890" />
+                        </div>
+                        <div class="info-item">
+                            <label>Email Address</label>
+                            <p class="info-val" id="v-email">[EMAIL_ADDRESS]</p>
+                            <input class="info-input hidden" id="e-email" type="email" value="[EMAIL_ADDRESS]" />
+                        </div>
+                        <div class="info-item">
+                            <label>Date of Birth</label>
+                            <p class="info-val" id="v-dob">15 Aug 1980</p>
+                            <input class="info-input hidden" id="e-dob" type="date" value="1980-08-15" />
+                        </div>
+                        <div class="info-item">
+                            <label>Gender</label>
+                            <p class="info-val" id="v-gender">Male</p>
+                            <select class="info-input hidden" id="e-gender">
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="info-item">
+                            <label>Age</label>
+                            <p class="info-val" id="v-age">19 years</p>
+                            <input class="info-input hidden" id="e-age" type="number" value="19" min="1" max="120" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Location -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <i class="fa-solid fa-location-dot" style="color:#e74c3c"></i>
+                        <h3>Delivery Address</h3>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item full-width">
+                            <label>Full Address</label>
+                            <p class="info-val" id="v-address">Plot 12, Near Ram Mandir</p>
+                            <input class="info-input hidden" id="e-address" type="text"
+                                value="Plot 12, Near Ram Mandir" />
+                        </div>
+                        <div class="info-item">
+                            <label>City</label>
+                            <p class="info-val" id="v-city">Akola</p>
+                            <input class="info-input hidden" id="e-city" type="text" value="Akola" />
+                        </div>
+                        <div class="info-item">
+                            <label>State</label>
+                            <p class="info-val" id="v-state">Maharashtra</p>
+                            <input class="info-input hidden" id="e-state" type="text" value="Maharashtra" />
+                        </div>
+                        <div class="info-item">
+                            <label>Pincode</label>
+                            <p class="info-val" id="v-pin">444001</p>
+                            <input class="info-input hidden" id="e-pin" type="text" value="444001" maxlength="6" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Health Info -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <i class="fa-solid fa-heart-pulse" style="color:#f59e0b"></i>
+                        <h3>Health Information</h3>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Blood Group</label>
+                            <p class="info-val" id="v-blood">B+</p>
+                            <select class="info-input hidden" id="e-blood">
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option selected>B-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                            </select>
+                        </div>
+                        <div class="info-item">
+                            <label>Weight</label>
+                            <p class="info-val" id="v-weight">72 kg</p>
+                            <input class="info-input hidden" id="e-weight" type="number" value="72" min="1" />
+                        </div>
+                        <div class="info-item">
+                            <label>Height</label>
+                            <p class="info-val" id="v-height">5′ 9″</p>
+                            <input class="info-input hidden" id="e-height" type="text" value="5′ 9″" />
+                        </div>
+                        <div class="info-item">
+                            <label>Primary Condition</label>
+                            <p class="info-val" id="v-condition">Type 2 Diabetes</p>
+                            <input class="info-input hidden" id="e-condition" type="text" value="Type 2 Diabetes" />
+                        </div>
+                        <div class="info-item full-width">
+                            <label>Known Allergies</label>
+                            <p class="info-val" id="v-allergy">Penicillin, Sulfa drugs</p>
+                            <input class="info-input hidden" id="e-allergy" type="text"
+                                value="Penicillin, Sulfa drugs" />
+                        </div>
+                        <div class="info-item full-width">
+                            <label>Current Medications</label>
+                            <p class="info-val" id="v-meds">Metformin 500mg, Atorvastatin 10mg</p>
+                            <input class="info-input hidden" id="e-meds" type="text"
+                                value="Metformin 500mg, Atorvastatin 10mg" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Emergency Contact -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <i class="fa-solid fa-phone-flip" style="color:#e74c3c"></i>
+                        <h3>Emergency Contact</h3>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Contact Name</label>
+                            <p class="info-val" id="v-ecName">Madhav</p>
+                            <input class="info-input hidden" id="e-ecName" type="text" value="Madhav" />
+                        </div>
+                        <div class="info-item">
+                            <label>Relationship</label>
+                            <p class="info-val" id="v-ecRel">Friend</p>
+                            <select class="info-input hidden" id="e-ecRel">
+                                <option>Spouse</option>
+                                <option>Parent</option>
+                                <option>Child</option>
+                                <option>Sibling</option>
+                                <option>Friend</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="info-item">
+                            <label>Phone Number</label>
+                            <p class="info-val" id="v-ecPhone">1234567890</p>
+                            <input class="info-input hidden" id="e-ecPhone" type="tel" value="1234567890" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Doctor Info -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <i class="fa-solid fa-user-doctor" style="color:#7c3aed"></i>
+                        <h3>Primary Doctor</h3>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Doctor Name</label>
+                            <p class="info-val" id="v-drName">Dr. Suresh Rathi</p>
+                            <input class="info-input hidden" id="e-drName" type="text" value="Dr. Suresh Rathi" />
+                        </div>
+                        <div class="info-item">
+                            <label>Specialisation</label>
+                            <p class="info-val" id="v-drSpec">Endocrinologist</p>
+                            <input class="info-input hidden" id="e-drSpec" type="text" value="Endocrinologist" />
+                        </div>
+                        <div class="info-item">
+                            <label>Doctor Phone</label>
+                            <p class="info-val" id="v-drPhone">0724-2345678</p>
+                            <input class="info-input hidden" id="e-drPhone" type="tel" value="0724-2345678" />
+                        </div>
+                        <div class="info-item">
+                            <label>Hospital / Clinic</label>
+                            <p class="info-val" id="v-drHosp">City Care Hospital, Akola</p>
+                            <input class="info-input hidden" id="e-drHosp" type="text"
+                                value="City Care Hospital, Akola" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Save bar (shown only in edit mode) -->
+                <div class="save-bar hidden" id="saveBar">
+                    <button class="btn-discard" onclick="cancelEdit()"><i class="fa-solid fa-xmark"></i>
+                        Discard</button>
+                    <button class="btn-save-profile" onclick="saveProfile()"><i class="fa-solid fa-floppy-disk"></i>
+                        Save Changes</button>
+                </div>
+
+            </div><!-- /sections-col -->
+        </div><!-- /profile-grid -->
+    </div><!-- /main-area -->
+
+    <!-- Toast notification -->
+    <div class="toast hidden" id="toast"><i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Saved!</span>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+
+</html>

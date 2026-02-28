@@ -1,79 +1,557 @@
+/* ==============================================
+   MediQuick – Login Page Styles
+   ============================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', Arial, sans-serif;
+}
 
 body {
-margin: 0;
-font-family: Arial, Helvetica, sans-serif;
-background: #eef3f6;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
+    min-height: 100vh;
+    background: #f0f4f8;
 }
 
+/* ========== SPLIT LAYOUT ========== */
 
-.app-container {
-width: 360px;
+.page-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
 }
 
+/* ========== LEFT – BRAND PANEL ========== */
 
-.step-indicator {
-text-align: center;
-margin-bottom: 10px;
-font-size: 14px;
-color: #666;
+.brand-panel {
+    background: linear-gradient(145deg, #0b8f99 0%, #0ea5b0 45%, #12c2cf 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 48px;
+    position: relative;
+    overflow: hidden;
 }
 
-
-.card {
-background: white;
-padding: 25px;
-border-radius: 16px;
-box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-display: flex;
-flex-direction: column;
-gap: 12px;
+.brand-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    max-width: 380px;
 }
 
+.brand-logo {
+    width: 72px;
+    height: 72px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(6px);
+}
+
+.brand-name {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.brand-tagline {
+    font-size: 17px;
+    line-height: 1.6;
+    opacity: 0.88;
+    margin-bottom: 40px;
+}
+
+.brand-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.brand-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.92;
+}
+
+.brand-features li i {
+    color: #a7f3d0;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* Decorative blurred circles */
+.deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 1;
+}
+
+.deco-1 {
+    width: 320px;
+    height: 320px;
+    bottom: -80px;
+    right: -80px;
+}
+
+.deco-2 {
+    width: 200px;
+    height: 200px;
+    top: -60px;
+    left: -60px;
+}
+
+/* ========== RIGHT – AUTH PANEL ========== */
+
+.auth-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    overflow-y: auto;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* Mobile logo (hidden on desktop) */
+.mobile-logo {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 800;
+    color: #0ea5b0;
+    margin-bottom: 28px;
+}
+
+.mobile-logo i {
+    font-size: 26px;
+}
+
+/* ========== ROLE SELECTOR ========== */
+
+.auth-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9aacb5;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 10px;
+}
+
+.role-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.role-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 12px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.role-btn i {
+    font-size: 28px;
+    color: #9aacb5;
+    transition: color 0.2s;
+}
+
+.role-btn:hover {
+    border-color: #0ea5b0;
+    color: #0ea5b0;
+}
+
+.role-btn:hover i {
+    color: #0ea5b0;
+}
+
+.role-btn.active {
+    border-color: #0ea5b0;
+    background: #e0f7f9;
+    color: #0b8f99;
+}
+
+.role-btn.active i {
+    color: #0b8f99;
+}
+
+/* Manager role active = slightly different accent */
+#roleManager.active {
+    border-color: #7c3aed;
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+#roleManager.active i {
+    color: #7c3aed;
+}
+
+/* ========== TAB BAR ========== */
+
+.tab-bar {
+    display: flex;
+    background: #f0f4f8;
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #9aacb5;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background: white;
+    color: #1a2332;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== AUTH FORMS ========== */
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.auth-form.hidden {
+    display: none;
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a2332;
+    margin-bottom: 2px;
+}
+
+.form-sub {
+    font-size: 14px;
+    color: #9aacb5;
+    margin-bottom: 4px;
+}
+
+/* Field group */
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrap>i {
+    position: absolute;
+    left: 14px;
+    color: #9aacb5;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.input-wrap input {
+    width: 100%;
+    padding: 13px 16px 13px 40px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #1a2332;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: white;
+}
+
+.input-wrap input:focus {
+    border-color: #0ea5b0;
+    box-shadow: 0 0 0 3px rgba(14, 165, 176, 0.12);
+}
+
+/* Eye toggle for password */
+.eye-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #9aacb5;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.eye-btn:hover {
+    color: #0ea5b0;
+}
+
+.forgot-link {
+    font-size: 13px;
+    color: #0ea5b0;
+    text-decoration: none;
+    text-align: right;
+    margin-top: -8px;
+    font-weight: 600;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Submit button */
+.submit-btn {
+    padding: 14px;
+    background: linear-gradient(135deg, #0ea5b0, #0b8f99);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s, transform 0.15s;
+    margin-top: 4px;
+}
+
+.submit-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Manager submit – purple accent */
+.submit-btn-manager {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+}
+
+.switch-text {
+    font-size: 13px;
+    color: #9aacb5;
+    text-align: center;
+}
+
+.switch-text a {
+    color: #0ea5b0;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.switch-text a:hover {
+    text-decoration: underline;
+}
+
+/* ---- Two-column field pair ---- */
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* ---- Section divider label inside form ---- */
+.form-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #0ea5b0;
+    padding: 6px 0 2px;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 2px;
+}
+
+/* ---- Required / Optional markers ---- */
+.req {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+.opt {
+    color: #9aacb5;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* ---- Select dropdown inside input-wrap ---- */
+.select-wrap select {
+    width: 100%;
+    padding: 13px 16px 13px 40px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #1a2332;
+    outline: none;
+    background: white;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.select-wrap select:focus {
+    border-color: #0ea5b0;
+    box-shadow: 0 0 0 3px rgba(14, 165, 176, 0.12);
+}
+
+.select-wrap>i {
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ---- Terms text ---- */
+.terms-text {
+    font-size: 12px;
+    color: #9aacb5;
+    text-align: center;
+    line-height: 1.5;
+    margin-top: -4px;
+}
+
+.terms-text a {
+    color: #0ea5b0;
+    text-decoration: none;
+}
+
+.terms-text a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive: stack field-row on very narrow screens */
+@media (max-width: 380px) {
+    .field-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hidden utility */
 
 .hidden {
-display: none;
+    display: none !important;
 }
 
+/* ========== ROUTING OVERLAY ========== */
 
-h2 {
-margin: 0;
-text-align: center;
+.route-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    gap: 20px;
 }
 
-
-.subtitle {
-text-align: center;
-font-size: 14px;
-color: #777;
-margin-bottom: 10px;
+.route-spinner {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #0ea5b0, #0b8f99);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: white;
+    animation: spinBounce 1s ease-in-out infinite;
 }
 
+@keyframes spinBounce {
 
-input, select {
-padding: 12px;
-border-radius: 10px;
-border: 1px solid #ccc;
-font-size: 14px;
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
 }
 
-
-button {
-margin-top: 10px;
-padding: 14px;
-border: none;
-border-radius: 12px;
-background: #0aa6b5;
-color: white;
-font-size: 16px;
-cursor: pointer;
-transition: 0.2s ease;
+.route-overlay p {
+    font-size: 17px;
+    font-weight: 600;
+    color: #4a5568;
 }
 
+/* ========== RESPONSIVE ========== */
 
-button:hover {
-background: #088d99;
+@media (max-width: 768px) {
+    .page-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .brand-panel {
+        display: none;
+    }
+
+    .mobile-logo {
+        display: flex;
+    }
+
+    .auth-panel {
+        padding: 32px 20px;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+}
+
+@media (max-width: 420px) {
+    .role-btn {
+        padding: 14px 8px;
+        font-size: 13px;
+    }
+
+    .role-btn i {
+        font-size: 22px;
+    }
 }
