@@ -59,9 +59,11 @@ function togglePwd(inputId, btn) {
 
 /* =============================================
    BACKEND API BASE URL
-   Change this if your backend runs on a different port/host
+   Auto-detects: localhost → uses port 5000, production → relative /api
    ============================================= */
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000/api'
+  : '/api';
 
 /* =============================================
    HELPER – show an error toast inside the form

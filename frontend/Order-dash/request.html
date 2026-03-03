@@ -14,10 +14,7 @@
 
   <link rel="stylesheet" href="request.css" />
   <link rel="stylesheet" href="location.css" />
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
+
 </head>
 
 <body>
@@ -113,10 +110,16 @@
 
     <!-- Search Bar -->
     <div class="search-wrap">
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <button class="search-icon-btn" onclick="doSearch()" title="Search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      </button>
       <div class="search-divider"></div>
-      <input class="search-input" type="text" placeholder="Search For Medicine" id="searchInput" />
+      <input class="search-input" type="text" placeholder="Search For Medicine" id="searchInput" autocomplete="off"
+        oninput="onSearchInput(this.value)" onkeydown="if(event.key==='Enter') doSearch()" />
     </div>
+
+    <!-- Live suggestions dropdown -->
+    <div id="suggestionsBox" class="suggestions-box"></div>
 
     <!-- OR divider -->
     <p class="or-text">— OR —</p>

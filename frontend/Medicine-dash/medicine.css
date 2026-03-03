@@ -1,0 +1,865 @@
+/* ================================================
+   MediQuick – Medicine Detail (FA Icons, Full-Width)
+   ================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --teal: #0ea5b0;
+    --teal-dark: #0b8f99;
+    --teal-light: #e0f7f9;
+    --bg: #f0fafb;
+    --white: #ffffff;
+    --border: #d4eef1;
+    --text: #1a2332;
+    --text-mid: #4a5568;
+    --text-muted: #9aacb5;
+    --green: #10b981;
+    --green-bg: #d1fae5;
+    --red: #ef4444;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ─── SIDEBAR ─────────────────────────────────── */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background: var(--white);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    z-index: 1200;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: left 0.3s ease;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    align-self: flex-end;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-close:hover {
+    background: #f0f0f0;
+    color: var(--text);
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    border-radius: 12px;
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.18s, color 0.18s;
+}
+
+.sidebar a:hover {
+    background: var(--teal-light);
+    color: var(--teal-dark);
+}
+
+.sidebar a i {
+    width: 18px;
+    text-align: center;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.38);
+    z-index: 1100;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* ─── HEADER ──────────────────────────────────── */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px;
+    height: 62px;
+    background: var(--white);
+    border-bottom: 1.5px solid var(--border);
+    box-shadow: 0 2px 10px rgba(14, 165, 176, 0.07);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-mid);
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 10px;
+    transition: background 0.18s, color 0.18s;
+}
+
+.icon-btn:hover {
+    background: var(--teal-light);
+    color: var(--teal);
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    text-decoration: none;
+    color: var(--teal-dark);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 50px;
+    background: var(--teal-light);
+    transition: opacity 0.18s;
+}
+
+.back-btn:hover {
+    opacity: 0.8;
+}
+
+.header-search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    padding: 0 16px;
+    height: 40px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.header-search:focus-within {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(14, 165, 176, 0.12);
+    background: var(--white);
+}
+
+.hs-icon {
+    color: var(--teal);
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.header-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    outline: none;
+}
+
+.header-search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.hs-go {
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.18s;
+}
+
+.hs-go:hover {
+    opacity: 0.88;
+}
+
+.header-right {
+    flex-shrink: 0;
+}
+
+.cart-link {
+    position: relative;
+    font-size: 20px;
+    text-decoration: none;
+    color: var(--text-mid);
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    transition: background 0.18s, color 0.18s;
+}
+
+.cart-link:hover {
+    background: var(--teal-light);
+    color: var(--teal);
+}
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 18px;
+    height: 18px;
+    background: var(--red);
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-badge:empty {
+    display: none;
+}
+
+/* ─── LOADING ─────────────────────────────────── */
+.state-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 20px;
+    color: var(--text-muted);
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--teal-light);
+    border-top-color: var(--teal);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.state-loading p {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* ─── ERROR ───────────────────────────────────── */
+.state-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 16px;
+    text-align: center;
+    padding: 40px;
+}
+
+.error-icon {
+    font-size: 60px;
+    color: #fca5a5;
+}
+
+.state-error h2 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.state-error p {
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+.go-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: var(--teal);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    transition: opacity 0.18s;
+}
+
+.go-back-btn:hover {
+    opacity: 0.88;
+}
+
+/* ─── BREADCRUMB ──────────────────────────────── */
+.breadcrumb-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.breadcrumb-bar a {
+    color: var(--teal);
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.breadcrumb-bar a:hover {
+    text-decoration: underline;
+}
+
+.bc-sep {
+    font-size: 10px;
+    color: var(--border);
+}
+
+.breadcrumb-bar span:last-child {
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* ─── HERO ────────────────────────────────────── */
+.product-hero {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    min-height: 60vh;
+    width: 100%;
+}
+
+/* Left: image / illustration */
+.hero-img-side {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #84fab0, #8fd3f4);
+    /* overridden by JS */
+}
+
+/* Decorative blobs */
+.hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(48px);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.hero-blob.b1 {
+    width: 320px;
+    height: 320px;
+    background: rgba(255, 255, 255, 0.55);
+    top: -80px;
+    left: -80px;
+}
+
+.hero-blob.b2 {
+    width: 220px;
+    height: 220px;
+    background: rgba(255, 255, 255, 0.40);
+    bottom: -50px;
+    right: -50px;
+}
+
+.hero-blob.b3 {
+    width: 160px;
+    height: 160px;
+    background: rgba(255, 255, 255, 0.50);
+    bottom: 40px;
+    left: 60px;
+}
+
+/* FA medicine icon wrapper */
+.hero-med-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The actual icon – type applied by JS (e.g. fa-tablets, fa-syringe) */
+.hero-med-icon {
+    font-size: 110px;
+    color: rgba(255, 255, 255, 0.92);
+    filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.18));
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-14px);
+    }
+}
+
+/* Pack chip at bottom of image area */
+.hero-pack-chip {
+    position: absolute;
+    bottom: 24px;
+    background: rgba(255, 255, 255, 0.80);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 8px 22px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.hero-pack-chip:empty {
+    display: none;
+}
+
+/* Right: product info */
+.hero-info-side {
+    background: var(--white);
+    padding: 48px 56px 48px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+/* ── Badges ABOVE the name ── */
+.badges-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge-type {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    background: var(--teal-light);
+    color: var(--teal-dark);
+    padding: 6px 16px;
+    border-radius: 50px;
+    border: 1.5px solid var(--teal);
+}
+
+.badge-rx {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 50px;
+}
+
+.badge-rx.rx-required {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1.5px solid #fca5a5;
+}
+
+.badge-rx.rx-ok {
+    background: var(--green-bg);
+    color: #065f46;
+    border: 1.5px solid #6ee7b7;
+}
+
+/* ── Medicine name ── */
+.med-name {
+    font-size: clamp(24px, 3.2vw, 44px);
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+.med-category-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ── Price ── */
+.price-block {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.price-range {
+    font-size: clamp(26px, 3.2vw, 42px);
+    font-weight: 900;
+    color: var(--teal-dark);
+    letter-spacing: -0.5px;
+}
+
+.price-pack {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* ── Stock ── */
+.stock-row {
+    display: flex;
+}
+
+.stock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--green-bg);
+    color: #065f46;
+    padding: 6px 16px;
+    border-radius: 50px;
+}
+
+.stock-badge.out-of-stock {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* ── CTA ── */
+.cta-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.qty-ctrl {
+    display: flex;
+    align-items: center;
+    border: 2.5px solid var(--border);
+    border-radius: 50px;
+    overflow: hidden;
+    background: var(--bg);
+}
+
+.qty-btn {
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--teal-dark);
+    font-size: 14px;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty-btn:hover {
+    background: var(--teal-light);
+}
+
+.qty-val {
+    min-width: 42px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.add-cart-btn {
+    flex: 1;
+    min-width: 180px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 22px rgba(14, 165, 176, 0.32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.15s, opacity 0.18s;
+}
+
+.add-cart-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-2px);
+}
+
+.add-cart-btn:active {
+    transform: translateY(0);
+}
+
+.add-cart-btn:disabled {
+    opacity: 0.40;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── Rx notice below CTA ── */
+.rx-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #fffbeb;
+    border: 1.5px solid #fcd34d;
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: #92400e;
+    line-height: 1.55;
+    font-weight: 500;
+}
+
+.rx-notice i {
+    color: #f59e0b;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* ─── CONTENT BELOW HERO ──────────────────────── */
+.product-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 36px 28px 72px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content-card {
+    background: var(--white);
+    border-radius: 22px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(14, 165, 176, 0.07);
+}
+
+.card-heading {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--teal-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.desc-text {
+    font-size: 15.5px;
+    color: var(--text-mid);
+    line-height: 1.8;
+}
+
+/* ── Info tiles ── */
+.info-tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.info-tile {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 12px rgba(14, 165, 176, 0.07);
+    border: 1.5px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.info-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(14, 165, 176, 0.14);
+}
+
+/* FA icon inside tile – styled rounded bubble */
+.tile-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--teal-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tile-fa-icon {
+    font-size: 18px;
+    color: var(--teal-dark);
+}
+
+.tile-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--text-muted);
+}
+
+.tile-val {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+}
+
+/* ─── TOAST ───────────────────────────────────── */
+.toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1a2332;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+    z-index: 4000;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.toast i {
+    color: #34d399;
+    font-size: 16px;
+}
+
+/* ─── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 900px) {
+    .product-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .hero-img-side {
+        min-height: 280px;
+    }
+
+    .hero-med-icon {
+        font-size: 80px;
+    }
+
+    .hero-info-side {
+        padding: 32px 28px;
+    }
+
+    .info-tiles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .header-search {
+        display: none;
+    }
+
+    .breadcrumb-bar {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    .hero-info-side {
+        padding: 24px 18px;
+        gap: 14px;
+    }
+
+    .hero-med-icon {
+        font-size: 64px;
+    }
+
+    .add-cart-btn {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .cta-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .qty-ctrl {
+        justify-content: center;
+    }
+
+    .product-content {
+        padding: 16px 14px 64px;
+    }
+}

@@ -1,0 +1,402 @@
+[
+  {
+    "name": "Paracetamol 500 mg",
+    "category": "Analgesic / Antipyretic",
+    "description": "Used for relief of mild to moderate pain and fever.",
+    "price": "₹10–₹20 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Paracetamol 650 mg",
+    "category": "Analgesic / Antipyretic",
+    "description": "Used for fever and body pain management.",
+    "price": "₹15–₹30 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Amoxicillin 500 mg",
+    "category": "Antibiotic (Penicillin)",
+    "description": "Used for treatment of bacterial infections.",
+    "price": "₹50–₹120 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Amoxicillin + Clavulanic Acid",
+    "category": "Antibiotic Combination",
+    "description": "Used for resistant bacterial infections.",
+    "price": "₹120–₹250 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Azithromycin 500 mg",
+    "category": "Antibiotic (Macrolide)",
+    "description": "Used for respiratory and throat infections.",
+    "price": "₹60–₹150 (3 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cefixime 200 mg",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for typhoid and urinary infections.",
+    "price": "₹120–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Doxycycline 100 mg",
+    "category": "Antibiotic (Tetracycline)",
+    "description": "Used for bacterial infections and acne.",
+    "price": "₹40–₹100 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Metformin 500 mg",
+    "category": "Antidiabetic (Biguanide)",
+    "description": "Used for management of Type 2 diabetes.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Glimepiride 1 mg",
+    "category": "Antidiabetic (Sulfonylurea)",
+    "description": "Used to control blood glucose levels.",
+    "price": "₹30–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Insulin Regular",
+    "category": "Hormone (Antidiabetic)",
+    "description": "Used for blood glucose control in diabetes.",
+    "price": "₹140–₹200 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Amlodipine 5 mg",
+    "category": "Antihypertensive (CCB)",
+    "description": "Used for treatment of hypertension.",
+    "price": "₹15–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Atenolol 50 mg",
+    "category": "Beta Blocker",
+    "description": "Used for hypertension and cardiac conditions.",
+    "price": "₹20–₹50 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Losartan 50 mg",
+    "category": "Antihypertensive (ARB)",
+    "description": "Used for blood pressure control.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Atorvastatin 10 mg",
+    "category": "Statin",
+    "description": "Used to reduce cholesterol levels.",
+    "price": "₹25–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Omeprazole 20 mg",
+    "category": "Proton Pump Inhibitor",
+    "description": "Used for acid reflux and gastric ulcers.",
+    "price": "₹20–₹70 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pantoprazole 40 mg",
+    "category": "Proton Pump Inhibitor",
+    "description": "Used for GERD and acidity disorders.",
+    "price": "₹15–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rabeprazole 20 mg",
+    "category": "Proton Pump Inhibitor",
+    "description": "Used for treatment of peptic ulcers.",
+    "price": "₹40–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cetirizine 10 mg",
+    "category": "Antihistamine",
+    "description": "Used for allergy symptom relief.",
+    "price": "₹10–₹30 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Levocetirizine 5 mg",
+    "category": "Antihistamine",
+    "description": "Used for allergic rhinitis.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Montelukast 10 mg",
+    "category": "Leukotriene Antagonist",
+    "description": "Used for asthma and allergy management.",
+    "price": "₹80–₹180 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Salbutamol",
+    "category": "Bronchodilator",
+    "description": "Used for relief of bronchospasm in asthma.",
+    "price": "₹20–₹40 (inhaler)",
+    "type": "Inhaler",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Diclofenac 50 mg",
+    "category": "NSAID",
+    "description": "Used for pain and inflammation.",
+    "price": "₹15–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Tramadol 50 mg",
+    "category": "Opioid Analgesic",
+    "description": "Used for moderate to severe pain.",
+    "price": "₹50–₹120 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Prednisolone 10 mg",
+    "category": "Corticosteroid",
+    "description": "Used for inflammatory and autoimmune conditions.",
+    "price": "₹15–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ondansetron 4 mg",
+    "category": "Antiemetic",
+    "description": "Used for prevention of nausea and vomiting.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Aspirin 75 mg",
+    "category": "Antiplatelet / NSAID",
+    "description": "Prevents blood clots and reduces cardiovascular risk.",
+    "price": "₹10–₹30 (14 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clopidogrel 75 mg",
+    "category": "Antiplatelet",
+    "description": "Prevents clot formation in heart and stroke patients.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Enalapril 5 mg",
+    "category": "ACE Inhibitor",
+    "description": "Treats hypertension and heart failure.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ramipril 2.5 mg",
+    "category": "ACE Inhibitor",
+    "description": "Used for hypertension and cardiac protection.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Furosemide 40 mg",
+    "category": "Loop Diuretic",
+    "description": "Reduces fluid retention and edema.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Spironolactone 25 mg",
+    "category": "Potassium-sparing Diuretic",
+    "description": "Used in heart failure and edema.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Hydrochlorothiazide 12.5 mg",
+    "category": "Thiazide Diuretic",
+    "description": "Manages hypertension.",
+    "price": "₹15–₹50 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Digoxin 0.25 mg",
+    "category": "Cardiac Glycoside",
+    "description": "Used in heart failure and arrhythmias.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Warfarin 5 mg",
+    "category": "Anticoagulant",
+    "description": "Prevents blood clot formation.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Heparin",
+    "category": "Anticoagulant",
+    "description": "Prevention and treatment of thrombosis.",
+    "price": "₹120–₹300 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Phenytoin 100 mg",
+    "category": "Antiepileptic",
+    "description": "Controls seizures.",
+    "price": "₹20–₹60 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sodium Valproate",
+    "category": "Antiepileptic",
+    "description": "Treats epilepsy and bipolar disorder.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Carbamazepine 200 mg",
+    "category": "Antiepileptic",
+    "description": "Used for seizures and nerve pain.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Diazepam 5 mg",
+    "category": "Benzodiazepine",
+    "description": "Used for anxiety and seizures.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Lorazepam 2 mg",
+    "category": "Benzodiazepine",
+    "description": "Used for anxiety and insomnia.",
+    "price": "₹20–₹70 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Haloperidol 5 mg",
+    "category": "Antipsychotic",
+    "description": "Used for psychotic disorders.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Risperidone 2 mg",
+    "category": "Antipsychotic",
+    "description": "Used in schizophrenia and bipolar disorder.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Fluoxetine 20 mg",
+    "category": "SSRI Antidepressant",
+    "description": "Treats depression and anxiety.",
+    "price": "₹20–₹70 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sertraline 50 mg",
+    "category": "SSRI Antidepressant",
+    "description": "Treats depression and panic disorder.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Amitriptyline 25 mg",
+    "category": "Tricyclic Antidepressant",
+    "description": "Used for depression and neuropathic pain.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Metoclopramide",
+    "category": "Antiemetic",
+    "description": "Treats nausea and vomiting.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Domperidone",
+    "category": "Antiemetic",
+    "description": "Relieves nausea and gastric discomfort.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ranitidine 150 mg",
+    "category": "H2 Receptor Blocker",
+    "description": "Reduces stomach acid secretion.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Loperamide",
+    "category": "Antidiarrheal",
+    "description": "Controls diarrhea.",
+    "price": "₹10–₹30 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "ORS Sachet",
+    "category": "Electrolyte",
+    "description": "Prevents dehydration due to diarrhea.",
+    "price": "₹10–₹20 (sachet)",
+    "type": "Powder",
+    "prescription_required": "FALSE"
+  }
+]

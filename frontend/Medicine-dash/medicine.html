@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – Medicine Detail</title>
+    <meta name="description" content="Medicine details, pricing, and prescription information." />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Font Awesome Icons (same CDN as request.html) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="medicine.css" />
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebar" class="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="../Order-dash/cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="../Order-dash/request.html"><i class="fa-solid fa-magnifying-glass"></i> Search Medicines</a>
+        <a href="../Reminder-dash/Reminder.html"><i class="fa-solid fa-bell"></i> Reminders</a>
+        <a href="../Profile-dash/index.html"><i class="fa-solid fa-user"></i> Profile</a>
+    </div>
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-left">
+            <button class="icon-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <a href="../Order-dash/request.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass hs-icon"></i>
+            <input id="reSearchInput" class="header-search-input" type="text" placeholder="Search another medicine…"
+                autocomplete="off" onkeydown="if(event.key==='Enter') doReSearch()" />
+            <button class="hs-go" onclick="doReSearch()">Go</button>
+        </div>
+
+        <div class="header-right">
+            <a href="../Order-dash/cart.html" class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cartCount" class="cart-badge"></span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== LOADING ===== -->
+    <div id="stateLoading" class="state-loading">
+        <div class="spinner"></div>
+        <p>Fetching medicine info…</p>
+    </div>
+
+    <!-- ===== ERROR ===== -->
+    <div id="stateError" class="state-error hidden">
+        <i class="fa-solid fa-circle-exclamation error-icon"></i>
+        <h2 id="errorTitle">Medicine not found</h2>
+        <p id="errorMsg">We couldn't find that medicine.</p>
+        <a href="../Order-dash/request.html" class="go-back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Search
+        </a>
+    </div>
+
+    <!-- ===== MEDICINE DETAIL ===== -->
+    <div id="medDetail" class="hidden">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar">
+            <a href="../Order-dash/request.html">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+            </a>
+            <i class="fa-solid fa-chevron-right bc-sep"></i>
+            <span id="bcCategory"></span>
+            <i class="fa-solid fa-chevron-right bc-sep"></i>
+            <span id="bcName"></span>
+        </div>
+
+        <!-- ─── HERO: full-width two-column ─── -->
+        <section class="product-hero" id="productHero">
+
+            <!-- Left: medicine illustration -->
+            <div class="hero-img-side" id="heroImgSide">
+                <div class="hero-blob b1"></div>
+                <div class="hero-blob b2"></div>
+                <div class="hero-blob b3"></div>
+
+                <!-- Large FA icon – type set by JS -->
+                <div class="hero-med-wrap">
+                    <i class="hero-med-icon" id="heroMedIcon"></i>
+                </div>
+
+                <!-- Pack size chip at bottom of image area -->
+                <div class="hero-pack-chip" id="heroPackChip"></div>
+            </div>
+
+            <!-- Right: product info -->
+            <div class="hero-info-side">
+
+                <!-- Type + Rx ABOVE the name -->
+                <div class="badges-row">
+                    <span class="badge-type" id="badgeType"></span>
+                    <span class="badge-rx" id="badgeRx"></span>
+                </div>
+
+                <!-- Medicine name (clean) -->
+                <h1 class="med-name" id="detailName"></h1>
+                <p class="med-category-text" id="detailCategorySub"></p>
+
+                <!-- Price -->
+                <div class="price-block">
+                    <span class="price-range" id="detailPrice"></span>
+                    <span class="price-pack" id="detailPer"></span>
+                </div>
+
+                <!-- Stock -->
+                <div class="stock-row">
+                    <span class="stock-badge" id="detailStockBadge">
+                        <i class="fa-solid fa-circle-check"></i> In Stock
+                    </span>
+                </div>
+
+                <!-- QTY + Add to Cart -->
+                <div class="cta-row">
+                    <div class="qty-ctrl">
+                        <button class="qty-btn" onclick="changeQty(-1)">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span class="qty-val" id="qtyVal">1</span>
+                        <button class="qty-btn" onclick="changeQty(1)">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <button class="add-cart-btn" id="addCartBtn" onclick="addToCart()">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+
+                <!-- Rx notice BELOW the CTA -->
+                <div class="rx-notice hidden" id="rxNotice">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    This medicine requires a valid prescription. Please upload it at checkout.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ─── CONTENT BELOW HERO ─── -->
+        <div class="product-content">
+
+            <!-- Description -->
+            <section class="content-card">
+                <h2 class="card-heading">
+                    <i class="fa-solid fa-circle-info"></i> About this medicine
+                </h2>
+                <p class="desc-text" id="detailDesc">No description available.</p>
+            </section>
+
+            <!-- Info tiles -->
+            <div class="info-tiles-grid">
+                <div class="info-tile">
+                    <div class="tile-icon-wrap"><i class="fa-solid fa-tag tile-fa-icon"></i></div>
+                    <p class="tile-label">Category</p>
+                    <p class="tile-val" id="infoCategory"></p>
+                </div>
+                <div class="info-tile">
+                    <div class="tile-icon-wrap"><i class="fa-solid fa-pills tile-fa-icon" id="tileFormIcon"></i></div>
+                    <p class="tile-label">Form</p>
+                    <p class="tile-val" id="infoComposition"></p>
+                </div>
+                <div class="info-tile" id="tilePackSize">
+                    <div class="tile-icon-wrap"><i class="fa-solid fa-box tile-fa-icon"></i></div>
+                    <p class="tile-label">Pack Size</p>
+                    <p class="tile-val" id="infoPackSize"></p>
+                </div>
+                <div class="info-tile" id="tileRx">
+                    <div class="tile-icon-wrap"><i class="fa-solid fa-file-prescription tile-fa-icon"
+                            id="tileRxIcon"></i></div>
+                    <p class="tile-label">Prescription</p>
+                    <p class="tile-val" id="tileRxVal"></p>
+                </div>
+                <div class="info-tile" id="tileManufacturer" style="display:none">
+                    <div class="tile-icon-wrap"><i class="fa-solid fa-industry tile-fa-icon"></i></div>
+                    <p class="tile-label">Manufacturer</p>
+                    <p class="tile-val" id="infoManufacturer"></p>
+                </div>
+            </div>
+
+            <!-- Side effects (if any) -->
+            <section class="content-card hidden" id="sectionSideEffects">
+                <h2 class="card-heading">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Side Effects
+                </h2>
+                <p class="desc-text" id="detailSideEffects"></p>
+            </section>
+
+        </div>
+
+    </div><!-- /medDetail -->
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg"></span>
+    </div>
+
+    <script src="medicine.js"></script>
+</body>
+
+</html>
