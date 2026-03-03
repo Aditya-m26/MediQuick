@@ -98,4 +98,58 @@ router.post("/login", async (req, res) => {
     }
 });
 
+
+// ─── Middleware: verify JWT ──────────────────────────────────────────────
+const authenticate = (req, res, next) => {
+    const auth = req.headers.authorization || '';
+    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
+    if (!token) return res.status(401).json({ message: 'No token provided.' });
+    try {
+        req.user = jwt.verify(token, process.env.JWT_SECRET);
+        next();
+    } catch {
+        return res.status(401).json({ message: 'Invalid or expired token.' });
+    }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/auth/me  – fetch own profile
+// ─────────────────────────────────────────────────────────────────────────────
+router.get('/me', authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        if (!user) return res.status(404).json({ message: 'User not found.' });
+        return res.json({ user });
+    } catch (err) {
+        return res.status(500).json({ message: 'Server error.' });
+    }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PUT /api/auth/me  – update own profile (only safe fields)
+// ─────────────────────────────────────────────────────────────────────────────
+router.put('/me', authenticate, async (req, res) => {
+    const ALLOWED = [
+        'fullName', 'mobile', 'gender', 'age', 'city', 'state', 'healthCondition',
+        'dob', 'address', 'pin', 'blood', 'weight', 'height',
+        'allergy', 'meds',
+        'ecName', 'ecRel', 'ecPhone',
+        'drName', 'drSpec', 'drPhone', 'drHosp',
+    ];
+    const updates = {};
+    ALLOWED.forEach(f => { if (req.body[f] !== undefined) updates[f] = req.body[f]; });
+
+    try {
+        const user = await User.findByIdAndUpdate(
+            req.user.id,
+            { $set: updates },
+            { new: true, runValidators: false }
+        ).select('-password');
+        if (!user) return res.status(404).json({ message: 'User not found.' });
+        return res.json({ message: 'Profile updated.', user });
+    } catch (err) {
+        return res.status(500).json({ message: 'Server error.' });
+    }
+});
+
 module.exports = router;

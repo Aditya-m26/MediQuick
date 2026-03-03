@@ -1,39 +1,17 @@
 /* ==============================================
    MediQuick – Profile Dashboard JS
+   Fetches real user data from backend via mq_token.
+   Only shows what's in the database; empty fields show as —
    ============================================== */
 
-/* =============================================
-   STATE  (in Phase 2 this comes from the backend/localStorage)
-   ============================================= */
-var profileData = {
-    fullName: 'Aditya Morey',
-    mobile: '1234567890',
-    email: '[EMAIL_ADDRESS]',
-    dob: '2007-02-26',
-    gender: 'Male',
-    age: '19',
-    address: 'Plot 12, Near Ram Mandir',
-    city: 'Akola',
-    state: 'Maharashtra',
-    pin: '444001',
-    blood: 'B+',
-    weight: '72',
-    height: "5′ 9″",
-    condition: 'Type 2 Diabetes',
-    allergy: 'Penicillin, Sulfa drugs',
-    meds: 'Metformin 500mg, Atorvastatin 10mg',
-    ecName: 'Madhav',
-    ecRel: 'Friend',
-    ecPhone: '1234567890',
-    drName: 'Dr.Suresh Rathi',
-    drSpec: 'Endocrinologist',
-    drPhone: '0724-2345678',
-    drHosp: 'City Care Hospital, Akola',
-};
+var API_BASE = window.location.hostname === 'localhost'
+    ? 'http://localhost:5000'
+    : '';
 
+var profileData = {};   // filled from backend
 var isEditing = false;
 
-/* All field IDs (view-id : edit-id) */
+/* All editable field IDs */
 var FIELDS = [
     'fullName', 'mobile', 'email', 'dob', 'gender', 'age',
     'address', 'city', 'state', 'pin',
@@ -46,9 +24,67 @@ var FIELDS = [
    INIT
    ============================================= */
 window.addEventListener('DOMContentLoaded', function () {
-    renderProfile();
-    updateSidebarInfo();
+    var token = localStorage.getItem('mq_token');
+    if (!token) {
+        window.location.href = '../index.html';
+        return;
+    }
+    loadProfile(token);
 });
+
+/* =============================================
+   LOAD FROM BACKEND
+   ============================================= */
+async function loadProfile(token) {
+    try {
+        var res = await fetch(API_BASE + '/api/auth/me', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+
+        if (res.status === 401) {
+            localStorage.removeItem('mq_token');
+            localStorage.removeItem('mq_user');
+            window.location.href = '../index.html';
+            return;
+        }
+
+        var data = await res.json();
+        var u = data.user;
+
+        /* Map DB fields → profileData */
+        profileData = {
+            fullName: u.fullName || '',
+            mobile: u.mobile || '',
+            email: u.email || '',
+            dob: u.dob || '',
+            gender: u.gender || '',
+            age: u.age ? String(u.age) : '',
+            address: u.address || '',
+            city: u.city || '',
+            state: u.state || '',
+            pin: u.pin || '',
+            blood: u.blood || '',
+            weight: u.weight || '',
+            height: u.height || '',
+            condition: u.healthCondition || '',
+            allergy: u.allergy || '',
+            meds: u.meds || '',
+            ecName: u.ecName || '',
+            ecRel: u.ecRel || '',
+            ecPhone: u.ecPhone || '',
+            drName: u.drName || '',
+            drSpec: u.drSpec || '',
+            drPhone: u.drPhone || '',
+            drHosp: u.drHosp || '',
+        };
+
+        renderProfile();
+
+    } catch (err) {
+        console.error('Failed to load profile:', err);
+        showToast('Could not load profile. Check your connection.');
+    }
+}
 
 /* =============================================
    RENDER (view mode)
@@ -60,7 +96,7 @@ function renderProfile() {
     setVal('email', profileData.email);
     setVal('dob', formatDob(profileData.dob));
     setVal('gender', profileData.gender);
-    setVal('age', profileData.age + ' years');
+    setVal('age', profileData.age ? profileData.age + ' years' : '');
 
     /* Address */
     setVal('address', profileData.address);
@@ -70,13 +106,13 @@ function renderProfile() {
 
     /* Health */
     setVal('blood', profileData.blood);
-    setVal('weight', profileData.weight + ' kg');
+    setVal('weight', profileData.weight ? profileData.weight + ' kg' : '');
     setVal('height', profileData.height);
     setVal('condition', profileData.condition);
     setVal('allergy', profileData.allergy);
     setVal('meds', profileData.meds);
 
-    /* Emergency */
+    /* Emergency contact */
     setVal('ecName', profileData.ecName);
     setVal('ecRel', profileData.ecRel);
     setVal('ecPhone', profileData.ecPhone);
@@ -88,24 +124,43 @@ function renderProfile() {
     setVal('drHosp', profileData.drHosp);
 
     /* Avatar initials */
-    var initials = profileData.fullName.split(' ').map(function (w) { return w[0]; }).join('').toUpperCase().slice(0, 2);
-    document.getElementById('bigAvatar').textContent = initials;
-    document.getElementById('sideAvatar').textContent = initials;
-    document.getElementById('dispName').textContent = profileData.fullName;
-    document.getElementById('sideName').textContent = profileData.fullName;
-    document.getElementById('sideEmail').textContent = profileData.email;
+    var name = profileData.fullName || profileData.email || '?';
+    var initials = name.split(' ').map(function (w) { return w[0]; }).join('').toUpperCase().slice(0, 2) || '?';
+    var bigAv = document.getElementById('bigAvatar');
+    var sideAv = document.getElementById('sideAvatar');
+    if (bigAv) bigAv.textContent = initials;
+    if (sideAv) sideAv.textContent = initials;
 
-    /* SOS display */
-    document.getElementById('sosDisplay').textContent = profileData.ecName + ' · ' + profileData.ecPhone;
-    document.getElementById('sosBtn').onclick = function () {
-        window.location.href = 'tel:' + profileData.ecPhone;
-    };
+    var dispName = document.getElementById('dispName');
+    var sideName = document.getElementById('sideName');
+    var sideEmail = document.getElementById('sideEmail');
+    if (dispName) dispName.textContent = profileData.fullName || '—';
+    if (sideName) sideName.textContent = profileData.fullName || '—';
+    if (sideEmail) sideEmail.textContent = profileData.email || '—';
+
+    /* SOS button */
+    var sosDisp = document.getElementById('sosDisplay');
+    var sosBtn = document.getElementById('sosBtn');
+    if (sosDisp) {
+        sosDisp.textContent = (profileData.ecName && profileData.ecPhone)
+            ? profileData.ecName + ' · ' + profileData.ecPhone
+            : 'No emergency contact set';
+    }
+    if (sosBtn) {
+        sosBtn.onclick = function () {
+            if (profileData.ecPhone) window.location.href = 'tel:' + profileData.ecPhone;
+        };
+    }
 
     /* Sidebar health summary */
-    document.getElementById('shBlood').textContent = profileData.blood || '—';
-    document.getElementById('shWeight').textContent = profileData.weight ? profileData.weight + ' kg' : '—';
-    document.getElementById('shCondition').textContent = profileData.condition || '—';
-    document.getElementById('shAllergy').textContent = profileData.allergy || '—';
+    var shBlood = document.getElementById('shBlood');
+    var shWeight = document.getElementById('shWeight');
+    var shCondition = document.getElementById('shCondition');
+    var shAllergy = document.getElementById('shAllergy');
+    if (shBlood) shBlood.textContent = profileData.blood || '—';
+    if (shWeight) shWeight.textContent = profileData.weight ? profileData.weight + ' kg' : '—';
+    if (shCondition) shCondition.textContent = profileData.condition || '—';
+    if (shAllergy) shAllergy.textContent = profileData.allergy || '—';
 }
 
 function setVal(id, val) {
@@ -118,7 +173,6 @@ function setVal(id, val) {
    ============================================= */
 function toggleEdit() {
     isEditing = !isEditing;
-
     var btn = document.getElementById('editToggleBtn');
     var bar = document.getElementById('saveBar');
 
@@ -139,10 +193,8 @@ function showEditInputs() {
         if (view) view.classList.add('hidden');
         if (input) {
             input.classList.remove('hidden');
-            /* Sync current value into input */
             var raw = profileData[id] || '';
             if (input.tagName === 'SELECT') {
-                /* find matching option */
                 for (var i = 0; i < input.options.length; i++) {
                     if (input.options[i].value === raw || input.options[i].text === raw) {
                         input.selectedIndex = i; break;
@@ -159,11 +211,9 @@ function cancelEdit() {
     isEditing = false;
     var btn = document.getElementById('editToggleBtn');
     var bar = document.getElementById('saveBar');
-
     btn.classList.remove('editing');
     btn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> Edit Profile';
     bar.classList.add('hidden');
-
     FIELDS.forEach(function (id) {
         var view = document.getElementById('v-' + id);
         var input = document.getElementById('e-' + id);
@@ -173,24 +223,76 @@ function cancelEdit() {
 }
 
 /* =============================================
-   SAVE
+   SAVE – sends to backend
    ============================================= */
-function saveProfile() {
-    /* Read all inputs */
+async function saveProfile() {
+    /* Read all visible inputs into profileData */
     FIELDS.forEach(function (id) {
         var input = document.getElementById('e-' + id);
         if (input && !input.classList.contains('hidden')) {
-            var val = input.tagName === 'SELECT' ? input.options[input.selectedIndex].text : input.value.trim();
-            profileData[id] = val;
+            profileData[id] = input.tagName === 'SELECT'
+                ? input.options[input.selectedIndex].text
+                : input.value.trim();
         }
     });
 
-    /* In Phase 2: POST profileData to backend API here */
-    /* Example: fetch('/api/profile', { method:'PUT', body: JSON.stringify(profileData), headers:{'Content-Type':'application/json'} }) */
+    var token = localStorage.getItem('mq_token');
+    if (!token) { window.location.href = '../index.html'; return; }
 
-    cancelEdit();
-    renderProfile();       // re-render view with new values
-    showToast('Profile saved successfully!');
+    /* Map profileData → backend field names */
+    var payload = {
+        fullName: profileData.fullName,
+        mobile: profileData.mobile,
+        gender: profileData.gender,
+        age: profileData.age ? Number(profileData.age) : undefined,
+        dob: profileData.dob,
+        address: profileData.address,
+        city: profileData.city,
+        state: profileData.state,
+        pin: profileData.pin,
+        healthCondition: profileData.condition,
+        blood: profileData.blood,
+        weight: profileData.weight,
+        height: profileData.height,
+        allergy: profileData.allergy,
+        meds: profileData.meds,
+        ecName: profileData.ecName,
+        ecRel: profileData.ecRel,
+        ecPhone: profileData.ecPhone,
+        drName: profileData.drName,
+        drSpec: profileData.drSpec,
+        drPhone: profileData.drPhone,
+        drHosp: profileData.drHosp,
+    };
+
+    try {
+        var res = await fetch(API_BASE + '/api/auth/me', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body: JSON.stringify(payload),
+        });
+
+        var data = await res.json();
+
+        if (!res.ok) {
+            showToast('Save failed: ' + (data.message || 'Unknown error'));
+            return;
+        }
+
+        /* Update localStorage cache with latest user */
+        localStorage.setItem('mq_user', JSON.stringify(data.user));
+
+        cancelEdit();
+        renderProfile();
+        showToast('Profile saved successfully!');
+
+    } catch (err) {
+        console.error('Save error:', err);
+        showToast('Could not save. Check your connection.');
+    }
 }
 
 /* =============================================
@@ -210,15 +312,11 @@ function toggleSidebar() {
     document.querySelector('.sidebar').classList.toggle('open');
 }
 
-function updateSidebarInfo() {
-    /* Already set via renderProfile — kept for clarity */
-}
-
 /* =============================================
    UTILITY
    ============================================= */
 function formatDob(dateStr) {
-    if (!dateStr) return '—';
+    if (!dateStr) return '';
     var d = new Date(dateStr);
     if (isNaN(d)) return dateStr;
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
