@@ -19,6 +19,7 @@
     },
     {
         "storeName": "Akola Medical Stores",
+        "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549773/akola_medical_imiisn.png",
         "address": "3, Mankar Complex, New Radhakisan Plots, Civil Line, Akola, Maharashtra 444001, India",
         "city": "Akola",
         "state": "Maharashtra",
@@ -33,6 +34,7 @@
     },
     {
         "storeName": "Wellness Forever Pharmacy",
+        "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549775/wellness_forever_kzcvuy.png",
         "address": "Shop No.1, The Blessing Tower, Gorakshan Rd, Sahakar Nagar, Akola, Maharashtra 444004, India",
         "city": "Akola",
         "state": "Maharashtra",
@@ -47,6 +49,7 @@
     },
     {
         "storeName": "Hariom Medical Stores",
+        "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549774/hariom_y6f5a2.png",
         "address": "Gorakshan Rd, Kapila Nagar, Akola, Maharashtra 444004, India",
         "city": "Akola",
         "state": "Maharashtra",
@@ -61,6 +64,7 @@
     },
     {
         "storeName": "Anand Medicals",
+        "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549774/Anand_medicals_ly5qra.png",
         "address": "Usha Kiran Complex, near Bank of Baroda, Shastri Nagar, Akola, Maharashtra 444001, India",
         "city": "Akola",
         "state": "Maharashtra",
@@ -75,6 +79,7 @@
     },
     {
         "storeName": "Varsha Medical",
+        "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549774/varsha_medicals_w3neyo.png",
         "address": "Baidpura Kashmir Lodge Building, Akola, Maharashtra 444001, India",
         "city": "Akola",
         "state": "Maharashtra",
