@@ -157,176 +157,20 @@
     </div>
     <p class="pharmacy-subtext">All stores are licensed &amp; integrated with MediQuick</p>
 
-    <!-- Store Cards Grid -->
-    <div class="pharmacy-grid">
+    <!-- Store Cards Grid – populated by request.js -->
+    <div class="pharmacy-grid" id="pharmacyGrid">
+      <!-- Loading skeleton -->
+      <div class="store-skeleton"></div>
+      <div class="store-skeleton"></div>
+      <div class="store-skeleton"></div>
+    </div>
 
-      <!-- Card 1 -->
-      <div class="store-card">
-        <div class="store-img-wrap">
-          <div class="store-img-placeholder">
-            <i class="fa-solid fa-capsules"></i>
-          </div>
-          <span class="store-open-badge">Open</span>
-        </div>
-        <div class="store-info">
-          <h3 class="store-name">Shree Ganesh Medical</h3>
-          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.6 <span class="review-count">(124 reviews)</span>
-          </p>
-          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 1.2 km away</p>
-          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 11:00 PM</p>
-          <div class="store-delivery">
-            <i class="fa-solid fa-circle-check"></i> 20–30 min delivery
-          </div>
-        </div>
-      </div>
 
-      <!-- Card 2 -->
-      <div class="store-card">
-        <div class="store-img-wrap">
-          <div class="store-img-placeholder store-img-green">
-            <i class="fa-solid fa-pills"></i>
-          </div>
-          <span class="store-open-badge">Open</span>
-        </div>
-        <div class="store-info">
-          <h3 class="store-name">Apollo Pharmacy</h3>
-          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.8 <span class="review-count">(312 reviews)</span>
-          </p>
-          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 1.8 km away</p>
-          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 10:00 PM</p>
-          <div class="store-delivery">
-            <i class="fa-solid fa-circle-check"></i> 15–25 min delivery
-          </div>
-        </div>
-      </div>
 
-      <!-- Card 3 -->
-      <div class="store-card">
-        <div class="store-img-wrap">
-          <div class="store-img-placeholder store-img-blue">
-            <i class="fa-solid fa-kit-medical"></i>
-          </div>
-          <span class="store-open-badge">Open</span>
-        </div>
-        <div class="store-info">
-          <h3 class="store-name">Medline Drug Store</h3>
-          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.3 <span class="review-count">(87 reviews)</span>
-          </p>
-          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 2.1 km away</p>
-          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 9:30 PM</p>
-          <div class="store-delivery">
-            <i class="fa-solid fa-circle-check"></i> 25–35 min delivery
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="store-card">
-        <div class="store-img-wrap">
-          <div class="store-img-placeholder store-img-purple">
-            <i class="fa-solid fa-prescription-bottle-medical"></i>
-          </div>
-          <span class="store-open-badge">Open</span>
-        </div>
-        <div class="store-info">
-          <h3 class="store-name">LifeCare Pharmacy</h3>
-          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.5 <span class="review-count">(205 reviews)</span>
-          </p>
-          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 2.5 km away</p>
-          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 12:00 AM</p>
-          <div class="store-delivery">
-            <i class="fa-solid fa-circle-check"></i> 20–40 min delivery
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="store-card">
-        <div class="store-img-wrap">
-          <div class="store-img-placeholder store-img-orange">
-            <i class="fa-solid fa-syringe"></i>
-          </div>
-          <span class="store-open-badge">Open</span>
-        </div>
-        <div class="store-info">
-          <h3 class="store-name">Wellness Plus Medical</h3>
-          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.7 <span class="review-count">(178 reviews)</span>
-          </p>
-          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 3.0 km away</p>
-          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 10:30 PM</p>
-          <div class="store-delivery">
-            <i class="fa-solid fa-circle-check"></i> 30–45 min delivery
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="store-card">
-        <div class="store-img-wrap">
-          <div class="store-img-placeholder store-img-teal">
-            <i class="fa-solid fa-heart-pulse"></i>
-          </div>
-          <span class="store-closed-badge">Closed</span>
-        </div>
-        <div class="store-info store-info-closed">
-          <h3 class="store-name">HealthMart Pharmacy</h3>
-          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.4 <span class="review-count">(99 reviews)</span>
-          </p>
-          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 3.4 km away</p>
-          <p class="store-hours"><i class="fa-regular fa-clock"></i> Opens 8:00 AM</p>
-          <div class="store-delivery store-delivery-inactive">
-            <i class="fa-solid fa-ban"></i> Currently Closed
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 7 -->
-      <div class="store-card">
-        <div class="store-img-wrap">
-          <div class="store-img-placeholder store-img-red">
-            <i class="fa-solid fa-stethoscope"></i>
-          </div>
-          <span class="store-open-badge">Open</span>
-        </div>
-        <div class="store-info">
-          <h3 class="store-name">CityMed Drugstore</h3>
-          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.2 <span class="review-count">(66 reviews)</span>
-          </p>
-          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 3.9 km away</p>
-          <p class="store-hours"><i class="fa-regular fa-clock"></i> Closes 11:30 PM</p>
-          <div class="store-delivery">
-            <i class="fa-solid fa-circle-check"></i> 35–50 min delivery
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 8 -->
-      <div class="store-card">
-        <div class="store-img-wrap">
-          <div class="store-img-placeholder store-img-indigo">
-            <i class="fa-solid fa-tablets"></i>
-          </div>
-          <span class="store-open-badge">Open</span>
-        </div>
-        <div class="store-info">
-          <h3 class="store-name">QuickMeds 24/7</h3>
-          <p class="store-rating"><i class="fa-solid fa-star"></i> 4.9 <span class="review-count">(430 reviews)</span>
-          </p>
-          <p class="store-distance"><i class="fa-solid fa-location-dot"></i> 4.3 km away</p>
-          <p class="store-hours"><i class="fa-regular fa-clock"></i> Open 24 hours</p>
-          <div class="store-delivery">
-            <i class="fa-solid fa-circle-check"></i> 40–55 min delivery
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end .pharmacy-grid -->
-  </section>
-
-  <script src="request.js"></script>
-  <script src="location.js"></script>
-  <script src="cart.js"></script>
-  <script src="emergency.js"></script>
+    <script src="request.js"></script>
+    <script src="location.js"></script>
+    <script src="cart.js"></script>
+    <script src="emergency.js"></script>
 
 </body>
 

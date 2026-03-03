@@ -24,6 +24,7 @@ app.use(express.json());
 // ── API Routes ───────────────────────────────────────────────────────────────
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/medicines", require("./routes/medicines"));
+app.use("/api/stores", require("./routes/stores"));
 
 // ── Catch-all: serve login page for any non-API route ───────────────────────
 // Express v5 requires `/*splat` instead of `*`
