@@ -1,25 +1,18 @@
 # render.yaml – MediQuick deployment config
-# Render reads this file automatically from the repo root.
-# One Web Service: Express serves both the API and the frontend.
-#
 # https://render.com/docs/yaml-spec
 
 services:
   - type: web
     name: mediquick
     runtime: node
-    # Build: install dependencies from the backend folder
-    rootDir: backend
-    buildCommand: npm install
-    # Start the server
-    startCommand: node server.js
-    # Auto-deploy on every push to main
+    # Build from repo root, cd into backend explicitly (rootDir alone is unreliable)
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
     autoDeploy: true
     envVars:
-      # Set these in the Render dashboard → Environment tab
       - key: MONGO_URI
-        sync: false   # secret – set manually on Render dashboard
+        sync: false   # set manually in Render dashboard → Environment
       - key: JWT_SECRET
-        sync: false   # secret – set manually on Render dashboard
+        sync: false   # set manually in Render dashboard → Environment
       - key: NODE_ENV
         value: production
