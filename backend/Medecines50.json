@@ -398,5 +398,3549 @@
     "price": "₹10–₹20 (sachet)",
     "type": "Powder",
     "prescription_required": "FALSE"
+  },
+  {
+    "name": "Ciprofloxacin 500 mg",
+    "category": "Antibiotic (Fluoroquinolone)",
+    "description": "Used for urinary and gastrointestinal bacterial infections.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Levofloxacin 500 mg",
+    "category": "Antibiotic (Fluoroquinolone)",
+    "description": "Used for respiratory and urinary infections.",
+    "price": "₹80–₹200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ofloxacin 200 mg",
+    "category": "Antibiotic (Fluoroquinolone)",
+    "description": "Treats bacterial infections including diarrhea and UTI.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ceftriaxone",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for severe bacterial infections.",
+    "price": "₹30–₹150 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Meropenem",
+    "category": "Antibiotic (Carbapenem)",
+    "description": "Used for serious hospital-acquired infections.",
+    "price": "₹800–₹2500 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clarithromycin 500 mg",
+    "category": "Antibiotic (Macrolide)",
+    "description": "Used for respiratory tract infections.",
+    "price": "₹100–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Linezolid 600 mg",
+    "category": "Antibiotic (Oxazolidinone)",
+    "description": "Used for resistant gram-positive infections.",
+    "price": "₹600–₹1500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Vancomycin",
+    "category": "Antibiotic (Glycopeptide)",
+    "description": "Used for severe gram-positive infections.",
+    "price": "₹400–₹1200 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Albendazole 400 mg",
+    "category": "Anthelmintic",
+    "description": "Used for worm infestations.",
+    "price": "₹10–₹30 (1 tablet)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Ivermectin 12 mg",
+    "category": "Antiparasitic",
+    "description": "Used for parasitic infections.",
+    "price": "₹20–₹80 (4 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Artemether + Lumefantrine",
+    "category": "Antimalarial",
+    "description": "Used for treatment of malaria.",
+    "price": "₹80–₹250 (6 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Chloroquine",
+    "category": "Antimalarial",
+    "description": "Used for malaria treatment.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Hydroxychloroquine 200 mg",
+    "category": "DMARD / Antimalarial",
+    "description": "Used in rheumatoid arthritis and lupus.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Methotrexate 7.5 mg",
+    "category": "Immunosuppressant",
+    "description": "Used for autoimmune disorders and cancer.",
+    "price": "₹40–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cyclophosphamide",
+    "category": "Chemotherapy Agent",
+    "description": "Used in cancer and autoimmune conditions.",
+    "price": "₹200–₹800 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tamoxifen 10 mg",
+    "category": "Selective Estrogen Receptor Modulator",
+    "description": "Used in breast cancer treatment.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Levothyroxine 50 mcg",
+    "category": "Thyroid Hormone",
+    "description": "Used for hypothyroidism.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Carbimazole 10 mg",
+    "category": "Antithyroid",
+    "description": "Used in hyperthyroidism.",
+    "price": "₹20–₹70 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Calcium Carbonate",
+    "category": "Mineral Supplement",
+    "description": "Used for calcium deficiency.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Vitamin D3 (Cholecalciferol)",
+    "category": "Vitamin Supplement",
+    "description": "Used for vitamin D deficiency.",
+    "price": "₹30–₹150 (capsule)",
+    "type": "Capsule",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Iron + Folic Acid",
+    "category": "Hematinic",
+    "description": "Used to treat iron deficiency anemia.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Cyanocobalamin",
+    "category": "Vitamin B12 Supplement",
+    "description": "Used for B12 deficiency.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Magnesium Sulphate",
+    "category": "Electrolyte",
+    "description": "Used in eclampsia and severe hypomagnesemia.",
+    "price": "₹20–₹100 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Adrenaline (Epinephrine)",
+    "category": "Sympathomimetic",
+    "description": "Used in cardiac arrest and anaphylaxis.",
+    "price": "₹10–₹50 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Atropine",
+    "category": "Anticholinergic",
+    "description": "Used in bradycardia and organophosphate poisoning.",
+    "price": "₹10–₹40 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Lignocaine",
+    "category": "Local Anesthetic",
+    "description": "Used for local anesthesia and minor surgical procedures.",
+    "price": "₹20–₹100 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bupivacaine",
+    "category": "Local Anesthetic",
+    "description": "Used for regional anesthesia.",
+    "price": "₹50–₹200 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ketamine",
+    "category": "Anesthetic / Analgesic",
+    "description": "Used for induction of anesthesia.",
+    "price": "₹100–₹400 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Propofol",
+    "category": "General Anesthetic",
+    "description": "Used for induction and maintenance of anesthesia.",
+    "price": "₹200–₹600 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Midazolam",
+    "category": "Benzodiazepine",
+    "description": "Used for sedation and procedural anesthesia.",
+    "price": "₹20–₹100 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Morphine",
+    "category": "Opioid Analgesic",
+    "description": "Used for severe pain management.",
+    "price": "₹30–₹150 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Codeine",
+    "category": "Opioid Analgesic",
+    "description": "Used for moderate pain and cough suppression.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dextromethorphan",
+    "category": "Antitussive",
+    "description": "Used to relieve dry cough.",
+    "price": "₹40–₹120 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Ambroxol",
+    "category": "Mucolytic",
+    "description": "Used to relieve productive cough.",
+    "price": "₹30–₹100 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Cetirizine Syrup",
+    "category": "Antihistamine",
+    "description": "Used for allergy relief in children.",
+    "price": "₹30–₹80 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Salbutamol Nebules",
+    "category": "Bronchodilator",
+    "description": "Used in acute asthma attacks.",
+    "price": "₹50–₹150 (pack)",
+    "type": "Respules",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Budesonide",
+    "category": "Corticosteroid",
+    "description": "Used in asthma management.",
+    "price": "₹150–₹350 (inhaler)",
+    "type": "Inhaler",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Beclomethasone",
+    "category": "Corticosteroid",
+    "description": "Used in asthma and allergic rhinitis.",
+    "price": "₹120–₹300 (inhaler)",
+    "type": "Inhaler",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Insulin Glargine",
+    "category": "Long-acting Insulin",
+    "description": "Used for long-term blood glucose control.",
+    "price": "₹600–₹1500 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Insulin Lispro",
+    "category": "Rapid-acting Insulin",
+    "description": "Used for post-meal glucose control.",
+    "price": "₹700–₹1800 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Glucagon",
+    "category": "Hormone",
+    "description": "Used in severe hypoglycemia.",
+    "price": "₹800–₹2000 (kit)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Metronidazole 400 mg",
+    "category": "Antibiotic (Nitroimidazole)",
+    "description": "Used for anaerobic bacterial infections.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tinidazole",
+    "category": "Antiprotozoal",
+    "description": "Used for amoebiasis and giardiasis.",
+    "price": "₹30–₹100 (4 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Nitrofurantoin",
+    "category": "Urinary Antibiotic",
+    "description": "Used for urinary tract infections.",
+    "price": "₹60–₹150 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tamsulosin",
+    "category": "Alpha Blocker",
+    "description": "Used in benign prostatic hyperplasia.",
+    "price": "₹100–₹300 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Finasteride",
+    "category": "5-Alpha Reductase Inhibitor",
+    "description": "Used for prostate enlargement and hair loss.",
+    "price": "₹80–₹250 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sildenafil",
+    "category": "PDE-5 Inhibitor",
+    "description": "Used for erectile dysfunction.",
+    "price": "₹100–₹400 (4 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Misoprostol",
+    "category": "Prostaglandin Analog",
+    "description": "Used for gastric ulcers and medical termination.",
+    "price": "₹150–₹400 (4 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Oxytocin",
+    "category": "Hormone",
+    "description": "Used to induce labor.",
+    "price": "₹10–₹50 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tranexamic Acid",
+    "category": "Antifibrinolytic",
+    "description": "Used to control excessive bleeding.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clindamycin 300 mg",
+    "category": "Antibiotic (Lincosamide)",
+    "description": "Used for serious bacterial infections.",
+    "price": "₹80–₹200 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Amikacin",
+    "category": "Antibiotic (Aminoglycoside)",
+    "description": "Used for severe gram-negative infections.",
+    "price": "₹40–₹150 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Gentamicin",
+    "category": "Antibiotic (Aminoglycoside)",
+    "description": "Used for serious bacterial infections.",
+    "price": "₹20–₹80 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cefotaxime",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for severe infections.",
+    "price": "₹30–₹120 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Piperacillin + Tazobactam",
+    "category": "Broad-spectrum Antibiotic",
+    "description": "Used for hospital-acquired infections.",
+    "price": "₹300–₹900 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dexamethasone",
+    "category": "Corticosteroid",
+    "description": "Used for inflammation and allergic reactions.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Hydrocortisone",
+    "category": "Corticosteroid",
+    "description": "Used in adrenal insufficiency and shock.",
+    "price": "₹20–₹100 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Betamethasone",
+    "category": "Corticosteroid",
+    "description": "Used for inflammatory and skin disorders.",
+    "price": "₹20–₹80 (tube)",
+    "type": "Ointment",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Insulin NPH",
+    "category": "Intermediate-acting Insulin",
+    "description": "Used for blood glucose control.",
+    "price": "₹150–₹400 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Glibenclamide 5 mg",
+    "category": "Antidiabetic (Sulfonylurea)",
+    "description": "Used for Type 2 diabetes.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pioglitazone 15 mg",
+    "category": "Antidiabetic (Thiazolidinedione)",
+    "description": "Used for Type 2 diabetes management.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Erythromycin 500 mg",
+    "category": "Antibiotic (Macrolide)",
+    "description": "Used for respiratory infections.",
+    "price": "₹60–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tetracycline 500 mg",
+    "category": "Antibiotic (Tetracycline)",
+    "description": "Used for bacterial infections.",
+    "price": "₹40–₹100 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cloxacillin 500 mg",
+    "category": "Antibiotic (Penicillin)",
+    "description": "Used for staphylococcal infections.",
+    "price": "₹50–₹120 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Co-trimoxazole",
+    "category": "Antibiotic Combination",
+    "description": "Used for respiratory and urinary infections.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ketorolac",
+    "category": "NSAID",
+    "description": "Used for short-term moderate pain.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Naproxen 250 mg",
+    "category": "NSAID",
+    "description": "Used for pain and inflammation.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Aceclofenac 100 mg",
+    "category": "NSAID",
+    "description": "Used for musculoskeletal pain.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Paracetamol Syrup",
+    "category": "Analgesic / Antipyretic",
+    "description": "Used for fever and pain in children.",
+    "price": "₹25–₹80 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Cefpodoxime 200 mg",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for respiratory infections.",
+    "price": "₹150–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Aztreonam",
+    "category": "Antibiotic (Monobactam)",
+    "description": "Used for gram-negative infections.",
+    "price": "₹500–₹1500 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Lactulose",
+    "category": "Osmotic Laxative",
+    "description": "Used for constipation and hepatic encephalopathy.",
+    "price": "₹100–₹250 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Bisacodyl",
+    "category": "Stimulant Laxative",
+    "description": "Used for short-term constipation relief.",
+    "price": "₹10–₹30 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Mannitol",
+    "category": "Osmotic Diuretic",
+    "description": "Used to reduce intracranial pressure.",
+    "price": "₹100–₹300 (bottle)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sodium Bicarbonate",
+    "category": "Alkalinizing Agent",
+    "description": "Used in metabolic acidosis.",
+    "price": "₹10–₹40 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Fluconazole 150 mg",
+    "category": "Antifungal (Azole)",
+    "description": "Used for fungal infections including candidiasis.",
+    "price": "₹20–₹80 (1 tablet)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Itraconazole 100 mg",
+    "category": "Antifungal (Azole)",
+    "description": "Used for systemic fungal infections.",
+    "price": "₹80–₹250 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ketoconazole",
+    "category": "Antifungal",
+    "description": "Used for fungal skin infections.",
+    "price": "₹50–₹150 (tube)",
+    "type": "Cream",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Acyclovir 400 mg",
+    "category": "Antiviral",
+    "description": "Used for herpes virus infections.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Oseltamivir",
+    "category": "Antiviral",
+    "description": "Used for treatment of influenza.",
+    "price": "₹400–₹1200 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Zidovudine",
+    "category": "Antiretroviral",
+    "description": "Used in HIV treatment.",
+    "price": "₹200–₹600 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tenofovir",
+    "category": "Antiretroviral",
+    "description": "Used for HIV and hepatitis B.",
+    "price": "₹200–₹700 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Lamivudine",
+    "category": "Antiretroviral",
+    "description": "Used in HIV therapy.",
+    "price": "₹150–₹500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rifampicin",
+    "category": "Antitubercular",
+    "description": "Used in tuberculosis treatment.",
+    "price": "₹40–₹120 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Isoniazid",
+    "category": "Antitubercular",
+    "description": "Used for tuberculosis management.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pyrazinamide",
+    "category": "Antitubercular",
+    "description": "Used in tuberculosis therapy.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ethambutol",
+    "category": "Antitubercular",
+    "description": "Used in combination TB therapy.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Amphotericin B",
+    "category": "Antifungal (Polyene)",
+    "description": "Used for severe systemic fungal infections.",
+    "price": "₹500–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clotrimazole",
+    "category": "Antifungal",
+    "description": "Used for topical fungal infections.",
+    "price": "₹30–₹100 (tube)",
+    "type": "Cream",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Nystatin",
+    "category": "Antifungal",
+    "description": "Used for candidiasis infections.",
+    "price": "₹30–₹100 (bottle)",
+    "type": "Suspension",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Ribavirin",
+    "category": "Antiviral",
+    "description": "Used for viral infections including hepatitis C.",
+    "price": "₹300–₹900 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Interferon Alfa",
+    "category": "Immunomodulator",
+    "description": "Used for viral hepatitis and certain cancers.",
+    "price": "₹2000–₹8000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Calcium Gluconate",
+    "category": "Mineral Supplement",
+    "description": "Used for hypocalcemia.",
+    "price": "₹10–₹50 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Potassium Chloride",
+    "category": "Electrolyte",
+    "description": "Used to treat hypokalemia.",
+    "price": "₹10–₹40 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Folic Acid 5 mg",
+    "category": "Vitamin Supplement",
+    "description": "Used for folate deficiency anemia.",
+    "price": "₹10–₹30 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Ascorbic Acid",
+    "category": "Vitamin C Supplement",
+    "description": "Used to prevent vitamin C deficiency.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Multivitamin Syrup",
+    "category": "Vitamin Supplement",
+    "description": "Used for nutritional supplementation.",
+    "price": "₹40–₹150 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Zinc Sulphate",
+    "category": "Mineral Supplement",
+    "description": "Used in diarrhea management and deficiency.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Cefoperazone + Sulbactam",
+    "category": "Broad-spectrum Antibiotic",
+    "description": "Used for severe bacterial infections.",
+    "price": "₹300–₹900 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Teicoplanin",
+    "category": "Antibiotic (Glycopeptide)",
+    "description": "Used for resistant gram-positive infections.",
+    "price": "₹400–₹1500 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Azathioprine",
+    "category": "Immunosuppressant",
+    "description": "Used in autoimmune disorders and transplant patients.",
+    "price": "₹80–₹250 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Mycophenolate Mofetil",
+    "category": "Immunosuppressant",
+    "description": "Prevents organ transplant rejection.",
+    "price": "₹300–₹900 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cyclosporine",
+    "category": "Immunosuppressant",
+    "description": "Used in transplant and autoimmune conditions.",
+    "price": "₹500–₹1500 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tacrolimus",
+    "category": "Immunosuppressant",
+    "description": "Prevents transplant rejection.",
+    "price": "₹800–₹2500 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Allopurinol 100 mg",
+    "category": "Xanthine Oxidase Inhibitor",
+    "description": "Used in gout management.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Febuxostat",
+    "category": "Xanthine Oxidase Inhibitor",
+    "description": "Used for chronic gout.",
+    "price": "₹100–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Colchicine",
+    "category": "Antigout Agent",
+    "description": "Used for acute gout attacks.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Methyldopa",
+    "category": "Antihypertensive",
+    "description": "Used for hypertension in pregnancy.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Nifedipine",
+    "category": "Calcium Channel Blocker",
+    "description": "Used for hypertension and angina.",
+    "price": "₹20–₹70 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ivabradine",
+    "category": "Heart Rate Reducer",
+    "description": "Used in chronic heart failure.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Amiodarone",
+    "category": "Antiarrhythmic",
+    "description": "Used for serious cardiac arrhythmias.",
+    "price": "₹60–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Verapamil",
+    "category": "Calcium Channel Blocker",
+    "description": "Used for arrhythmias and hypertension.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Diltiazem",
+    "category": "Calcium Channel Blocker",
+    "description": "Used for hypertension and angina.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Apixaban",
+    "category": "Anticoagulant (DOAC)",
+    "description": "Prevents stroke and blood clots.",
+    "price": "₹400–₹1200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rivaroxaban",
+    "category": "Anticoagulant (DOAC)",
+    "description": "Prevents and treats thrombosis.",
+    "price": "₹300–₹1000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dabigatran",
+    "category": "Anticoagulant (DOAC)",
+    "description": "Used for prevention of stroke in AF.",
+    "price": "₹300–₹900 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clonazepam",
+    "category": "Benzodiazepine",
+    "description": "Used for seizure and panic disorders.",
+    "price": "₹20–₹70 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Olanzapine",
+    "category": "Antipsychotic",
+    "description": "Used in schizophrenia and bipolar disorder.",
+    "price": "₹40–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Quetiapine",
+    "category": "Antipsychotic",
+    "description": "Used for mood disorders.",
+    "price": "₹80–₹250 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Aripiprazole",
+    "category": "Antipsychotic",
+    "description": "Used in schizophrenia and depression.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Escitalopram",
+    "category": "SSRI Antidepressant",
+    "description": "Used for anxiety and depression.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Venlafaxine",
+    "category": "SNRI Antidepressant",
+    "description": "Used for depression and anxiety disorders.",
+    "price": "₹60–₹180 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Duloxetine",
+    "category": "SNRI Antidepressant",
+    "description": "Used for neuropathic pain and depression.",
+    "price": "₹100–₹300 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Gabapentin",
+    "category": "Antiepileptic / Neuropathic Agent",
+    "description": "Used for neuropathic pain.",
+    "price": "₹60–₹200 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pregabalin",
+    "category": "Neuropathic Pain Agent",
+    "description": "Used for nerve pain and epilepsy.",
+    "price": "₹80–₹250 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Levetiracetam",
+    "category": "Antiepileptic",
+    "description": "Used to control seizures.",
+    "price": "₹100–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Topiramate",
+    "category": "Antiepileptic",
+    "description": "Used for seizures and migraine prevention.",
+    "price": "₹80–₹250 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Valacyclovir",
+    "category": "Antiviral",
+    "description": "Used for herpes infections.",
+    "price": "₹200–₹600 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sofosbuvir",
+    "category": "Antiviral (Hepatitis C)",
+    "description": "Used for chronic hepatitis C treatment.",
+    "price": "₹2000–₹8000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Remdesivir",
+    "category": "Antiviral",
+    "description": "Used for severe viral infections.",
+    "price": "₹1500–₹5000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Caspofungin",
+    "category": "Antifungal (Echinocandin)",
+    "description": "Used for invasive fungal infections.",
+    "price": "₹4000–₹10000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Epoetin Alfa",
+    "category": "Erythropoiesis Stimulating Agent",
+    "description": "Used for anemia in CKD.",
+    "price": "₹1000–₹4000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Filgrastim",
+    "category": "Colony Stimulating Factor",
+    "description": "Used to increase white blood cells.",
+    "price": "₹1500–₹5000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Denosumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used for osteoporosis treatment.",
+    "price": "₹10000–₹25000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Adalimumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used for autoimmune diseases.",
+    "price": "₹25000–₹60000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Infliximab",
+    "category": "Monoclonal Antibody",
+    "description": "Used for inflammatory disorders.",
+    "price": "₹20000–₹50000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rituximab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in lymphoma and autoimmune diseases.",
+    "price": "₹30000–₹80000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Trastuzumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in HER2-positive breast cancer.",
+    "price": "₹50000–₹150000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Imatinib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in chronic myeloid leukemia.",
+    "price": "₹1000–₹5000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Gefitinib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in lung cancer treatment.",
+    "price": "₹2000–₹6000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Erlotinib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used for non-small cell lung cancer.",
+    "price": "₹3000–₹8000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Capecitabine",
+    "category": "Anticancer Agent",
+    "description": "Used in colorectal and breast cancer.",
+    "price": "₹1000–₹4000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cisplatin",
+    "category": "Platinum Chemotherapy Agent",
+    "description": "Used in various cancers.",
+    "price": "₹200–₹800 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Carboplatin",
+    "category": "Platinum Chemotherapy Agent",
+    "description": "Used in ovarian and lung cancer.",
+    "price": "₹500–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Docetaxel",
+    "category": "Taxane Chemotherapy Agent",
+    "description": "Used in breast and lung cancer.",
+    "price": "₹2000–₹8000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Paclitaxel",
+    "category": "Taxane Chemotherapy Agent",
+    "description": "Used in ovarian and breast cancer.",
+    "price": "₹1500–₹6000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Zoledronic Acid",
+    "category": "Bisphosphonate",
+    "description": "Used in osteoporosis and bone metastasis.",
+    "price": "₹800–₹3000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Etanercept",
+    "category": "TNF Inhibitor",
+    "description": "Used for rheumatoid arthritis.",
+    "price": "₹20000–₹50000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Teriparatide",
+    "category": "Parathyroid Hormone Analog",
+    "description": "Used for severe osteoporosis.",
+    "price": "₹15000–₹40000 (pen)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Metoprolol",
+    "category": "Beta Blocker",
+    "description": "Used for hypertension and heart disease.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bisoprolol",
+    "category": "Beta Blocker",
+    "description": "Used for heart failure and hypertension.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Telmisartan",
+    "category": "ARB",
+    "description": "Used for blood pressure control.",
+    "price": "₹60–₹180 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Olmesartan",
+    "category": "ARB",
+    "description": "Used for hypertension.",
+    "price": "₹80–₹200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Chlorpheniramine",
+    "category": "Antihistamine",
+    "description": "Used for allergy symptoms.",
+    "price": "₹10–₹30 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Fexofenadine",
+    "category": "Antihistamine",
+    "description": "Used for allergic rhinitis.",
+    "price": "₹60–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Desloratadine",
+    "category": "Antihistamine",
+    "description": "Used for seasonal allergies.",
+    "price": "₹70–₹180 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Mometasone",
+    "category": "Corticosteroid",
+    "description": "Used for allergic rhinitis.",
+    "price": "₹150–₹350 (spray)",
+    "type": "Spray",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Fluticasone",
+    "category": "Corticosteroid",
+    "description": "Used for asthma and allergies.",
+    "price": "₹200–₹400 (inhaler)",
+    "type": "Inhaler",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Roxithromycin",
+    "category": "Antibiotic (Macrolide)",
+    "description": "Used for respiratory infections.",
+    "price": "₹80–₹200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cefuroxime",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for bacterial infections.",
+    "price": "₹200–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Etoricoxib",
+    "category": "NSAID (COX-2)",
+    "description": "Used for arthritis pain.",
+    "price": "₹80–₹200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Indomethacin",
+    "category": "NSAID",
+    "description": "Used for inflammatory conditions.",
+    "price": "₹30–₹100 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Mefenamic Acid",
+    "category": "NSAID",
+    "description": "Used for menstrual pain.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Hyoscine",
+    "category": "Antispasmodic",
+    "description": "Used for abdominal cramps.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Drotaverine",
+    "category": "Antispasmodic",
+    "description": "Used for smooth muscle spasm.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Gliclazide",
+    "category": "Antidiabetic (Sulfonylurea)",
+    "description": "Used for Type 2 diabetes.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Vildagliptin",
+    "category": "DPP-4 Inhibitor",
+    "description": "Used for blood glucose control.",
+    "price": "₹120–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sitagliptin",
+    "category": "DPP-4 Inhibitor",
+    "description": "Used in Type 2 diabetes.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Empagliflozin",
+    "category": "SGLT2 Inhibitor",
+    "description": "Used for diabetes and heart protection.",
+    "price": "₹200–₹500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dapagliflozin",
+    "category": "SGLT2 Inhibitor",
+    "description": "Used for Type 2 diabetes.",
+    "price": "₹180–₹450 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Liraglutide",
+    "category": "GLP-1 Agonist",
+    "description": "Used for diabetes management.",
+    "price": "₹3000–₹8000 (pen)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Insulin Detemir",
+    "category": "Long-acting Insulin",
+    "description": "Used for glucose control.",
+    "price": "₹800–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Baclofen",
+    "category": "Muscle Relaxant",
+    "description": "Used for muscle spasticity.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tizanidine",
+    "category": "Muscle Relaxant",
+    "description": "Used for muscle spasms.",
+    "price": "₹60–₹180 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Thiocolchicoside",
+    "category": "Muscle Relaxant",
+    "description": "Used for musculoskeletal pain.",
+    "price": "₹60–₹150 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ranitidine Injection",
+    "category": "H2 Blocker",
+    "description": "Used for acid-related disorders.",
+    "price": "₹10–₹40 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Esomeprazole",
+    "category": "Proton Pump Inhibitor",
+    "description": "Used for GERD and ulcers.",
+    "price": "₹60–₹150 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sucralfate",
+    "category": "Gastroprotective Agent",
+    "description": "Used for ulcer healing.",
+    "price": "₹100–₹250 (bottle)",
+    "type": "Suspension",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Aluminium Hydroxide + Magnesium Hydroxide",
+    "category": "Antacid",
+    "description": "Used for acidity relief.",
+    "price": "₹40–₹120 (bottle)",
+    "type": "Suspension",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Domperidone Injection",
+    "category": "Antiemetic",
+    "description": "Used for nausea.",
+    "price": "₹20–₹80 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ondansetron Injection",
+    "category": "Antiemetic",
+    "description": "Used for severe vomiting.",
+    "price": "₹40–₹150 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rifaximin",
+    "category": "Antibiotic",
+    "description": "Used for hepatic encephalopathy.",
+    "price": "₹400–₹1200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Nitroglycerin",
+    "category": "Vasodilator",
+    "description": "Used for angina relief.",
+    "price": "₹100–₹300 (spray)",
+    "type": "Spray",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Isosorbide Mononitrate",
+    "category": "Nitrate",
+    "description": "Used for angina prevention.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Hydralazine",
+    "category": "Vasodilator",
+    "description": "Used for hypertension.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Propranolol",
+    "category": "Beta Blocker",
+    "description": "Used for hypertension and anxiety.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clobazam",
+    "category": "Benzodiazepine",
+    "description": "Used for epilepsy.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Phenobarbital",
+    "category": "Barbiturate",
+    "description": "Used for seizure control.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Lacosamide",
+    "category": "Antiepileptic",
+    "description": "Used for seizure disorders.",
+    "price": "₹200–₹500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Amoxicillin Syrup",
+    "category": "Antibiotic (Penicillin)",
+    "description": "Used for pediatric infections.",
+    "price": "₹50–₹150 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cefixime Syrup",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for pediatric infections.",
+    "price": "₹100–₹250 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Linezolid Injection",
+    "category": "Antibiotic",
+    "description": "Used for resistant infections.",
+    "price": "₹600–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Levofloxacin Injection",
+    "category": "Antibiotic",
+    "description": "Used for severe infections.",
+    "price": "₹100–₹400 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clarithromycin Syrup",
+    "category": "Antibiotic",
+    "description": "Used for pediatric respiratory infections.",
+    "price": "₹120–₹300 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Diclofenac Injection",
+    "category": "NSAID",
+    "description": "Used for acute pain relief.",
+    "price": "₹10–₹40 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ketorolac Injection",
+    "category": "NSAID",
+    "description": "Used for severe short-term pain.",
+    "price": "₹20–₹80 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pantoprazole Injection",
+    "category": "Proton Pump Inhibitor",
+    "description": "Used for severe acidity.",
+    "price": "₹30–₹120 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cefazolin",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for surgical prophylaxis.",
+    "price": "₹40–₹150 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tobramycin",
+    "category": "Antibiotic (Aminoglycoside)",
+    "description": "Used for severe bacterial infections.",
+    "price": "₹40–₹150 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Moxifloxacin",
+    "category": "Antibiotic (Fluoroquinolone)",
+    "description": "Used for respiratory infections.",
+    "price": "₹150–₹350 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Voriconazole",
+    "category": "Antifungal",
+    "description": "Used for invasive fungal infections.",
+    "price": "₹800–₹3000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Posaconazole",
+    "category": "Antifungal",
+    "description": "Used for resistant fungal infections.",
+    "price": "₹2000–₹6000 (bottle)",
+    "type": "Suspension",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Caspofungin Injection",
+    "category": "Antifungal",
+    "description": "Used for invasive candidiasis.",
+    "price": "₹4000–₹10000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Colistin",
+    "category": "Antibiotic",
+    "description": "Used for multidrug-resistant infections.",
+    "price": "₹800–₹3000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Fosfomycin",
+    "category": "Urinary Antibiotic",
+    "description": "Used for urinary tract infections.",
+    "price": "₹200–₹600 (sachet)",
+    "type": "Powder",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Azilsartan",
+    "category": "ARB",
+    "description": "Used for hypertension.",
+    "price": "₹120–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Nebivolol",
+    "category": "Beta Blocker",
+    "description": "Used for hypertension.",
+    "price": "₹60–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Candesartan",
+    "category": "ARB",
+    "description": "Used for heart failure and hypertension.",
+    "price": "₹60–₹180 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Torsemide",
+    "category": "Loop Diuretic",
+    "description": "Used for edema and heart failure.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ranolazine",
+    "category": "Antianginal",
+    "description": "Used for chronic angina.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Prasugrel",
+    "category": "Antiplatelet",
+    "description": "Used to prevent clot formation.",
+    "price": "₹120–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ticagrelor",
+    "category": "Antiplatelet",
+    "description": "Used to reduce cardiovascular events.",
+    "price": "₹400–₹900 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Fondaparinux",
+    "category": "Anticoagulant",
+    "description": "Used for thrombosis prevention.",
+    "price": "₹1500–₹4000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Edoxaban",
+    "category": "Anticoagulant",
+    "description": "Used to prevent stroke.",
+    "price": "₹400–₹1000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rasagiline",
+    "category": "Anti-Parkinson",
+    "description": "Used for Parkinson's disease.",
+    "price": "₹200–₹500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pramipexole",
+    "category": "Dopamine Agonist",
+    "description": "Used for Parkinson's disease.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Selegiline",
+    "category": "MAO-B Inhibitor",
+    "description": "Used in Parkinson's disease.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Memantine",
+    "category": "NMDA Antagonist",
+    "description": "Used in Alzheimer's disease.",
+    "price": "₹200–₹500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Donepezil",
+    "category": "Cholinesterase Inhibitor",
+    "description": "Used in Alzheimer's disease.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ropinirole",
+    "category": "Dopamine Agonist",
+    "description": "Used in Parkinson's disease.",
+    "price": "₹200–₹500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bupropion",
+    "category": "Antidepressant",
+    "description": "Used for depression and smoking cessation.",
+    "price": "₹100–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Mirtazapine",
+    "category": "Antidepressant",
+    "description": "Used for depression.",
+    "price": "₹100–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Trazodone",
+    "category": "Antidepressant",
+    "description": "Used for depression and insomnia.",
+    "price": "₹60–₹180 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Lithium Carbonate",
+    "category": "Mood Stabilizer",
+    "description": "Used in bipolar disorder.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Buspirone",
+    "category": "Anxiolytic",
+    "description": "Used for anxiety disorders.",
+    "price": "₹80–₹200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Hydroxyzine",
+    "category": "Antihistamine / Anxiolytic",
+    "description": "Used for anxiety and allergies.",
+    "price": "₹30–₹90 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Melatonin",
+    "category": "Hormone Supplement",
+    "description": "Used for sleep disorders.",
+    "price": "₹80–₹200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Testosterone Injection",
+    "category": "Hormone",
+    "description": "Used in testosterone deficiency.",
+    "price": "₹200–₹800 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Progesterone",
+    "category": "Hormone",
+    "description": "Used in hormonal therapy.",
+    "price": "₹100–₹300 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Estradiol",
+    "category": "Hormone",
+    "description": "Used in hormone replacement therapy.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clomiphene",
+    "category": "Fertility Agent",
+    "description": "Used to induce ovulation.",
+    "price": "₹80–₹250 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Human Chorionic Gonadotropin",
+    "category": "Hormone",
+    "description": "Used in fertility treatment.",
+    "price": "₹500–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Metformin SR",
+    "category": "Antidiabetic",
+    "description": "Used for extended glucose control.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Acarbose",
+    "category": "Alpha-glucosidase Inhibitor",
+    "description": "Used to control post-meal glucose.",
+    "price": "₹60–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Orlistat",
+    "category": "Anti-obesity Agent",
+    "description": "Used for weight management.",
+    "price": "₹200–₹500 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Levocarnitine",
+    "category": "Supplement",
+    "description": "Used in carnitine deficiency.",
+    "price": "₹100–₹300 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sodium Valproate Syrup",
+    "category": "Antiepileptic",
+    "description": "Used in pediatric seizures.",
+    "price": "₹60–₹150 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cefepime",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for severe infections.",
+    "price": "₹200–₹600 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Imipenem + Cilastatin",
+    "category": "Carbapenem Antibiotic",
+    "description": "Used for serious infections.",
+    "price": "₹800–₹2500 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Doxycycline Injection",
+    "category": "Antibiotic",
+    "description": "Used for severe infections.",
+    "price": "₹100–₹300 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tigecycline",
+    "category": "Antibiotic",
+    "description": "Used for resistant infections.",
+    "price": "₹1500–₹4000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ertapenem",
+    "category": "Carbapenem Antibiotic",
+    "description": "Used for complicated infections.",
+    "price": "₹1000–₹3000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Linezolid Syrup",
+    "category": "Antibiotic",
+    "description": "Used for resistant pediatric infections.",
+    "price": "₹600–₹1500 (bottle)",
+    "type": "Syrup",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Methylprednisolone",
+    "category": "Corticosteroid",
+    "description": "Used for severe inflammation.",
+    "price": "₹40–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Prednisone",
+    "category": "Corticosteroid",
+    "description": "Used for inflammatory conditions.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Azithromycin Injection",
+    "category": "Antibiotic",
+    "description": "Used for severe infections.",
+    "price": "₹100–₹300 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ceftriaxone + Sulbactam",
+    "category": "Broad-spectrum Antibiotic",
+    "description": "Used for resistant infections.",
+    "price": "₹150–₹400 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Alogliptin",
+    "category": "DPP-4 Inhibitor",
+    "description": "Used for Type 2 diabetes management.",
+    "price": "₹120–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Linagliptin",
+    "category": "DPP-4 Inhibitor",
+    "description": "Used to improve glycemic control.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Canagliflozin",
+    "category": "SGLT2 Inhibitor",
+    "description": "Used for Type 2 diabetes.",
+    "price": "₹250–₹600 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Glargine Insulin Pen",
+    "category": "Long-acting Insulin",
+    "description": "Used for sustained glucose control.",
+    "price": "₹1500–₹3000 (pen)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Regular Insulin Pen",
+    "category": "Short-acting Insulin",
+    "description": "Used for mealtime glucose control.",
+    "price": "₹1000–₹2500 (pen)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Saxagliptin",
+    "category": "DPP-4 Inhibitor",
+    "description": "Used in Type 2 diabetes.",
+    "price": "₹120–₹350 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Repaglinide",
+    "category": "Meglitinide",
+    "description": "Used to control post-meal glucose.",
+    "price": "₹60–₹180 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Glucosamine",
+    "category": "Supplement",
+    "description": "Used for osteoarthritis support.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Chondroitin",
+    "category": "Supplement",
+    "description": "Used for joint health.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Meloxicam",
+    "category": "NSAID",
+    "description": "Used for arthritis pain.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Piroxicam",
+    "category": "NSAID",
+    "description": "Used for inflammatory disorders.",
+    "price": "₹20–₹80 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Celecoxib",
+    "category": "COX-2 Inhibitor",
+    "description": "Used for arthritis pain.",
+    "price": "₹100–₹250 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Etodolac",
+    "category": "NSAID",
+    "description": "Used for musculoskeletal pain.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Chlorpromazine",
+    "category": "Antipsychotic",
+    "description": "Used in schizophrenia and psychosis.",
+    "price": "₹20–₹60 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ziprasidone",
+    "category": "Antipsychotic",
+    "description": "Used in bipolar disorder.",
+    "price": "₹200–₹500 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Paliperidone",
+    "category": "Antipsychotic",
+    "description": "Used for schizophrenia.",
+    "price": "₹300–₹800 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Atomoxetine",
+    "category": "ADHD Medication",
+    "description": "Used for attention deficit disorder.",
+    "price": "₹200–₹500 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Methylphenidate",
+    "category": "CNS Stimulant",
+    "description": "Used for ADHD.",
+    "price": "₹200–₹600 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Modafinil",
+    "category": "Wakefulness Promoter",
+    "description": "Used for narcolepsy.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Armodafinil",
+    "category": "Wakefulness Promoter",
+    "description": "Used for sleep disorders.",
+    "price": "₹200–₹500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sumatriptan",
+    "category": "Antimigraine",
+    "description": "Used for acute migraine attacks.",
+    "price": "₹60–₹200 (2 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rizatriptan",
+    "category": "Antimigraine",
+    "description": "Used for migraine relief.",
+    "price": "₹150–₹400 (2 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ergotamine",
+    "category": "Antimigraine",
+    "description": "Used for vascular headaches.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Desmopressin",
+    "category": "Hormone Analog",
+    "description": "Used for diabetes insipidus.",
+    "price": "₹200–₹600 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Terazosin",
+    "category": "Alpha Blocker",
+    "description": "Used for hypertension and BPH.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Alfuzosin",
+    "category": "Alpha Blocker",
+    "description": "Used for prostate enlargement.",
+    "price": "₹100–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tolterodine",
+    "category": "Antimuscarinic",
+    "description": "Used for overactive bladder.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Oxybutynin",
+    "category": "Antimuscarinic",
+    "description": "Used for urinary incontinence.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sodium Fusidate",
+    "category": "Antibiotic",
+    "description": "Used for skin infections.",
+    "price": "₹60–₹150 (tube)",
+    "type": "Ointment",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Mupirocin",
+    "category": "Topical Antibiotic",
+    "description": "Used for bacterial skin infections.",
+    "price": "₹80–₹200 (tube)",
+    "type": "Ointment",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ketoconazole Shampoo",
+    "category": "Antifungal",
+    "description": "Used for dandruff.",
+    "price": "₹150–₹400 (bottle)",
+    "type": "Shampoo",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Permethrin",
+    "category": "Antiparasitic",
+    "description": "Used for scabies treatment.",
+    "price": "₹60–₹150 (tube)",
+    "type": "Cream",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Benzoyl Peroxide",
+    "category": "Topical Acne Agent",
+    "description": "Used for acne treatment.",
+    "price": "₹80–₹200 (tube)",
+    "type": "Gel",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Adapalene",
+    "category": "Topical Retinoid",
+    "description": "Used for acne.",
+    "price": "₹150–₹350 (tube)",
+    "type": "Gel",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Isotretinoin",
+    "category": "Retinoid",
+    "description": "Used for severe acne.",
+    "price": "₹200–₹600 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Hydroquinone",
+    "category": "Depigmenting Agent",
+    "description": "Used for hyperpigmentation.",
+    "price": "₹80–₹200 (tube)",
+    "type": "Cream",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Minoxidil",
+    "category": "Vasodilator",
+    "description": "Used for hair growth.",
+    "price": "₹300–₹800 (bottle)",
+    "type": "Solution",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Finasteride 1 mg",
+    "category": "5-Alpha Reductase Inhibitor",
+    "description": "Used for male pattern baldness.",
+    "price": "₹100–₹300 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clobetasol",
+    "category": "Topical Corticosteroid",
+    "description": "Used for severe skin inflammation.",
+    "price": "₹60–₹150 (tube)",
+    "type": "Cream",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tacrolimus Ointment",
+    "category": "Topical Immunomodulator",
+    "description": "Used for eczema.",
+    "price": "₹400–₹1200 (tube)",
+    "type": "Ointment",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Latanoprost",
+    "category": "Antiglaucoma",
+    "description": "Used to reduce intraocular pressure.",
+    "price": "₹300–₹800 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Timolol Eye Drops",
+    "category": "Beta Blocker",
+    "description": "Used for glaucoma treatment.",
+    "price": "₹100–₹300 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Brimonidine",
+    "category": "Alpha Agonist",
+    "description": "Used for glaucoma.",
+    "price": "₹200–₹500 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ciprofloxacin Eye Drops",
+    "category": "Antibiotic",
+    "description": "Used for eye infections.",
+    "price": "₹40–₹120 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ofloxacin Eye Drops",
+    "category": "Antibiotic",
+    "description": "Used for bacterial eye infections.",
+    "price": "₹50–₹150 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Artificial Tears",
+    "category": "Lubricant",
+    "description": "Used for dry eyes.",
+    "price": "₹80–₹200 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Carboxymethylcellulose",
+    "category": "Lubricant",
+    "description": "Used for dry eye syndrome.",
+    "price": "₹80–₹200 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Moxifloxacin Eye Drops",
+    "category": "Antibiotic",
+    "description": "Used for eye infections.",
+    "price": "₹100–₹300 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ketorolac Eye Drops",
+    "category": "NSAID",
+    "description": "Used for eye inflammation.",
+    "price": "₹150–₹350 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Prednisolone Eye Drops",
+    "category": "Corticosteroid",
+    "description": "Used for ocular inflammation.",
+    "price": "₹150–₹400 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bevacizumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in cancer therapy.",
+    "price": "₹20000–₹50000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cetuximab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in colorectal cancer.",
+    "price": "₹30000–₹80000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Nivolumab",
+    "category": "Immunotherapy",
+    "description": "Used in various cancers.",
+    "price": "₹80000–₹200000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pembrolizumab",
+    "category": "Immunotherapy",
+    "description": "Used for advanced cancers.",
+    "price": "₹100000–₹300000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sunitinib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in renal cancer.",
+    "price": "₹5000–₹15000 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sorafenib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in liver cancer.",
+    "price": "₹6000–₹20000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Regorafenib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in colorectal cancer.",
+    "price": "₹8000–₹25000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Nilotinib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in leukemia.",
+    "price": "₹8000–₹20000 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bosutinib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in leukemia.",
+    "price": "₹10000–₹30000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dasatinib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in leukemia.",
+    "price": "₹10000–₹30000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Everolimus",
+    "category": "mTOR Inhibitor",
+    "description": "Used in cancer therapy.",
+    "price": "₹5000–₹15000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Temsirolimus",
+    "category": "mTOR Inhibitor",
+    "description": "Used in renal cancer.",
+    "price": "₹20000–₹60000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Palbociclib",
+    "category": "CDK4/6 Inhibitor",
+    "description": "Used in breast cancer.",
+    "price": "₹10000–₹40000 (pack)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Abiraterone",
+    "category": "Antiandrogen",
+    "description": "Used in prostate cancer.",
+    "price": "₹8000–₹25000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Enzalutamide",
+    "category": "Antiandrogen",
+    "description": "Used in prostate cancer.",
+    "price": "₹15000–₹40000 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bortezomib",
+    "category": "Proteasome Inhibitor",
+    "description": "Used in multiple myeloma.",
+    "price": "₹8000–₹30000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Lenalidomide",
+    "category": "Immunomodulatory Agent",
+    "description": "Used in myeloma.",
+    "price": "₹10000–₹40000 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Thalidomide",
+    "category": "Immunomodulatory Agent",
+    "description": "Used in myeloma.",
+    "price": "₹3000–₹10000 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bleomycin",
+    "category": "Anticancer Antibiotic",
+    "description": "Used in lymphoma.",
+    "price": "₹500–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Vincristine",
+    "category": "Vinca Alkaloid",
+    "description": "Used in chemotherapy.",
+    "price": "₹300–₹1200 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Vinblastine",
+    "category": "Vinca Alkaloid",
+    "description": "Used in cancer therapy.",
+    "price": "₹300–₹1200 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Doxorubicin",
+    "category": "Anthracycline",
+    "description": "Used in chemotherapy.",
+    "price": "₹500–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Epirubicin",
+    "category": "Anthracycline",
+    "description": "Used in cancer treatment.",
+    "price": "₹1000–₹3000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Methotrexate Injection",
+    "category": "Antimetabolite",
+    "description": "Used in cancer therapy.",
+    "price": "₹100–₹400 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "5-Fluorouracil",
+    "category": "Antimetabolite",
+    "description": "Used in chemotherapy.",
+    "price": "₹100–₹400 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cytarabine",
+    "category": "Antimetabolite",
+    "description": "Used in leukemia.",
+    "price": "₹500–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ifosfamide",
+    "category": "Alkylating Agent",
+    "description": "Used in cancer therapy.",
+    "price": "₹800–₹3000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Busulfan",
+    "category": "Alkylating Agent",
+    "description": "Used in leukemia.",
+    "price": "₹1000–₹4000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Melphalan",
+    "category": "Alkylating Agent",
+    "description": "Used in myeloma.",
+    "price": "₹800–₹3000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Carfilzomib",
+    "category": "Proteasome Inhibitor",
+    "description": "Used in multiple myeloma.",
+    "price": "₹20000–₹60000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ixazomib",
+    "category": "Proteasome Inhibitor",
+    "description": "Used in myeloma.",
+    "price": "₹15000–₹40000 (capsule)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Olaparib",
+    "category": "PARP Inhibitor",
+    "description": "Used in ovarian cancer.",
+    "price": "₹20000–₹50000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Atezolizumab",
+    "category": "Immunotherapy",
+    "description": "Used in cancer treatment.",
+    "price": "₹100000–₹300000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Durvalumab",
+    "category": "Immunotherapy",
+    "description": "Used in lung cancer.",
+    "price": "₹100000–₹300000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ipilimumab",
+    "category": "Immunotherapy",
+    "description": "Used in melanoma.",
+    "price": "₹150000–₹400000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Nintedanib",
+    "category": "Tyrosine Kinase Inhibitor",
+    "description": "Used in pulmonary fibrosis.",
+    "price": "₹5000–₹15000 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pirfenidone",
+    "category": "Antifibrotic Agent",
+    "description": "Used in pulmonary fibrosis.",
+    "price": "₹3000–₹10000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sevoflurane",
+    "category": "Inhalational Anesthetic",
+    "description": "Used for general anesthesia.",
+    "price": "₹3000–₹8000 (bottle)",
+    "type": "Liquid",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Isoflurane",
+    "category": "Inhalational Anesthetic",
+    "description": "Used during surgery.",
+    "price": "₹2000–₹6000 (bottle)",
+    "type": "Liquid",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Desflurane",
+    "category": "Inhalational Anesthetic",
+    "description": "Used for anesthesia.",
+    "price": "₹5000–₹15000 (bottle)",
+    "type": "Liquid",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rocuronium",
+    "category": "Neuromuscular Blocker",
+    "description": "Used during surgical procedures.",
+    "price": "₹200–₹800 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Vecuronium",
+    "category": "Neuromuscular Blocker",
+    "description": "Used for muscle relaxation in surgery.",
+    "price": "₹200–₹800 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Atracurium",
+    "category": "Neuromuscular Blocker",
+    "description": "Used in anesthesia.",
+    "price": "₹200–₹800 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Neostigmine",
+    "category": "Cholinesterase Inhibitor",
+    "description": "Used to reverse neuromuscular blockade.",
+    "price": "₹20–₹80 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Glycopyrrolate",
+    "category": "Anticholinergic",
+    "description": "Used in anesthesia and to reduce secretions.",
+    "price": "₹20–₹80 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dobutamine",
+    "category": "Inotrope",
+    "description": "Used in heart failure.",
+    "price": "₹100–₹300 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dopamine",
+    "category": "Inotrope",
+    "description": "Used in shock management.",
+    "price": "₹100–₹300 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Noradrenaline",
+    "category": "Vasopressor",
+    "description": "Used in severe hypotension.",
+    "price": "₹100–₹300 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Phenylephrine",
+    "category": "Vasoconstrictor",
+    "description": "Used for nasal congestion and hypotension.",
+    "price": "₹20–₹80 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ephedrine",
+    "category": "Sympathomimetic",
+    "description": "Used in hypotension during anesthesia.",
+    "price": "₹20–₹80 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Metaraminol",
+    "category": "Vasopressor",
+    "description": "Used for acute hypotension.",
+    "price": "₹100–₹300 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Milrinone",
+    "category": "Inotrope",
+    "description": "Used in heart failure.",
+    "price": "₹500–₹1500 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Levosimendan",
+    "category": "Inodilator",
+    "description": "Used in acute heart failure.",
+    "price": "₹3000–₹8000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Nicardipine",
+    "category": "Calcium Channel Blocker",
+    "description": "Used for severe hypertension.",
+    "price": "₹200–₹600 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clevidipine",
+    "category": "Calcium Channel Blocker",
+    "description": "Used for acute BP control.",
+    "price": "₹5000–₹15000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Urapidil",
+    "category": "Antihypertensive",
+    "description": "Used for hypertensive emergencies.",
+    "price": "₹500–₹1500 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Esmolol",
+    "category": "Beta Blocker",
+    "description": "Used for rapid heart rate control.",
+    "price": "₹300–₹900 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Digoxin Injection",
+    "category": "Cardiac Glycoside",
+    "description": "Used for arrhythmias and heart failure.",
+    "price": "₹30–₹120 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Valganciclovir",
+    "category": "Antiviral",
+    "description": "Used for CMV infections.",
+    "price": "₹2000–₹6000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ganciclovir",
+    "category": "Antiviral",
+    "description": "Used for severe viral infections.",
+    "price": "₹1500–₹5000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Adefovir",
+    "category": "Antiviral",
+    "description": "Used in hepatitis B.",
+    "price": "₹500–₹1500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Entecavir",
+    "category": "Antiviral",
+    "description": "Used in chronic hepatitis B.",
+    "price": "₹800–₹2500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Favipiravir",
+    "category": "Antiviral",
+    "description": "Used in viral infections.",
+    "price": "₹1000–₹3000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Micafungin",
+    "category": "Antifungal",
+    "description": "Used for invasive candidiasis.",
+    "price": "₹4000–₹10000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Anidulafungin",
+    "category": "Antifungal",
+    "description": "Used for severe fungal infections.",
+    "price": "₹5000–₹12000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Terbinafine",
+    "category": "Antifungal",
+    "description": "Used for fungal nail infections.",
+    "price": "₹80–₹250 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Griseofulvin",
+    "category": "Antifungal",
+    "description": "Used for dermatophyte infections.",
+    "price": "₹60–₹180 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dapsone",
+    "category": "Antimicrobial",
+    "description": "Used in leprosy and dermatitis herpetiformis.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Clofazimine",
+    "category": "Antileprotic",
+    "description": "Used in leprosy treatment.",
+    "price": "₹50–₹150 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Primaquine",
+    "category": "Antimalarial",
+    "description": "Used for radical cure of malaria.",
+    "price": "₹20–₹80 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Artesunate Injection",
+    "category": "Antimalarial",
+    "description": "Used for severe malaria.",
+    "price": "₹100–₹400 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Chloramphenicol",
+    "category": "Antibiotic",
+    "description": "Used for serious infections.",
+    "price": "₹40–₹120 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Fidaxomicin",
+    "category": "Antibiotic",
+    "description": "Used for C. difficile infection.",
+    "price": "₹10000–₹30000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ceftazidime",
+    "category": "Antibiotic (Cephalosporin)",
+    "description": "Used for severe infections.",
+    "price": "₹80–₹250 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Meropenem + Vaborbactam",
+    "category": "Carbapenem Antibiotic",
+    "description": "Used for resistant infections.",
+    "price": "₹5000–₹15000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ceftolozane + Tazobactam",
+    "category": "Broad-spectrum Antibiotic",
+    "description": "Used for complicated infections.",
+    "price": "₹5000–₹15000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tedizolid",
+    "category": "Antibiotic",
+    "description": "Used for skin infections.",
+    "price": "₹2000–₹6000 (6 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Omadacycline",
+    "category": "Antibiotic",
+    "description": "Used for community-acquired pneumonia.",
+    "price": "₹5000–₹15000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Eravacycline",
+    "category": "Antibiotic",
+    "description": "Used for intra-abdominal infections.",
+    "price": "₹8000–₹20000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bedaquiline",
+    "category": "Antitubercular",
+    "description": "Used for multidrug-resistant TB.",
+    "price": "₹2000–₹6000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Delamanid",
+    "category": "Antitubercular",
+    "description": "Used for MDR-TB.",
+    "price": "₹3000–₹8000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Capreomycin",
+    "category": "Antitubercular",
+    "description": "Used for resistant TB.",
+    "price": "₹1000–₹4000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Streptomycin",
+    "category": "Antibiotic (Aminoglycoside)",
+    "description": "Used for TB and infections.",
+    "price": "₹40–₹150 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Caspofungin Acetate",
+    "category": "Antifungal",
+    "description": "Used for invasive fungal infections.",
+    "price": "₹4000–₹10000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Furosemide Injection",
+    "category": "Loop Diuretic",
+    "description": "Used for acute fluid overload.",
+    "price": "₹10–₹50 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Torsemide Injection",
+    "category": "Loop Diuretic",
+    "description": "Used for edema management.",
+    "price": "₹20–₹80 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Acetazolamide",
+    "category": "Carbonic Anhydrase Inhibitor",
+    "description": "Used for glaucoma and altitude sickness.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Brinzolamide",
+    "category": "Antiglaucoma",
+    "description": "Used to lower eye pressure.",
+    "price": "₹300–₹800 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Pilocarpine",
+    "category": "Cholinergic Agent",
+    "description": "Used for glaucoma treatment.",
+    "price": "₹150–₹400 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Travoprost",
+    "category": "Antiglaucoma",
+    "description": "Used to reduce intraocular pressure.",
+    "price": "₹300–₹800 (bottle)",
+    "type": "Eye Drop",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Acetylcysteine",
+    "category": "Mucolytic / Antidote",
+    "description": "Used for paracetamol overdose and cough.",
+    "price": "₹100–₹300 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Activated Charcoal",
+    "category": "Adsorbent",
+    "description": "Used in poisoning cases.",
+    "price": "₹200–₹600 (bottle)",
+    "type": "Suspension",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Naloxone",
+    "category": "Opioid Antagonist",
+    "description": "Used in opioid overdose.",
+    "price": "₹200–₹800 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Flumazenil",
+    "category": "Benzodiazepine Antagonist",
+    "description": "Used in benzodiazepine overdose.",
+    "price": "₹1000–₹3000 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Protamine Sulfate",
+    "category": "Antidote",
+    "description": "Used to reverse heparin.",
+    "price": "₹500–₹1500 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Vitamin K Injection",
+    "category": "Antidote / Vitamin",
+    "description": "Used for bleeding disorders.",
+    "price": "₹20–₹80 (ampoule)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Desferrioxamine",
+    "category": "Chelating Agent",
+    "description": "Used in iron poisoning.",
+    "price": "₹1000–₹4000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Calcium EDTA",
+    "category": "Chelating Agent",
+    "description": "Used in heavy metal poisoning.",
+    "price": "₹500–₹2000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Labetalol",
+    "category": "Beta Blocker",
+    "description": "Used for hypertension emergencies.",
+    "price": "₹40–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ambrisentan",
+    "category": "Endothelin Receptor Antagonist",
+    "description": "Used for pulmonary hypertension.",
+    "price": "₹5000–₹15000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Bosentan",
+    "category": "Endothelin Receptor Antagonist",
+    "description": "Used in pulmonary hypertension.",
+    "price": "₹5000–₹15000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sotalol",
+    "category": "Antiarrhythmic",
+    "description": "Used for ventricular arrhythmias.",
+    "price": "₹80–₹200 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Mexiletine",
+    "category": "Antiarrhythmic",
+    "description": "Used for ventricular arrhythmias.",
+    "price": "₹300–₹800 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ivacaftor",
+    "category": "CFTR Modulator",
+    "description": "Used in cystic fibrosis.",
+    "price": "₹100000–₹300000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Lumacaftor + Ivacaftor",
+    "category": "CFTR Modulator",
+    "description": "Used in cystic fibrosis.",
+    "price": "₹200000–₹500000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tezacaftor",
+    "category": "CFTR Modulator",
+    "description": "Used in cystic fibrosis.",
+    "price": "₹200000–₹500000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Elexacaftor",
+    "category": "CFTR Modulator",
+    "description": "Used in cystic fibrosis.",
+    "price": "₹200000–₹500000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Dupilumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in severe asthma and eczema.",
+    "price": "₹50000–₹150000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Omalizumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in allergic asthma.",
+    "price": "₹20000–₹60000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Mepolizumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in eosinophilic asthma.",
+    "price": "₹50000–₹150000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Benralizumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in severe asthma.",
+    "price": "₹50000–₹150000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Secukinumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used for psoriasis.",
+    "price": "₹40000–₹120000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ustekinumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in autoimmune diseases.",
+    "price": "₹80000–₹200000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tofacitinib",
+    "category": "JAK Inhibitor",
+    "description": "Used for rheumatoid arthritis.",
+    "price": "₹2000–₹6000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Baricitinib",
+    "category": "JAK Inhibitor",
+    "description": "Used in rheumatoid arthritis.",
+    "price": "₹3000–₹8000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Upadacitinib",
+    "category": "JAK Inhibitor",
+    "description": "Used for autoimmune diseases.",
+    "price": "₹5000–₹12000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ruxolitinib",
+    "category": "JAK Inhibitor",
+    "description": "Used in myelofibrosis.",
+    "price": "₹8000–₹20000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Belimumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in lupus.",
+    "price": "₹60000–₹150000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Eculizumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in rare blood disorders.",
+    "price": "₹200000–₹500000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Alemtuzumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in leukemia and MS.",
+    "price": "₹200000–₹500000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Natalizumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in multiple sclerosis.",
+    "price": "₹80000–₹200000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Fingolimod",
+    "category": "Immunomodulator",
+    "description": "Used in multiple sclerosis.",
+    "price": "₹5000–₹15000 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Teriflunomide",
+    "category": "Immunomodulator",
+    "description": "Used in multiple sclerosis.",
+    "price": "₹5000–₹15000 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ocrelizumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in multiple sclerosis.",
+    "price": "₹200000–₹500000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Cladribine",
+    "category": "Immunosuppressant",
+    "description": "Used in multiple sclerosis.",
+    "price": "₹100000–₹300000 (pack)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Glatiramer Acetate",
+    "category": "Immunomodulator",
+    "description": "Used in multiple sclerosis.",
+    "price": "₹50000–₹150000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Peginterferon Beta",
+    "category": "Immunomodulator",
+    "description": "Used in multiple sclerosis.",
+    "price": "₹50000–₹150000 (injection)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Mitoxantrone",
+    "category": "Antineoplastic",
+    "description": "Used in multiple sclerosis and cancer.",
+    "price": "₹5000–₹15000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Zolpidem",
+    "category": "Sedative",
+    "description": "Used for insomnia.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Eszopiclone",
+    "category": "Sedative",
+    "description": "Used for insomnia.",
+    "price": "₹200–₹500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ramelteon",
+    "category": "Melatonin Agonist",
+    "description": "Used for insomnia.",
+    "price": "₹500–₹1500 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Doxylamine",
+    "category": "Antihistamine",
+    "description": "Used for nausea and insomnia.",
+    "price": "₹30–₹100 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Pyridoxine",
+    "category": "Vitamin B6",
+    "description": "Used in deficiency states.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Thiamine",
+    "category": "Vitamin B1",
+    "description": "Used in deficiency and neuropathy.",
+    "price": "₹10–₹40 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Niacin",
+    "category": "Vitamin B3",
+    "description": "Used for dyslipidemia.",
+    "price": "₹40–₹120 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Biotin",
+    "category": "Vitamin Supplement",
+    "description": "Used for hair and nail health.",
+    "price": "₹50–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "FALSE"
+  },
+  {
+    "name": "Pancreatin",
+    "category": "Digestive Enzyme",
+    "description": "Used in pancreatic insufficiency.",
+    "price": "₹100–₹300 (10 capsules)",
+    "type": "Capsule",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Ursodeoxycholic Acid",
+    "category": "Bile Acid",
+    "description": "Used in gallstones and liver disease.",
+    "price": "₹150–₹400 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Mesalamine",
+    "category": "Aminosalicylate",
+    "description": "Used in ulcerative colitis.",
+    "price": "₹300–₹800 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Sulfasalazine",
+    "category": "Aminosalicylate",
+    "description": "Used in rheumatoid arthritis and IBD.",
+    "price": "₹40–₹150 (10 tablets)",
+    "type": "Tablet",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Vedolizumab",
+    "category": "Monoclonal Antibody",
+    "description": "Used in inflammatory bowel disease.",
+    "price": "₹100000–₹300000 (vial)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Influenza Vaccine",
+    "category": "Vaccine",
+    "description": "Used for flu prevention.",
+    "price": "₹800–₹2000 (dose)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Hepatitis B Vaccine",
+    "category": "Vaccine",
+    "description": "Used for hepatitis B prevention.",
+    "price": "₹200–₹600 (dose)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Rabies Vaccine",
+    "category": "Vaccine",
+    "description": "Used after rabies exposure.",
+    "price": "₹300–₹1000 (dose)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "Tetanus Toxoid",
+    "category": "Vaccine",
+    "description": "Used for tetanus prevention.",
+    "price": "₹50–₹200 (dose)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
+  },
+  {
+    "name": "HPV Vaccine",
+    "category": "Vaccine",
+    "description": "Used to prevent HPV infection.",
+    "price": "₹3000–₹10000 (dose)",
+    "type": "Injection",
+    "prescription_required": "TRUE"
   }
 ]
