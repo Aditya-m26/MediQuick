@@ -1,0 +1,9 @@
+{
+  "name": "mediquick-root",
+  "version": "1.0.0",
+  "description": "Root package to help Render deploy the backend",
+  "scripts": {
+    "postinstall": "cd backend && npm install",
+    "start": "cd backend && node server.js"
+  }
+}
