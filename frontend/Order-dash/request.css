@@ -598,6 +598,15 @@ body {
   color: #0ea5b0;
 }
 
+/* Real Cloudinary photo — cropped to same height as placeholder */
+.store-photo {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 /* Colour variants for icon backgrounds */
 .store-img-green {
   background: linear-gradient(135deg, #d4f5e9, #a8e6cf);
