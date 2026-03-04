@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const Tesseract = require("tesseract.js");
+const { createWorker } = require("tesseract.js");
 const { upload } = require("../config/cloudinary");
 const Medicine = require("../models/Medicine");
 
@@ -21,34 +21,46 @@ function authenticate(req, res, next) {
 // ─────────────────────────────────────────────────────────────────────────────
 // POST /api/prescription/scan
 // Body: multipart/form-data → field name: "prescription"
-//
-// Flow:
-//   1. Upload image to Cloudinary (mediquick/prescriptions)
-//   2. Run Tesseract.js OCR on the Cloudinary URL
-//   3. Extract candidate medicine names from OCR text
-//   4. Fuzzy-match each candidate against the medicines collection
-//   5. Return { imageUrl, extractedText, medicines }
 // ─────────────────────────────────────────────────────────────────────────────
-router.post("/scan", authenticate, upload.single("prescription"), async (req, res) => {
+router.post("/scan", authenticate, (req, res, next) => {
+    // Wrap multer in try-catch so upload errors don't crash
+    upload.single("prescription")(req, res, (err) => {
+        if (err) {
+            console.error("[UPLOAD] Multer/Cloudinary error:", err.message);
+            return res.status(400).json({
+                message: "Image upload failed: " + err.message,
+            });
+        }
+        next();
+    });
+}, async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ message: "No prescription image provided." });
     }
 
     const imageUrl = req.file.path; // Cloudinary URL
+    console.log("[RX] Image uploaded to:", imageUrl);
 
+    let worker;
     try {
-        // ── Step 1: OCR ──────────────────────────────────────────────────────
-        console.log("[OCR] Starting Tesseract on:", imageUrl);
-        const { data } = await Tesseract.recognize(imageUrl, "eng", {
+        // ── Step 1: OCR with Tesseract worker ────────────────────────────────
+        console.log("[OCR] Creating Tesseract worker...");
+        worker = await createWorker("eng", 1, {
             logger: (m) => {
                 if (m.status === "recognizing text") {
-                    console.log(`[OCR] Progress: ${Math.round(m.progress * 100)}%`);
+                    console.log(`[OCR] ${Math.round(m.progress * 100)}%`);
                 }
             },
         });
 
+        console.log("[OCR] Running recognition...");
+        const { data } = await worker.recognize(imageUrl);
         const extractedText = data.text || "";
-        console.log("[OCR] Extracted text:", extractedText.substring(0, 200));
+        console.log("[OCR] Extracted:", extractedText.substring(0, 300));
+
+        // Terminate worker to free memory
+        await worker.terminate();
+        worker = null;
 
         if (!extractedText.trim()) {
             return res.json({
@@ -59,19 +71,15 @@ router.post("/scan", authenticate, upload.single("prescription"), async (req, re
             });
         }
 
-        // ── Step 2: Parse medicine candidates ────────────────────────────────
-        // Split text into lines, then into words/phrases
-        // Filter out very short tokens or purely numeric ones
+        // ── Step 2: Parse candidate medicine names ───────────────────────────
         const lines = extractedText
             .split(/\r?\n/)
             .map((l) => l.trim())
             .filter((l) => l.length > 2);
 
-        // Collect candidate phrases: full lines + individual words (3+ chars)
         const candidates = new Set();
         for (const line of lines) {
             candidates.add(line);
-            // Also split by common delimiters
             const words = line.split(/[\s,;|/]+/);
             for (const w of words) {
                 const clean = w.replace(/[^a-zA-Z0-9]/g, "");
@@ -81,8 +89,8 @@ router.post("/scan", authenticate, upload.single("prescription"), async (req, re
             }
         }
 
-        // ── Step 3: Fuzzy-match against DB ───────────────────────────────────
-        const matched = new Map(); // Use map to avoid duplicates by _id
+        // ── Step 3: Fuzzy-match against medicines DB ─────────────────────────
+        const matched = new Map();
 
         for (const term of candidates) {
             const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -99,12 +107,12 @@ router.post("/scan", authenticate, upload.single("prescription"), async (req, re
                     }
                 }
             } catch {
-                // skip invalid regex terms
+                // skip invalid regex
             }
         }
 
         const medicines = Array.from(matched.values());
-        console.log(`[OCR] Matched ${medicines.length} medicines from ${candidates.size} candidates.`);
+        console.log(`[OCR] Matched ${medicines.length} medicine(s) from ${candidates.size} candidates`);
 
         return res.json({
             imageUrl,
@@ -114,10 +122,15 @@ router.post("/scan", authenticate, upload.single("prescription"), async (req, re
                 ? `Found ${medicines.length} medicine(s) from your prescription.`
                 : "Could not match any medicines. Try searching manually.",
         });
+
     } catch (err) {
-        console.error("[OCR] Error:", err);
+        console.error("[OCR] Error:", err.message || err);
+        // Clean up worker on error
+        if (worker) {
+            try { await worker.terminate(); } catch { }
+        }
         return res.status(500).json({
-            message: "OCR processing failed. Please try again.",
+            message: "OCR processing failed: " + (err.message || "Unknown error"),
             imageUrl,
         });
     }

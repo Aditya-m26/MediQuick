@@ -254,7 +254,17 @@ function handleRxUpload(input) {
     headers: { 'Authorization': 'Bearer ' + token },
     body: formData,
   })
-    .then(function (r) { return r.json(); })
+    .then(function (r) {
+      if (!r.ok) {
+        return r.text().then(function (txt) {
+          try { var j = JSON.parse(txt); throw new Error(j.message || 'Server error'); }
+          catch (e) { if (e.message) throw e; throw new Error('Server error (' + r.status + ')'); }
+        });
+      }
+      // Update progress text — OCR may take a while
+      document.getElementById('rxProgressText').textContent = 'Processing OCR… this may take 10-20 seconds';
+      return r.json();
+    })
     .then(function (data) {
       document.getElementById('rxProgress').classList.add('hidden');
       renderRxResults(data);
@@ -263,7 +273,7 @@ function handleRxUpload(input) {
       console.error('Rx upload error:', err);
       document.getElementById('rxProgress').classList.add('hidden');
       document.getElementById('uploadBox').classList.remove('hidden');
-      alert('Upload failed. Please try again.');
+      alert(err.message || 'Upload failed. Please try again.');
     });
 
   // Reset file input so same file can be re-selected
