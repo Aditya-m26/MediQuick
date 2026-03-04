@@ -232,3 +232,114 @@ function renderStores(stores) {
     );
   }).join('');
 }
+
+// ─── PRESCRIPTION UPLOAD + OCR ──────────────────────────────────────────────
+function handleRxUpload(input) {
+  var file = input.files && input.files[0];
+  if (!file) return;
+
+  var token = localStorage.getItem('mq_token');
+  if (!token) { window.location.href = '../index.html'; return; }
+
+  // Show progress, hide upload box
+  document.getElementById('uploadBox').classList.add('hidden');
+  document.getElementById('rxProgress').classList.remove('hidden');
+  document.getElementById('rxProgressText').textContent = 'Uploading & scanning prescription…';
+
+  var formData = new FormData();
+  formData.append('prescription', file);
+
+  fetch(API_BASE + '/api/prescription/scan?folder=mediquick/prescriptions', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token },
+    body: formData,
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      document.getElementById('rxProgress').classList.add('hidden');
+      renderRxResults(data);
+    })
+    .catch(function (err) {
+      console.error('Rx upload error:', err);
+      document.getElementById('rxProgress').classList.add('hidden');
+      document.getElementById('uploadBox').classList.remove('hidden');
+      alert('Upload failed. Please try again.');
+    });
+
+  // Reset file input so same file can be re-selected
+  input.value = '';
+}
+
+function renderRxResults(data) {
+  document.getElementById('rxResults').classList.remove('hidden');
+
+  // Preview image
+  var img = document.getElementById('rxPreviewImg');
+  if (data.imageUrl) {
+    img.src = data.imageUrl;
+    img.style.display = 'block';
+  } else {
+    img.style.display = 'none';
+  }
+
+  // Extracted text
+  document.getElementById('rxExtractedText').textContent =
+    data.extractedText || 'No text detected.';
+
+  // Matched medicines
+  var meds = data.medicines || [];
+  document.getElementById('rxMedsCount').textContent =
+    meds.length + ' medicine' + (meds.length !== 1 ? 's' : '') + ' found';
+
+  var list = document.getElementById('rxMedsList');
+  if (!meds.length) {
+    list.innerHTML = '<p class="rx-no-meds">No medicines matched. Try searching manually.</p>';
+    return;
+  }
+
+  list.innerHTML = meds.map(function (m) {
+    var priceText = m.estimatedPrice || ('\u20B9' + m.price);
+    var rxBadge = m.prescription
+      ? '<span class="rx-badge rx-req">Rx</span>'
+      : '<span class="rx-badge rx-ok">OTC</span>';
+
+    return (
+      '<div class="rx-med-card">' +
+      '<div class="rx-med-info">' +
+      '<div class="rx-med-name">' + m.name + ' ' + rxBadge + '</div>' +
+      '<div class="rx-med-meta">' +
+      '<span>' + (m.category || '') + '</span>' +
+      '<span class="rx-dot">\u00B7</span>' +
+      '<span>' + (m.type || '') + '</span>' +
+      '<span class="rx-dot">\u00B7</span>' +
+      '<span class="rx-med-price">' + priceText + '</span>' +
+      '</div>' +
+      '</div>' +
+      '<button class="rx-add-btn" onclick="addRxMed(\'' +
+      m._id + '\',\'' +
+      m.name.replace(/'/g, "\\'") + '\',' +
+      m.price +
+      ')">' +
+      '<i class="fa-solid fa-cart-plus"></i> Add' +
+      '</button>' +
+      '</div>'
+    );
+  }).join('');
+}
+
+function addRxMed(id, name, price) {
+  addToCart({ id: id, name: name, price: price });
+  updateCartCount();
+  // Visual feedback
+  var btn = event.target.closest('.rx-add-btn');
+  if (btn) {
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
+    btn.classList.add('added');
+    btn.disabled = true;
+  }
+}
+
+function closeRxResults() {
+  document.getElementById('rxResults').classList.add('hidden');
+  document.getElementById('uploadBox').classList.remove('hidden');
+}

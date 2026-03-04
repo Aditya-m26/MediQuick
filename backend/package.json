@@ -20,6 +20,7 @@
     "mongodb": "^7.1.0",
     "mongoose": "^9.2.3",
     "multer": "^2.1.0",
-    "multer-storage-cloudinary": "^4.0.0"
+    "multer-storage-cloudinary": "^4.0.0",
+    "tesseract.js": "^7.0.0"
   }
 }

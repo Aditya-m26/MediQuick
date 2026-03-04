@@ -913,3 +913,267 @@ body.emergency-on .store-card:hover {
     align-items: flex-start;
   }
 }
+
+/* ======== PRESCRIPTION UPLOAD + OCR ======== */
+
+/* Progress spinner */
+.rx-progress {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.rx-progress-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: #0ea5b0;
+  font-weight: 600;
+}
+
+.sd-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #0ea5b0;
+  border-radius: 50%;
+  animation: rxSpin .7s linear infinite;
+}
+
+@keyframes rxSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Results panel */
+.rx-results {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+  margin: 20px auto;
+  max-width: 800px;
+  overflow: hidden;
+  animation: rxFadeIn .3s ease;
+}
+
+@keyframes rxFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rx-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #0ea5b0, #14b8a6);
+  color: #fff;
+}
+
+.rx-results-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rx-close-btn {
+  background: rgba(255, 255, 255, .2);
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rx-close-btn:hover {
+  background: rgba(255, 255, 255, .35);
+}
+
+.rx-results-body {
+  padding: 20px;
+}
+
+/* Prescription preview image */
+.rx-preview {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.rx-preview img {
+  max-width: 100%;
+  max-height: 260px;
+  border-radius: 12px;
+  object-fit: contain;
+  border: 2px solid #e2e8f0;
+}
+
+/* Extracted text collapsible */
+.rx-extracted {
+  margin-bottom: 16px;
+  background: #f8fffe;
+  border: 1px solid #d1f5f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rx-extracted summary {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0ea5b0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rx-extracted pre {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #334155;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 0;
+  background: #f0fafa;
+}
+
+/* Matched medicines header */
+.rx-meds-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a2332;
+  margin-bottom: 12px;
+}
+
+.rx-meds-header i {
+  color: #0ea5b0;
+}
+
+/* Medicine card list */
+.rx-meds-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rx-med-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #f8fafc;
+  border: 1px solid #e9eef4;
+  border-radius: 12px;
+  transition: border-color .2s;
+}
+
+.rx-med-card:hover {
+  border-color: #b2dfe4;
+}
+
+.rx-med-info {
+  flex: 1;
+}
+
+.rx-med-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a2332;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rx-med-meta {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.rx-dot {
+  color: #cbd5e1;
+}
+
+.rx-med-price {
+  font-weight: 600;
+  color: #0ea5b0;
+}
+
+/* Rx badge */
+.rx-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+.rx-badge.rx-req {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.rx-badge.rx-ok {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* Add button */
+.rx-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #0ea5b0;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: background .2s;
+  flex-shrink: 0;
+}
+
+.rx-add-btn:hover {
+  background: #0b8f99;
+}
+
+.rx-add-btn.added {
+  background: #10b981;
+  cursor: default;
+}
+
+.rx-no-meds {
+  text-align: center;
+  color: #94a3b8;
+  padding: 20px;
+  font-size: 14px;
+}

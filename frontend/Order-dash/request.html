@@ -125,14 +125,51 @@
     <p class="or-text">— OR —</p>
 
     <!-- Prescription Upload Box -->
-    <div class="upload-box">
+    <div class="upload-box" id="uploadBox">
       <i class="fa-solid fa-file-medical upload-icon"></i>
       <p class="upload-title">Scan / Upload your Rx</p>
       <p class="upload-sub">Upload a photo of your prescription</p>
-      <button class="upload-btn">
+      <input type="file" id="rxFileInput" accept="image/*" style="display:none" onchange="handleRxUpload(this)" />
+      <button class="upload-btn" onclick="document.getElementById('rxFileInput').click()">
         <i class="fa-solid fa-upload"></i>
         Upload Prescription
       </button>
+    </div>
+
+    <!-- Upload Progress -->
+    <div id="rxProgress" class="rx-progress hidden">
+      <div class="rx-progress-inner">
+        <div class="sd-spinner"></div>
+        <p id="rxProgressText">Uploading & scanning…</p>
+      </div>
+    </div>
+
+    <!-- Prescription Results Panel -->
+    <div id="rxResults" class="rx-results hidden">
+      <div class="rx-results-header">
+        <h3><i class="fa-solid fa-prescription"></i> Prescription Scan Results</h3>
+        <button class="rx-close-btn" onclick="closeRxResults()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="rx-results-body">
+        <!-- Preview -->
+        <div class="rx-preview">
+          <img id="rxPreviewImg" src="" alt="Prescription" />
+        </div>
+
+        <!-- Extracted text (collapsible) -->
+        <details class="rx-extracted">
+          <summary><i class="fa-solid fa-file-lines"></i> Extracted Text</summary>
+          <pre id="rxExtractedText"></pre>
+        </details>
+
+        <!-- Matched medicines -->
+        <div class="rx-meds-header">
+          <i class="fa-solid fa-pills"></i>
+          <span id="rxMedsCount">0 medicines found</span>
+        </div>
+        <div id="rxMedsList" class="rx-meds-list"></div>
+      </div>
     </div>
 
   </main>
