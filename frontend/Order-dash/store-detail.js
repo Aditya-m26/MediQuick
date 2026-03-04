@@ -1,32 +1,28 @@
 /* =============================================
-   MediQuick – Store Detail JS
-   Loads store from backend via ?id= query param
+   MediQuick – Store Detail JS (Redesigned)
    ============================================= */
-
 var API_BASE = window.location.hostname === 'localhost'
     ? 'http://localhost:5000'
     : '';
 
 var currentStore = null;
 
-/* ── Pharmacist auto-responses ────────────────────────── */
-var PHARMACIST_REPLIES = {
+/* ── Pharmacist auto-responses ───────────────── */
+var REPLIES = {
     'Is this medicine available?':
-        'Please share the medicine name and I\u0027ll check our stock for you right away!',
-    'Do you have an alternative for my medicine?':
-        'Yes! Share the medicine name and I\u0027ll suggest available alternatives with similar composition.',
-    'What is the price of this medicine?':
-        'Please tell me the medicine name and I\u0027ll share the current price with MRP and any discounts.',
+        'Please share the medicine name and I will check our stock for you right away!',
+    'Do you have an alternative?':
+        'Yes! Share the medicine name and I will suggest available alternatives with similar composition.',
+    'What is the price?':
+        'Please tell me the medicine name and I will share the current price with MRP and any discounts.',
     'How long will delivery take?':
-        'Delivery usually takes 20\u201330 minutes depending on your distance. Emergency orders are prioritized!',
+        'Delivery usually takes 20-30 minutes depending on your distance. Emergency orders are prioritized!',
     'Do you accept prescriptions online?':
-        'Yes, you can upload your prescription through the Order page and we\u0027ll verify it before dispatching.',
-    'Can I get a discount for bulk order?':
-        'We offer 5\u201310% discount on bulk medicine orders. Please share your list and I\u0027ll prepare a quote!',
+        'Yes, you can upload your prescription through the Order page and we will verify it before dispatching.',
+    'Bulk order discount?':
+        'We offer 5-10% discount on bulk medicine orders. Please share your list and I will prepare a quote!'
 };
-
-/* Default fallback for custom messages */
-var DEFAULT_REPLY = 'Thank you for your message! Our pharmacist will review this and respond shortly. For urgent queries, please call us directly.';
+var FALLBACK = 'Thank you for your message! Our pharmacist will review this shortly. For urgent queries, call us directly.';
 
 /* =============================================
    INIT
@@ -43,94 +39,83 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 /* =============================================
-   LOAD STORE FROM BACKEND
+   LOAD STORE
    ============================================= */
-async function loadStore(id, token) {
-    try {
-        var res = await fetch(API_BASE + '/api/stores/' + id, {
-            headers: { 'Authorization': 'Bearer ' + token }
+function loadStore(id, token) {
+    fetch(API_BASE + '/api/stores/' + id, {
+        headers: { 'Authorization': 'Bearer ' + token }
+    })
+        .then(function (r) {
+            if (!r.ok) throw new Error('Not found');
+            return r.json();
+        })
+        .then(function (data) {
+            currentStore = data.store;
+            render(currentStore);
+        })
+        .catch(function () {
+            document.getElementById('stateLoading').innerHTML =
+                '<p style="color:#ef4444;font-weight:600;">Store not found.</p>';
         });
-
-        if (!res.ok) {
-            document.getElementById('loadingSkeleton').innerHTML =
-                '<p style="text-align:center;padding:40px;color:#ef4444;">Store not found.</p>';
-            return;
-        }
-
-        var data = await res.json();
-        currentStore = data.store;
-        renderStoreDetail(currentStore);
-
-    } catch (err) {
-        console.error('Load store error:', err);
-        document.getElementById('loadingSkeleton').innerHTML =
-            '<p style="text-align:center;padding:40px;color:#ef4444;">Could not load store details.</p>';
-    }
 }
 
 /* =============================================
-   RENDER STORE DETAIL
+   RENDER
    ============================================= */
-function renderStoreDetail(s) {
-    // Hide skeleton, show content
-    document.getElementById('loadingSkeleton').style.display = 'none';
-    document.getElementById('heroSection').style.display = 'block';
-    document.getElementById('detailMain').style.display = 'block';
+function render(s) {
+    document.getElementById('stateLoading').style.display = 'none';
+    document.getElementById('storeDetail').classList.remove('hidden');
 
-    // Hero image
-    var heroImg = document.getElementById('heroImg');
-    var heroPlaceholder = document.getElementById('heroPlaceholder');
+    // Photo
+    var img = document.getElementById('heroPhoto');
+    var ph = document.getElementById('heroPlaceholder');
     if (s.photo) {
-        heroImg.src = s.photo;
-        heroImg.alt = s.storeName;
-        heroImg.style.display = 'block';
-        heroPlaceholder.classList.remove('visible');
+        img.src = s.photo;
+        img.alt = s.storeName;
+        img.style.display = 'block';
+        ph.classList.remove('visible');
     } else {
-        heroImg.style.display = 'none';
-        heroPlaceholder.classList.add('visible');
+        img.style.display = 'none';
+        ph.classList.add('visible');
     }
 
-    // Open/Closed badge
-    var statusEl = document.getElementById('heroStatus');
-    if (s.isOpen) {
-        statusEl.textContent = 'Open';
-        statusEl.className = 'hero-status open';
-    } else {
-        statusEl.textContent = 'Closed';
-        statusEl.className = 'hero-status closed';
-    }
+    // Status chip
+    var chip = document.getElementById('statusChip');
+    chip.textContent = s.isOpen ? 'Open' : 'Closed';
+    if (!s.isOpen) chip.classList.add('closed');
 
-    // Title
+    // Name
     document.getElementById('storeName').textContent = s.storeName;
-    document.title = s.storeName + ' – MediQuick';
+    document.title = s.storeName + ' \u2013 MediQuick';
 
-    // Stars
+    // Rating
     var rating = parseFloat(s.rating) || 0;
-    var starsHtml = '';
+    var stars = '';
     for (var i = 0; i < 5; i++) {
-        starsHtml += '<i class="fa-solid fa-star' + (i < Math.round(rating) ? '' : ' star-empty') + '"></i>';
+        stars += '<i class="fa-solid fa-star' + (i < Math.round(rating) ? '' : ' star-empty') + '"></i>';
     }
-    document.getElementById('stars').innerHTML = starsHtml;
-    document.getElementById('ratingText').textContent = rating.toFixed(1);
-    document.getElementById('reviewCount').textContent = '(' + (s.reviews || 0) + ' reviews)';
+    document.getElementById('ratingRow').innerHTML =
+        stars + ' <span class="r-num">' + rating.toFixed(1) + '</span>' +
+        '<span class="r-count">(' + (s.reviews || 0) + ' reviews)</span>';
 
-    // Info cards
-    document.getElementById('storeAddress').textContent = s.address || '—';
-    document.getElementById('storeTimings').textContent = s.timings || '—';
-    document.getElementById('storePhone').textContent = s.phone || '—';
-    document.getElementById('storeDelivery').textContent = s.delivery ? s.delivery + ' delivery' : '—';
-    document.getElementById('storeLicence').textContent = s.licenceNo || 'Not listed';
-    document.getElementById('storePincode').textContent = s.pincode || '—';
+    // Address
+    document.querySelector('#storeAddress span').textContent = s.address || '\u2014';
 
-    // Check if this store was already selected
-    var selectedId = localStorage.getItem('mq_selected_store');
-    if (selectedId === s._id) {
-        markAsSelected();
+    // Meta info
+    document.querySelector('#storeTimings span').textContent = s.timings || '\u2014';
+    document.querySelector('#storePhone span').textContent = s.phone || '\u2014';
+    document.querySelector('#storeDelivery span').textContent = s.delivery ? s.delivery + ' delivery' : '\u2014';
+    document.querySelector('#storeLicence span').textContent = s.licenceNo || 'Not listed';
+    document.querySelector('#storePincode span').textContent = s.pincode ? 'Pincode: ' + s.pincode : '\u2014';
+
+    // If already selected
+    if (localStorage.getItem('mq_selected_store') === s._id) {
+        markSelected();
     }
 }
 
 /* =============================================
-   SELECT STORE
+   SELECT STORE -> save + redirect to search
    ============================================= */
 function selectStore() {
     if (!currentStore) return;
@@ -138,80 +123,80 @@ function selectStore() {
     localStorage.setItem('mq_selected_store', currentStore._id);
     localStorage.setItem('mq_selected_store_name', currentStore.storeName);
 
-    markAsSelected();
+    // Notify store dash
+    saveChatNotif(currentStore.storeName + ' was selected for ordering.');
 
-    // Send a chat notification to store dashboard (saved in localStorage for demo)
-    var chatNotifs = JSON.parse(localStorage.getItem('mq_store_chat_notifs') || '[]');
-    var user = JSON.parse(localStorage.getItem('mq_user') || '{}');
-    chatNotifs.push({
-        storeId: currentStore._id,
-        storeName: currentStore.storeName,
-        userName: user.fullName || user.email || 'A customer',
-        message: 'selected this store for ordering.',
-        time: new Date().toISOString(),
-    });
-    localStorage.setItem('mq_store_chat_notifs', JSON.stringify(chatNotifs));
+    markSelected();
+
+    // Show toast then redirect
+    showToast('Store selected! Redirecting to search...');
+    setTimeout(function () {
+        window.location.href = 'request.html';
+    }, 1200);
 }
 
-function markAsSelected() {
-    var btn = document.getElementById('selectStoreBtn');
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> Store Selected';
+function markSelected() {
+    var btn = document.getElementById('selectBtn');
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Selected';
     btn.classList.add('selected');
-    document.getElementById('selectedMsg').classList.remove('hidden');
 }
 
 /* =============================================
-   CHAT – Quick Replies
+   TOAST
    ============================================= */
-function sendQuickReply(msg) {
+function showToast(msg) {
+    var t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(function () { t.classList.remove('show'); }, 2500);
+}
+
+/* =============================================
+   CHAT WIDGET
+   ============================================= */
+function toggleChat() {
+    var w = document.getElementById('chatWidget');
+    w.classList.toggle('hidden');
+}
+
+function sendQuick(msg) {
     addBubble(msg, 'user');
-
-    // Save chat notification for Store-dash
-    saveChatNotification(msg);
-
-    // Auto-reply after brief delay
+    saveChatNotif(msg);
     setTimeout(function () {
-        var reply = PHARMACIST_REPLIES[msg] || DEFAULT_REPLY;
-        addBubble(reply, 'pharmacist');
+        addBubble(REPLIES[msg] || FALLBACK, 'pharmacist');
+    }, 600);
+}
+
+function sendMsg() {
+    var inp = document.getElementById('chatInput');
+    var msg = inp.value.trim();
+    if (!msg) return;
+    inp.value = '';
+    addBubble(msg, 'user');
+    saveChatNotif(msg);
+    setTimeout(function () {
+        addBubble(FALLBACK, 'pharmacist');
     }, 800);
 }
 
-function sendMessage() {
-    var input = document.getElementById('chatInput');
-    var msg = input.value.trim();
-    if (!msg) return;
-    input.value = '';
-
-    addBubble(msg, 'user');
-
-    // Save chat notification for Store-dash
-    saveChatNotification(msg);
-
-    setTimeout(function () {
-        addBubble(DEFAULT_REPLY, 'pharmacist');
-    }, 1000);
-}
-
-function addBubble(text, sender) {
+function addBubble(text, who) {
     var win = document.getElementById('chatWindow');
-    var bubble = document.createElement('div');
-    bubble.className = 'chat-bubble ' + sender;
-    bubble.innerHTML =
-        '<span class="chat-sender">' + (sender === 'user' ? 'You' : 'Pharmacist') + '</span>' +
-        '<p>' + text + '</p>';
-    win.appendChild(bubble);
+    var el = document.createElement('div');
+    el.className = 'cw-bubble ' + who;
+    el.innerHTML = '<p>' + text + '</p>';
+    win.appendChild(el);
     win.scrollTop = win.scrollHeight;
 }
 
-function saveChatNotification(msg) {
-    var chatNotifs = JSON.parse(localStorage.getItem('mq_store_chat_notifs') || '[]');
+function saveChatNotif(msg) {
+    var notifs = JSON.parse(localStorage.getItem('mq_store_chat_notifs') || '[]');
     var user = JSON.parse(localStorage.getItem('mq_user') || '{}');
-    chatNotifs.push({
+    notifs.push({
         storeId: currentStore ? currentStore._id : '',
         storeName: currentStore ? currentStore.storeName : '',
         userName: user.fullName || user.email || 'A customer',
         message: msg,
-        time: new Date().toISOString(),
+        time: new Date().toISOString()
     });
-    localStorage.setItem('mq_store_chat_notifs', JSON.stringify(chatNotifs));
+    localStorage.setItem('mq_store_chat_notifs', JSON.stringify(notifs));
 }
