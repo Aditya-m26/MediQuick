@@ -32,20 +32,20 @@ async function seed() {
     const raw = JSON.parse(fs.readFileSync(jsonFile, "utf8"));
     console.log(`📦  ${raw.length} stores in JSON`);
 
-    let inserted = 0, skipped = 0;
+    let inserted = 0, updated = 0;
     for (const s of raw) {
         const result = await Store.updateOne(
             { storeName: s.storeName, city: s.city },
-            { $setOnInsert: s },
+            { $set: s },
             { upsert: true }
         );
         if (result.upsertedCount) inserted++;
-        else skipped++;
+        else updated++;
     }
 
     console.log("\n🎉  Done!");
     console.log(`   ✅ Inserted (new):             ${inserted}`);
-    console.log(`   ⏭️  Already existed (skipped): ${skipped}\n`);
+    console.log(`   🔄 Updated (existing):        ${updated}\n`);
 
     await mongoose.disconnect();
     console.log("🔌  Disconnected.");
