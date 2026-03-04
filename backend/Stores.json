@@ -20,7 +20,7 @@
     {
         "storeName": "Akola Medical Stores",
         "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549773/akola_medical_imiisn.png",
-        "address": "3, Mankar Complex, New Radhakisan Plots, Civil Line, Akola, Maharashtra 444001, India",
+        "address": "3, Mankar Complex, New Radhakisan Plots, Civil Line, Akola",
         "city": "Akola",
         "state": "Maharashtra",
         "pincode": "444001",
@@ -35,7 +35,7 @@
     {
         "storeName": "Wellness Forever Pharmacy",
         "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549775/wellness_forever_kzcvuy.png",
-        "address": "Shop No.1, The Blessing Tower, Gorakshan Rd, Sahakar Nagar, Akola, Maharashtra 444004, India",
+        "address": "Shop No.1, The Blessing Tower, Gorakshan Rd, Sahakar Nagar, Akola",
         "city": "Akola",
         "state": "Maharashtra",
         "pincode": "444004",
@@ -50,7 +50,7 @@
     {
         "storeName": "Hariom Medical Stores",
         "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549774/hariom_y6f5a2.png",
-        "address": "Gorakshan Rd, Kapila Nagar, Akola, Maharashtra 444004, India",
+        "address": "Gorakshan Rd, Kapila Nagar, Akola",
         "city": "Akola",
         "state": "Maharashtra",
         "pincode": "444004",
@@ -65,7 +65,7 @@
     {
         "storeName": "Anand Medicals",
         "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549774/Anand_medicals_ly5qra.png",
-        "address": "Usha Kiran Complex, near Bank of Baroda, Shastri Nagar, Akola, Maharashtra 444001, India",
+        "address": "Usha Kiran Complex, near Bank of Baroda, Shastri Nagar, Akola",
         "city": "Akola",
         "state": "Maharashtra",
         "pincode": "444001",
@@ -80,7 +80,7 @@
     {
         "storeName": "Varsha Medical",
         "photo": "https://res.cloudinary.com/dcqh9su4h/image/upload/v1772549774/varsha_medicals_w3neyo.png",
-        "address": "Baidpura Kashmir Lodge Building, Akola, Maharashtra 444001, India",
+        "address": "Baidpura Kashmir Lodge Building, Akola",
         "city": "Akola",
         "state": "Maharashtra",
         "pincode": "444001",
@@ -94,7 +94,7 @@
     },
     {
         "storeName": "Malu Medicals",
-        "address": "Durga Chowk, Ranpise Nagar, Akola, Maharashtra 444005, India",
+        "address": "Durga Chowk, Ranpise Nagar, Akola",
         "city": "Akola",
         "state": "Maharashtra",
         "pincode": "444005",

@@ -43,41 +43,39 @@ function toggleEmergency() {
     }
 }
 
+/* ---- Helper: emergency delivery time from distance (min 10, max 25) ---- */
+function getEmergencyTime(distanceKm) {
+    if (distanceKm === null || distanceKm === undefined || distanceKm === '') return '~15 min';
+    var d = parseFloat(distanceKm);
+    if (isNaN(d)) return '~15 min';
+    if (d <= 2) return '~10 min';
+    if (d <= 5) return '~12 min';
+    if (d <= 10) return '~15 min';
+    if (d <= 15) return '~20 min';
+    return '~25 min';
+}
+
 /* ---- Helper: swap delivery text on all open store cards ---- */
 function updateDeliveryTags(emergencyMode) {
     // Grab all open delivery tags (not closed / inactive ones)
     const deliveryTags = document.querySelectorAll('.store-delivery:not(.store-delivery-inactive)');
 
-    // Emergency delivery times — one per card in order
-    const emergencyTimes = [
-        '🚨 Priority – ~8 min',
-        '🚨 Priority – ~10 min',
-        '🚨 Priority – ~12 min',
-        '🚨 Priority – ~15 min',
-        '🚨 Priority – ~18 min',
-        '🚨 Priority – ~20 min',
-        '🚨 Priority – ~22 min',
-    ];
+    deliveryTags.forEach(function (tag) {
+        var dist = tag.getAttribute('data-distance');
 
-    const normalTimes = [
-        '20–30 min delivery',
-        '15–25 min delivery',
-        '25–35 min delivery',
-        '20–40 min delivery',
-        '30–45 min delivery',
-        '35–50 min delivery',
-        '40–55 min delivery',
-    ];
-
-    deliveryTags.forEach(function (tag, index) {
         if (emergencyMode) {
             tag.classList.add('emergency-active');
-            tag.innerHTML = '<i class="fa-solid fa-siren-on"></i> ' +
-                (emergencyTimes[index] || '🚨 Priority dispatch');
+            tag.innerHTML = '<i class="fa-solid fa-siren-on"></i> 🚨 Priority – ' +
+                getEmergencyTime(dist);
         } else {
             tag.classList.remove('emergency-active');
+            // Use the shared helper from request.js
+            var normalTime = (typeof window.getDeliveryTime === 'function')
+                ? window.getDeliveryTime(dist === '' ? null : parseFloat(dist))
+                : '20–30 min';
             tag.innerHTML = '<i class="fa-solid fa-circle-check"></i> ' +
-                (normalTimes[index] || 'Fast delivery');
+                normalTime + ' delivery';
         }
     });
 }
+

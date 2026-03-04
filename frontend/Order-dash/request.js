@@ -142,6 +142,28 @@ function fetchStores(lat, lng, token) {
     });
 }
 
+// ─── DELIVERY TIME HELPER (distance → time range) ────────────────────────────
+// Exposed on window so emergency.js can reuse it
+function getDeliveryTime(distanceKm) {
+  if (distanceKm === null || distanceKm === undefined) return '20–30 min';
+  if (distanceKm <= 2) return '10–15 min';
+  if (distanceKm <= 5) return '15–20 min';
+  if (distanceKm <= 10) return '20–25 min';
+  if (distanceKm <= 15) return '25–35 min';
+  return '35–45 min';
+}
+window.getDeliveryTime = getDeliveryTime;
+
+// ─── SHORT ADDRESS HELPER ────────────────────────────────────────────────────
+function shortAddress(addr) {
+  if (!addr) return '';
+  // Take the first meaningful part (before the first comma or up to 45 chars)
+  var parts = addr.split(',');
+  var short = parts.slice(0, 2).join(',').trim();
+  if (short.length > 45) short = short.substring(0, 42) + '…';
+  return short;
+}
+
 function renderStores(stores) {
   var grid = document.getElementById('pharmacyGrid');
   if (!grid) return;
@@ -166,12 +188,21 @@ function renderStores(stores) {
       ? '<p class="store-distance"><i class="fa-solid fa-location-dot"></i> ' + s.distanceKm + ' km away</p>'
       : '<p class="store-distance"><i class="fa-solid fa-location-dot"></i> ' + s.city + '</p>';
 
-    var hoursHtml = isOpen
-      ? '<p class="store-hours"><i class="fa-regular fa-clock"></i> Closes ' + (s.closingTime || s.timings) + '</p>'
-      : '<p class="store-hours"><i class="fa-regular fa-clock"></i> ' + (s.timings || 'See store for hours') + '</p>';
+    // Short address line
+    var addrText = shortAddress(s.address);
+    var addrHtml = addrText
+      ? '<p class="store-address"><i class="fa-solid fa-map-pin"></i> ' + addrText + '</p>'
+      : '';
 
+    // Timings (full range, not just closing time)
+    var hoursHtml = '<p class="store-hours"><i class="fa-regular fa-clock"></i> ' +
+      (s.timings || 'See store for hours') + '</p>';
+
+    // Dynamic delivery time based on distance
+    var deliveryTime = getDeliveryTime(s.distanceKm);
+    var distAttr = s.distanceKm !== null ? s.distanceKm : '';
     var deliveryHtml = isOpen
-      ? '<div class="store-delivery"><i class="fa-solid fa-circle-check"></i> ' + s.delivery + ' delivery</div>'
+      ? '<div class="store-delivery" data-distance="' + distAttr + '"><i class="fa-solid fa-circle-check"></i> ' + deliveryTime + ' delivery</div>'
       : '<div class="store-delivery store-delivery-inactive"><i class="fa-solid fa-ban"></i> Currently Closed</div>';
 
     var starsHtml = '';
@@ -191,6 +222,7 @@ function renderStores(stores) {
       '<p class="store-rating">' + starsHtml + ' ' + rating.toFixed(1) +
       ' <span class="review-count">(' + (s.reviews || 0) + ' reviews)</span></p>' +
       distHtml +
+      addrHtml +
       hoursHtml +
       deliveryHtml +
       '</div>' +
