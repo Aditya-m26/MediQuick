@@ -567,6 +567,13 @@ body {
   gap: 18px;
 }
 
+/* ---- Clickable store card link ---- */
+.store-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 /* ---- Individual store card ---- */
 .store-card {
   background: white;

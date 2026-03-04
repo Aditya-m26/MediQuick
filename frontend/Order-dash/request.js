@@ -212,6 +212,7 @@ function renderStores(stores) {
     }
 
     return (
+      '<a href="store-detail.html?id=' + s._id + '" class="store-card-link">' +
       '<div class="store-card' + (isOpen ? '' : ' store-card-closed') + '">' +
       '<div class="store-img-wrap">' +
       imgHtml +
@@ -226,7 +227,8 @@ function renderStores(stores) {
       hoursHtml +
       deliveryHtml +
       '</div>' +
-      '</div>'
+      '</div>' +
+      '</a>'
     );
   }).join('');
 }

@@ -56,5 +56,17 @@ router.get("/", authenticate, async (req, res) => {
         return res.status(500).json({ message: "Server error." });
     }
 });
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/stores/:id   – single store details
+// ─────────────────────────────────────────────────────────────────────────────
+router.get("/:id", authenticate, async (req, res) => {
+    try {
+        const store = await Store.findById(req.params.id).lean();
+        if (!store) return res.status(404).json({ message: "Store not found." });
+        return res.json({ store });
+    } catch (err) {
+        return res.status(500).json({ message: "Server error." });
+    }
+});
 
 module.exports = router;

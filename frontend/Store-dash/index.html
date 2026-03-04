@@ -13,10 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <link rel="stylesheet" href="store.css" />
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
+
 </head>
 
 <body>
@@ -121,6 +118,25 @@
                     <p>Waiting for orders...</p>
                 </div>
             </div>
+
+            <!-- ===== CUSTOMER CHAT NOTIFICATIONS ===== -->
+            <section class="chat-notifs-section">
+                <div class="chat-notifs-header">
+                    <h2><i class="fa-solid fa-comments"></i> Customer Messages
+                        <span class="chat-notif-badge" id="chatNotifBadge">0</span>
+                    </h2>
+                    <button class="clear-notifs-btn" onclick="clearChatNotifs()">
+                        <i class="fa-solid fa-broom"></i> Clear All
+                    </button>
+                </div>
+                <div class="chat-notif-list" id="chatNotifList">
+                    <div class="chat-notifs-empty">
+                        <i class="fa-solid fa-inbox"></i>
+                        <p>No customer messages yet</p>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 

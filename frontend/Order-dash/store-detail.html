@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – Store Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="store-detail.css" />
+</head>
+
+<body>
+
+    <!-- BACK NAVIGATION -->
+    <nav class="detail-nav">
+        <a href="request.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Stores
+        </a>
+        <div class="nav-right">
+            <a href="cart.html" class="nav-icon-btn"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="../Profile-dash/index.html" class="nav-icon-btn"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- LOADING SKELETON -->
+    <div id="loadingSkeleton" class="loading-skeleton">
+        <div class="skel-hero"></div>
+        <div class="skel-info">
+            <div class="skel-line skel-line-lg"></div>
+            <div class="skel-line skel-line-md"></div>
+            <div class="skel-line skel-line-sm"></div>
+        </div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <section class="hero" id="heroSection" style="display:none;">
+        <img id="heroImg" class="hero-img" src="" alt="Store" />
+        <div class="hero-placeholder" id="heroPlaceholder">
+            <i class="fa-solid fa-store"></i>
+        </div>
+        <div class="hero-overlay">
+            <span class="hero-status" id="heroStatus">Open</span>
+        </div>
+    </section>
+
+    <!-- STORE INFO CONTENT -->
+    <main class="detail-main" id="detailMain" style="display:none;">
+
+        <!-- Store Name & Rating -->
+        <div class="store-header">
+            <h1 class="store-title" id="storeName">—</h1>
+            <div class="store-rating-row">
+                <div class="stars" id="stars"></div>
+                <span class="rating-text" id="ratingText">—</span>
+                <span class="review-count" id="reviewCount">(0 reviews)</span>
+            </div>
+        </div>
+
+        <!-- Info Cards Grid -->
+        <div class="info-grid">
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                    <p class="info-label">Address</p>
+                    <p class="info-value" id="storeAddress">—</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
+                <div>
+                    <p class="info-label">Timings</p>
+                    <p class="info-value" id="storeTimings">—</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                    <p class="info-label">Contact</p>
+                    <p class="info-value" id="storePhone">—</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <div>
+                    <p class="info-label">Delivery</p>
+                    <p class="info-value" id="storeDelivery">—</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div>
+                    <p class="info-label">Licence No.</p>
+                    <p class="info-value" id="storeLicence">—</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-map-pin"></i></div>
+                <div>
+                    <p class="info-label">Pincode</p>
+                    <p class="info-value" id="storePincode">—</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SELECT STORE BUTTON -->
+        <button class="select-store-btn" id="selectStoreBtn" onclick="selectStore()">
+            <i class="fa-solid fa-circle-check"></i> Select This Store for Ordering
+        </button>
+        <p class="selected-msg hidden" id="selectedMsg">
+            <i class="fa-solid fa-check"></i> Store selected! You can now order from here.
+        </p>
+
+        <!-- CHAT SECTION -->
+        <section class="chat-section">
+            <div class="chat-header">
+                <i class="fa-solid fa-comments"></i>
+                <h2>Quick Chat with Pharmacist</h2>
+            </div>
+
+            <div class="chat-window" id="chatWindow">
+                <div class="chat-bubble pharmacist">
+                    <span class="chat-sender">Pharmacist</span>
+                    <p>Hello! How can I help you today? Choose a question below or type your own.</p>
+                </div>
+            </div>
+
+            <!-- Pre-selected quick replies -->
+            <div class="quick-replies" id="quickReplies">
+                <button onclick="sendQuickReply('Is this medicine available?')">
+                    <i class="fa-solid fa-pills"></i> Is this medicine available?
+                </button>
+                <button onclick="sendQuickReply('Do you have an alternative for my medicine?')">
+                    <i class="fa-solid fa-right-left"></i> Do you have an alternative?
+                </button>
+                <button onclick="sendQuickReply('What is the price of this medicine?')">
+                    <i class="fa-solid fa-indian-rupee-sign"></i> What is the price?
+                </button>
+                <button onclick="sendQuickReply('How long will delivery take?')">
+                    <i class="fa-solid fa-truck-fast"></i> How long will delivery take?
+                </button>
+                <button onclick="sendQuickReply('Do you accept prescriptions online?')">
+                    <i class="fa-solid fa-file-medical"></i> Accept prescriptions online?
+                </button>
+                <button onclick="sendQuickReply('Can I get a discount for bulk order?')">
+                    <i class="fa-solid fa-percent"></i> Bulk order discount?
+                </button>
+            </div>
+
+            <!-- Manual input -->
+            <div class="chat-input-wrap">
+                <input type="text" id="chatInput" placeholder="Type your message..."
+                    onkeydown="if(event.key==='Enter') sendMessage()" />
+                <button class="chat-send-btn" onclick="sendMessage()">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="store-detail.js"></script>
+</body>
+
+</html>

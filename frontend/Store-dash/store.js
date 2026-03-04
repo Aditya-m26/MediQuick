@@ -311,3 +311,45 @@ function updateOrderBadge() {
 function random(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
+
+/* =====================================================
+   CUSTOMER CHAT NOTIFICATIONS
+   Reads from localStorage (set by store-detail.js)
+   ===================================================== */
+function loadChatNotifs() {
+    var notifs = JSON.parse(localStorage.getItem('mq_store_chat_notifs') || '[]');
+    var list = document.getElementById('chatNotifList');
+    var badge = document.getElementById('chatNotifBadge');
+    if (!list || !badge) return;
+
+    badge.textContent = notifs.length;
+    badge.style.display = notifs.length === 0 ? 'none' : '';
+
+    if (notifs.length === 0) {
+        list.innerHTML = '<div class="chat-notifs-empty"><i class="fa-solid fa-inbox"></i><p>No customer messages yet</p></div>';
+        return;
+    }
+
+    // Newest first
+    list.innerHTML = notifs.slice().reverse().map(function (n) {
+        var d = new Date(n.time);
+        var timeStr = d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+        return '<div class="chat-notif-card">' +
+            '<div class="chat-notif-top">' +
+            '<span class="chat-notif-user"><i class="fa-solid fa-user"></i> ' + n.userName + '</span>' +
+            '<span class="chat-notif-time">' + timeStr + '</span>' +
+            '</div>' +
+            '<p class="chat-notif-msg">' + n.message + '</p>' +
+            '</div>';
+    }).join('');
+}
+
+function clearChatNotifs() {
+    localStorage.removeItem('mq_store_chat_notifs');
+    loadChatNotifs();
+}
+
+// Poll for new notifications every 3 seconds
+setInterval(loadChatNotifs, 3000);
+// Load on init
+loadChatNotifs();
