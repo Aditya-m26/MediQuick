@@ -50,11 +50,11 @@ function renderCart() {
       '</div>' +
       '</div>' +
       '<div class="qty-controls">' +
-      '<button class="qty-btn" onclick="changeQty(' + item.id + ', -1)">−</button>' +
+      '<button class="qty-btn" onclick="changeQty(\'' + item.id + '\', -1)">−</button>' +
       '<span class="qty-number">' + item.qty + '</span>' +
-      '<button class="qty-btn" onclick="changeQty(' + item.id + ', +1)">+</button>' +
+      '<button class="qty-btn" onclick="changeQty(\'' + item.id + '\', +1)">+</button>' +
       '</div>' +
-      '<button class="remove-btn" onclick="deleteItem(' + item.id + ')" title="Remove">' +
+      '<button class="remove-btn" onclick="deleteItem(\'' + item.id + '\')" title="Remove">' +
       '<i class="fa-solid fa-trash"></i>' +
       '</button>';
 
