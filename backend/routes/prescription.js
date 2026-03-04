@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { createWorker } = require("tesseract.js");
+const { recognize } = require("tesseract.js");
 const { upload } = require("../config/cloudinary");
 const Medicine = require("../models/Medicine");
 
@@ -23,7 +23,6 @@ function authenticate(req, res, next) {
 // Body: multipart/form-data → field name: "prescription"
 // ─────────────────────────────────────────────────────────────────────────────
 router.post("/scan", authenticate, (req, res, next) => {
-    // Wrap multer in try-catch so upload errors don't crash
     upload.single("prescription")(req, res, (err) => {
         if (err) {
             console.error("[UPLOAD] Multer/Cloudinary error:", err.message);
@@ -41,11 +40,10 @@ router.post("/scan", authenticate, (req, res, next) => {
     const imageUrl = req.file.path; // Cloudinary URL
     console.log("[RX] Image uploaded to:", imageUrl);
 
-    let worker;
     try {
-        // ── Step 1: OCR with Tesseract worker ────────────────────────────────
-        console.log("[OCR] Creating Tesseract worker...");
-        worker = await createWorker("eng", 1, {
+        // ── Step 1: OCR with Tesseract v5 ────────────────────────────────────
+        console.log("[OCR] Starting recognition...");
+        const { data } = await recognize(imageUrl, "eng", {
             logger: (m) => {
                 if (m.status === "recognizing text") {
                     console.log(`[OCR] ${Math.round(m.progress * 100)}%`);
@@ -53,14 +51,8 @@ router.post("/scan", authenticate, (req, res, next) => {
             },
         });
 
-        console.log("[OCR] Running recognition...");
-        const { data } = await worker.recognize(imageUrl);
         const extractedText = data.text || "";
-        console.log("[OCR] Extracted:", extractedText.substring(0, 300));
-
-        // Terminate worker to free memory
-        await worker.terminate();
-        worker = null;
+        console.log("[OCR] Done. Extracted:", extractedText.substring(0, 300));
 
         if (!extractedText.trim()) {
             return res.json({
@@ -125,10 +117,6 @@ router.post("/scan", authenticate, (req, res, next) => {
 
     } catch (err) {
         console.error("[OCR] Error:", err.message || err);
-        // Clean up worker on error
-        if (worker) {
-            try { await worker.terminate(); } catch { }
-        }
         return res.status(500).json({
             message: "OCR processing failed: " + (err.message || "Unknown error"),
             imageUrl,
