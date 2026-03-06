@@ -1,17 +1,19 @@
-// ===== CART DATA =====
-// Cart is stored in localStorage so items stay even if you refresh
+// ===================================================
+//  MediQuick – cart.js  (Data Layer)
+//  Cart stored in localStorage. Helpers used by cart-ui.js.
+// ===================================================
 
-var cart = JSON.parse(localStorage.getItem("cart")) || [];
+/* ──── Cart array (loaded from localStorage) ──── */
+var cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Save the cart array to localStorage
+/* ──── Persist cart to localStorage ──── */
 function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Add an item to the cart (or increase qty if already there)
+/* ──── Add (or increment) an item ──── */
 function addToCart(item) {
   var found = false;
-
   for (var i = 0; i < cart.length; i++) {
     if (cart[i].id === item.id) {
       cart[i].qty += 1;
@@ -21,36 +23,35 @@ function addToCart(item) {
   }
 
   if (!found) {
-    cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
+    cart.push({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      type: item.type || 'Tablet',
+      category: item.category || '',
+      requiresPrescription: item.prescription || item.requiresPrescription || false,
+      qty: 1
+    });
   }
 
   saveCart();
-
-  // If this page has a renderCart function (cart.html), refresh the view
-  if (typeof renderCart === "function") {
+  if (typeof renderCart === 'function') {
     renderCart();
     updateCartBadge();
   }
 }
 
-// Remove an item from the cart by its id
+/* ──── Remove one item by id ──── */
 function removeFromCart(id) {
-  var newCart = [];
-  for (var i = 0; i < cart.length; i++) {
-    if (cart[i].id !== id) {
-      newCart.push(cart[i]);
-    }
-  }
-  cart = newCart;
+  cart = cart.filter(function (it) { return it.id !== id; });
   saveCart();
 }
 
-// Change the qty of an item (+1 or -1)
-function updateQty(id, change) {
+/* ──── Change qty (+/-). Removes item if qty drops to 0 ──── */
+function updateQty(id, delta) {
   for (var i = 0; i < cart.length; i++) {
     if (cart[i].id === id) {
-      cart[i].qty += change;
-
+      cart[i].qty += delta;
       if (cart[i].qty <= 0) {
         removeFromCart(id);
       } else {
@@ -59,4 +60,14 @@ function updateQty(id, change) {
       return;
     }
   }
+}
+
+/* ──── Count medicines that need a prescription ──── */
+function getPrescriptionCount() {
+  return cart.filter(function (it) { return it.requiresPrescription; }).length;
+}
+
+/* ──── Medicine sub-total ──── */
+function getSubtotal() {
+  return cart.reduce(function (acc, it) { return acc + it.price * it.qty; }, 0);
 }

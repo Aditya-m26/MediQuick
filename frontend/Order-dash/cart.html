@@ -7,21 +7,17 @@
   <title>MediQuick - Your Cart</title>
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <link rel="stylesheet" href="cart.css" />
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body>
 
-  <!-- SIDEBAR -->
+  <!-- ===== SIDEBAR ===== -->
   <div id="sidebar" class="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">
       <i class="fa-solid fa-xmark"></i>
@@ -30,25 +26,19 @@
     <a href="../Reminder-dash/Reminder.html"><i class="fa-solid fa-bell"></i> Reminders</a>
     <a href="../Profile-dash/index.html"><i class="fa-solid fa-user"></i> Profile</a>
   </div>
-
-  <!-- Sidebar dark backdrop -->
   <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-  <!-- HEADER -->
+  <!-- ===== HEADER ===== -->
   <header class="header">
-
-    <!-- Left: menu + location -->
     <div class="left-group">
       <button class="menu-btn" onclick="toggleSidebar()">
         <i class="fa-solid fa-bars"></i>
       </button>
       <div class="location-pill">
         <i class="fa-solid fa-location-dot"></i>
-        <span>Your Location</span>
+        <span id="locationText">Your Location</span>
       </div>
     </div>
-
-    <!-- Right: cart + profile -->
     <div class="right-icons">
       <a href="cart.html" class="cart-btn">
         <i class="fa-solid fa-cart-shopping"></i>
@@ -58,47 +48,151 @@
         <i class="fa-solid fa-user"></i>
       </a>
     </div>
-
   </header>
 
-  <!-- PAGE TITLE -->
-  <div class="page-title">
-    <i class="fa-solid fa-cart-shopping"></i>
-    <h1>Your Cart</h1>
-  </div>
+  <!-- ===== PAGE CONTENT ===== -->
+  <main class="cart-page">
 
-  <!-- MAIN LAYOUT -->
-  <main class="cart-items-page">
+    <!-- ====== LEFT PANEL – ORDER BUILDER (60%) ====== -->
+    <section class="order-panel">
 
-    <!-- LEFT: Cart Items -->
-    <section class="cart-items">
+      <!-- Page Title -->
+      <div class="panel-title">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <h1>Your Cart</h1>
+      </div>
 
-      <!-- Empty cart message (shown when cart is empty) -->
-      <div id="emptyCart" class="empty-cart">
-        <i class="fa-solid fa-cart-shopping empty-icon"></i>
+      <!-- ── EMPTY STATE ── -->
+      <div id="emptyCart" class="empty-state">
+        <div class="empty-icon-wrap">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </div>
         <h2>Your cart is empty</h2>
-        <p>Search for medicine to add items here</p>
-        <button class="explore-btn" onclick="window.location.href='request.html'">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          Find Medicine
+        <p>Search for medicines and add them here to place an order</p>
+        <button class="btn-primary" onclick="window.location.href='request.html'">
+          <i class="fa-solid fa-magnifying-glass"></i> Find Medicine
         </button>
       </div>
 
-      <!-- Cart items list (filled by cart-ui.js) -->
-      <div id="cartList"></div>
+      <!-- ── CART ITEMS (hidden when empty) ── -->
+      <div id="cartContent" style="display:none;">
 
-      <!-- Place Order button — shown only when cart has items -->
-      <button id="placeOrderBtn" class="place-order-btn" style="display: none;">
-        <i class="fa-solid fa-check"></i>
-        Place Order
-      </button>
+        <!-- Medicine List -->
+        <div class="section-card" id="medicinesCard">
+          <div id="cartList" class="medicine-list"></div>
+          <button class="btn-ghost mt-12" onclick="window.location.href='request.html'">
+            <i class="fa-solid fa-plus"></i> Add More Medicines
+          </button>
+        </div>
+
+        <!-- Delivery Mode -->
+        <div class="section-card">
+          <h2 class="card-title"><i class="fa-solid fa-truck"></i> Mode of Delivery</h2>
+          <div class="delivery-options">
+
+            <label class="delivery-option" id="optStandard">
+              <input type="radio" name="deliveryMode" value="standard" checked onchange="handleDeliveryChange()">
+              <div class="opt-body">
+                <div class="opt-row">
+                  <span class="opt-name">Standard Delivery</span>
+                  <span class="opt-fee">+ &#8377;20</span>
+                </div>
+                <span class="opt-time"><i class="fa-regular fa-clock"></i> 25&#8211;30 minutes</span>
+              </div>
+              <div class="opt-radio-dot"></div>
+            </label>
+
+            <label class="delivery-option" id="optEmergency">
+              <input type="radio" name="deliveryMode" value="emergency" onchange="handleDeliveryChange()">
+              <div class="opt-body">
+                <div class="opt-row">
+                  <span class="opt-name">Emergency Delivery</span>
+                  <span class="opt-fee opt-fee-emergency">+ &#8377;60</span>
+                </div>
+                <span class="opt-time"><i class="fa-solid fa-bolt"></i> 10&#8211;15 minutes</span>
+              </div>
+              <div class="opt-radio-dot"></div>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Prescription Upload (shown only if required) -->
+        <div class="section-card" id="prescriptionCard" style="display:none;">
+          <h2 class="card-title"><i class="fa-solid fa-file-medical"></i> Upload Prescription</h2>
+          <p class="card-sub" id="rxNote">Required for <span id="rxCount">some</span> medicine(s) in your cart</p>
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('rxFileInput').click()">
+            <input type="file" id="rxFileInput" accept="image/jpeg,image/png" style="display:none"
+              onchange="handlePrescriptionUpload(event)">
+            <div id="uploadPlaceholder">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span>Click to select JPG or PNG</span>
+            </div>
+            <img id="rxPreview" src="" alt="Prescription preview"
+              style="display:none; width:100%; max-height:200px; object-fit:contain; border-radius:10px; padding:8px;">
+          </div>
+        </div>
+
+        <!-- Order Overview -->
+        <div class="section-card" id="overviewCard">
+          <h2 class="card-title"><i class="fa-solid fa-receipt"></i> Order Overview</h2>
+
+          <div id="overviewPharmacyRow" class="overview-pharmacy">
+            <div class="overview-pharmacy-icon"><i class="fa-solid fa-store"></i></div>
+            <div>
+              <div class="overview-pharmacy-name" id="ovPharmacyName">No pharmacy selected</div>
+              <div class="overview-pharmacy-meta" id="ovPharmacyMeta"></div>
+            </div>
+          </div>
+
+          <div class="overview-rows">
+            <div class="overview-row">
+              <span>Medicine Subtotal</span>
+              <strong id="ovSubtotal">&#8377;0</strong>
+            </div>
+            <div class="overview-row">
+              <span>Delivery Fee</span>
+              <strong id="ovDelivery">&#8377;0</strong>
+            </div>
+            <div class="overview-divider"></div>
+            <div class="overview-row overview-total">
+              <span>Total</span>
+              <strong id="ovTotal">&#8377;0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Place Order -->
+        <button id="placeOrderBtn" class="btn-place-order" onclick="placeOrder()">
+          <i class="fa-solid fa-check-circle"></i> Place Order
+        </button>
+
+      </div><!-- /cartContent -->
 
     </section>
 
-
-
+    <!-- ====== RIGHT PANEL – PHARMACY SELECTION (40%) ====== -->
+    <section class="pharmacy-panel" id="pharmacyPanel" style="display:none;">
+      <div class="panel-title">
+        <i class="fa-solid fa-store"></i>
+        <h2>Select Pharmacy</h2>
+      </div>
+      <p class="pharmacy-panel-sub">Sorted by availability then distance</p>
+      <div id="pharmacyList" class="pharmacy-list">
+        <!-- Skeleton loaders -->
+        <div class="pharm-skeleton"></div>
+        <div class="pharm-skeleton"></div>
+        <div class="pharm-skeleton"></div>
+      </div>
+    </section>
 
   </main>
+
+  <!-- ===== TOAST ===== -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">Order placed! Pharmacy is confirming your order.</span>
+  </div>
 
   <script src="cart.js"></script>
   <script src="cart-ui.js"></script>

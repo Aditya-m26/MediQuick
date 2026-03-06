@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { recognize } = require("tesseract.js");
 const { upload } = require("../config/cloudinary");
 const Medicine = require("../models/Medicine");
 
@@ -19,16 +18,61 @@ function authenticate(req, res, next) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Google Cloud Vision OCR via REST API
+// Requires GOOGLE_VISION_API_KEY in .env
+// ─────────────────────────────────────────────────────────────────────────────
+async function ocrWithGoogleVision(imageUrl) {
+    const apiKey = process.env.GOOGLE_VISION_API_KEY;
+    if (!apiKey) throw new Error("GOOGLE_VISION_API_KEY not set in .env");
+
+    const endpoint = `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`;
+
+    const body = {
+        requests: [
+            {
+                image: { source: { imageUri: imageUrl } },
+                features: [{ type: "TEXT_DETECTION" }],
+            },
+        ],
+    };
+
+    const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+        throw new Error(data.error.message || "Vision API error");
+    }
+
+    const responses = data.responses || [];
+    if (!responses.length || !responses[0].textAnnotations) {
+        return "";
+    }
+
+    // First annotation = full extracted text
+    return responses[0].textAnnotations[0].description || "";
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // POST /api/prescription/scan
 // Body: multipart/form-data → field name: "prescription"
+//
+// Flow:
+//   1. Upload image to Cloudinary
+//   2. Send Cloudinary URL to Google Cloud Vision for OCR
+//   3. Parse extracted text for medicine candidates
+//   4. Fuzzy-match candidates against medicines collection
+//   5. Return { imageUrl, extractedText, medicines }
 // ─────────────────────────────────────────────────────────────────────────────
 router.post("/scan", authenticate, (req, res, next) => {
     upload.single("prescription")(req, res, (err) => {
         if (err) {
-            console.error("[UPLOAD] Multer/Cloudinary error:", err.message);
-            return res.status(400).json({
-                message: "Image upload failed: " + err.message,
-            });
+            console.error("[UPLOAD] Error:", err.message);
+            return res.status(400).json({ message: "Image upload failed: " + err.message });
         }
         next();
     });
@@ -38,32 +82,24 @@ router.post("/scan", authenticate, (req, res, next) => {
     }
 
     const imageUrl = req.file.path; // Cloudinary URL
-    console.log("[RX] Image uploaded to:", imageUrl);
+    console.log("[RX] Image uploaded:", imageUrl);
 
     try {
-        // ── Step 1: OCR with Tesseract v5 ────────────────────────────────────
-        console.log("[OCR] Starting recognition...");
-        const { data } = await recognize(imageUrl, "eng", {
-            logger: (m) => {
-                if (m.status === "recognizing text") {
-                    console.log(`[OCR] ${Math.round(m.progress * 100)}%`);
-                }
-            },
-        });
-
-        const extractedText = data.text || "";
-        console.log("[OCR] Done. Extracted:", extractedText.substring(0, 300));
+        // ── Step 1: Google Vision OCR ────────────────────────────────────────
+        console.log("[OCR] Calling Google Cloud Vision...");
+        const extractedText = await ocrWithGoogleVision(imageUrl);
+        console.log("[OCR] Extracted:", extractedText.substring(0, 300));
 
         if (!extractedText.trim()) {
             return res.json({
                 imageUrl,
                 extractedText: "",
                 medicines: [],
-                message: "Could not extract any text from the image. Try a clearer photo.",
+                message: "Could not extract text from the image. Try a clearer photo.",
             });
         }
 
-        // ── Step 2: Parse candidate medicine names ───────────────────────────
+        // ── Step 2: Parse candidate medicine names ──────────────────────────
         const lines = extractedText
             .split(/\r?\n/)
             .map((l) => l.trim())
@@ -81,7 +117,7 @@ router.post("/scan", authenticate, (req, res, next) => {
             }
         }
 
-        // ── Step 3: Fuzzy-match against medicines DB ─────────────────────────
+        // ── Step 3: Fuzzy-match against medicines DB ────────────────────────
         const matched = new Map();
 
         for (const term of candidates) {
@@ -118,7 +154,7 @@ router.post("/scan", authenticate, (req, res, next) => {
     } catch (err) {
         console.error("[OCR] Error:", err.message || err);
         return res.status(500).json({
-            message: "OCR processing failed: " + (err.message || "Unknown error"),
+            message: "OCR failed: " + (err.message || "Unknown error"),
             imageUrl,
         });
     }

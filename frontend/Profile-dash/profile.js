@@ -1,10 +1,9 @@
-/* ==============================================
-   MediQuick – Profile Dashboard JS
-   Fetches real user data from backend via mq_token.
-   Only shows what's in the database; empty fields show as —
-   ============================================== */
+/* =============================================
+   MediQuick – Profile Dashboard Script
+   ============================================= */
 
-var API_BASE = window.location.hostname === 'localhost'
+// ─── CONFIG ──────────────────────────────────────────
+var API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     ? 'http://localhost:5000'
     : '';
 

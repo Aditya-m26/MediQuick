@@ -1,9 +1,9 @@
-/* ================================================
-   MediQuick – Medicine Detail Page Script
-   Fetches from backend API, renders full-width product page
-   ================================================ */
+/* ==============================================
+   MediQuick – Medicine Details Template Logic
+   ============================================== */
 
-const API_BASE = window.location.hostname === 'localhost'
+// ─── CONFIG ───────────────────────────────────
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     ? 'http://localhost:5000'
     : ''; // On Render: same origin, relative paths
 
@@ -279,6 +279,9 @@ function addToCart() {
             id: String(currentMed._id),
             name: currentMed.name,
             price: currentMed.price,
+            type: currentMed.type || 'Tablet',
+            category: currentMed.category || '',
+            requiresPrescription: !!currentMed.prescription,
             qty: currentQty,
         });
     }
