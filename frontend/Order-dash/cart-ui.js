@@ -41,7 +41,7 @@ function renderCart() {
   var isEmpty = (cart.length === 0);
 
   document.getElementById('emptyCart').style.display = isEmpty ? 'flex' : 'none';
-  document.getElementById('cartContent').style.display = isEmpty ? 'none' : 'block';
+  document.getElementById('cartContent').style.display = isEmpty ? 'none' : 'flex';
 
   var pharmacyPanel = document.getElementById('pharmacyPanel');
   if (pharmacyPanel) pharmacyPanel.style.display = isEmpty ? 'none' : 'flex';
