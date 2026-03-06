@@ -181,6 +181,13 @@ body {
   min-width: 0;
 }
 
+/* The wrapper around all section-cards – THIS is what spaces the cards apart */
+#cartContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 /* RIGHT – Pharmacy Selection */
 .pharmacy-panel {
   width: 40%;
