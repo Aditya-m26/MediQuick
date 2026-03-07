@@ -1,6 +1,7 @@
 /* =====================================================
    MediQuick – emergency.js
    Controls the Emergency Delivery Mode toggle
+   When ON: redirects to cart with emergency mode active
    ===================================================== */
 
 let isEmergencyOn = false;
@@ -14,22 +15,10 @@ function toggleEmergency() {
     const greeting = document.getElementById('greetingText');
 
     if (isEmergencyOn) {
-        /* ---- TURN ON ---- */
-        banner.classList.remove('hidden');
-        toggle.classList.add('active');
-        label.textContent = 'Emergency ON';
-        greeting.textContent = '🚨 Emergency! Finding fastest pharmacy...';
-        document.body.classList.add('emergency-on');
-
-        // Update all open delivery tags to emergency style
-        updateDeliveryTags(true);
-
-        // Scroll user to pharmacy section so they see results instantly
-        const section = document.querySelector('.pharmacy-section');
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
+        /* ---- TURN ON: redirect to cart/checkout with emergency mode ---- */
+        localStorage.setItem('mq_emergency_mode', '1');
+        window.location.href = 'cart.html';
+        return;
     } else {
         /* ---- TURN OFF ---- */
         banner.classList.add('hidden');
@@ -79,3 +68,19 @@ function updateDeliveryTags(emergencyMode) {
     });
 }
 
+// Init: if user returned from cart with emergency mode on, show toggle as active
+(function init() {
+    if (localStorage.getItem('mq_emergency_mode') === '1') {
+        isEmergencyOn = true;
+        var banner = document.getElementById('emergencyBanner');
+        var toggle = document.getElementById('emergencyToggle');
+        var label = document.getElementById('emergencyLabel');
+        var greeting = document.getElementById('greetingText');
+        if (banner) banner.classList.remove('hidden');
+        if (toggle) toggle.classList.add('active');
+        if (label) label.textContent = 'Emergency ON';
+        if (greeting) greeting.textContent = '🚨 Emergency! Finding fastest pharmacy...';
+        document.body.classList.add('emergency-on');
+        updateDeliveryTags(true);
+    }
+})();

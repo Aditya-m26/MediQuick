@@ -248,6 +248,9 @@ function fetchPharmacies(lat, lng, token) {
       var list = document.getElementById('pharmacyList');
       if (list) list.innerHTML = '';
       refreshPharmacyList();
+      if (localStorage.getItem('mq_emergency_mode') === '1' && typeof applyEmergencyMode === 'function') {
+        applyEmergencyMode();
+      }
     })
     .catch(function (err) {
       console.error('Failed to load pharmacies:', err);
@@ -483,8 +486,72 @@ function showToast(msg, isError) {
 }
 
 /* ════════════════════════════════════════════════════
+   EMERGENCY MODE (cart)
+   Auto-select emergency delivery + nearest full-stock pharmacy.
+══════════════════════════════════════════════════════ */
+function applyEmergencyMode() {
+  selectedDeliveryMode = 'emergency';
+  deliveryFee = 60;
+
+  var optEmergency = document.getElementById('optEmergency');
+  var optStandard = document.getElementById('optStandard');
+  if (optEmergency && optEmergency.querySelector('input')) {
+    optEmergency.querySelector('input').checked = true;
+  }
+  if (optStandard && optStandard.querySelector('input')) {
+    optStandard.querySelector('input').checked = false;
+  }
+
+  var toggle = document.getElementById('emergencyToggle');
+  var label = document.getElementById('emergencyLabel');
+  var banner = document.getElementById('emergencyBanner');
+  if (toggle) { toggle.classList.add('active'); if (label) label.textContent = 'Emergency ON'; }
+  if (banner) banner.classList.remove('hidden');
+  document.body.classList.add('emergency-on');
+
+  refreshPharmacyList();
+  updateOverview();
+}
+
+function clearEmergencyMode() {
+  selectedDeliveryMode = 'standard';
+  deliveryFee = 20;
+  localStorage.removeItem('mq_emergency_mode');
+
+  var optStandard = document.getElementById('optStandard');
+  var optEmergency = document.getElementById('optEmergency');
+  if (optStandard && optStandard.querySelector('input')) optStandard.querySelector('input').checked = true;
+  if (optEmergency && optEmergency.querySelector('input')) optEmergency.querySelector('input').checked = false;
+
+  var toggle = document.getElementById('emergencyToggle');
+  var label = document.getElementById('emergencyLabel');
+  var banner = document.getElementById('emergencyBanner');
+  if (toggle) toggle.classList.remove('active');
+  if (label) label.textContent = 'Emergency';
+  if (banner) banner.classList.add('hidden');
+  document.body.classList.remove('emergency-on');
+
+  refreshPharmacyList();
+  updateOverview();
+}
+
+function toggleCartEmergency() {
+  if (localStorage.getItem('mq_emergency_mode') === '1') {
+    clearEmergencyMode();
+  } else {
+    localStorage.setItem('mq_emergency_mode', '1');
+    applyEmergencyMode();
+  }
+}
+
+/* ════════════════════════════════════════════════════
    INIT
 ══════════════════════════════════════════════════════ */
 renderCart();
 updateCartBadge();
 loadPharmacies();
+
+// Apply emergency mode if user came from request page with Emergency ON
+if (localStorage.getItem('mq_emergency_mode') === '1') {
+  applyEmergencyMode();
+}

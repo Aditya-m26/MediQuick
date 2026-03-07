@@ -28,8 +28,15 @@
   </div>
   <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
+  <!-- EMERGENCY BANNER (hidden by default) -->
+  <div id="emergencyBanner" class="emergency-banner hidden">
+    <i class="fa-solid fa-siren-on"></i>
+    <span>🚨 EMERGENCY MODE ACTIVE &nbsp;—&nbsp; Priority Dispatch Enabled • Avg. 10 min</span>
+    <i class="fa-solid fa-siren-on"></i>
+  </div>
+
   <!-- ===== HEADER ===== -->
-  <header class="header">
+  <header class="header" id="cartHeader">
     <div class="left-group">
       <button class="menu-btn" onclick="toggleSidebar()">
         <i class="fa-solid fa-bars"></i>
@@ -40,6 +47,10 @@
       </div>
     </div>
     <div class="right-icons">
+      <button class="emergency-toggle" id="emergencyToggle" onclick="toggleCartEmergency()" title="Emergency Mode">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span id="emergencyLabel">Emergency</span>
+      </button>
       <a href="cart.html" class="cart-btn">
         <i class="fa-solid fa-cart-shopping"></i>
         <span id="cartCount" class="cart-badge">0</span>

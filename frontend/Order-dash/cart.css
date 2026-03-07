@@ -1029,3 +1029,61 @@ body {
     display: none;
   }
 }
+
+/* ──────────── EMERGENCY MODE (cart) ──────────── */
+.emergency-banner {
+  background: linear-gradient(90deg, #dc2626, #ef4444);
+  color: white;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  animation: emergencyPulse 1.4s ease-in-out infinite;
+}
+
+.emergency-banner i {
+  font-size: 16px;
+}
+
+@keyframes emergencyPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
+}
+
+.emergency-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.emergency-toggle:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.emergency-toggle.active {
+  background: #e74c3c;
+  border-color: #e74c3c;
+  color: white;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.2);
+}
+
+body.emergency-on .header {
+  background: linear-gradient(90deg, #fff5f5, #fff);
+  border-bottom: 2px solid #fca5a5;
+}
