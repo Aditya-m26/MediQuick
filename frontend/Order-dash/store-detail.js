@@ -9,15 +9,13 @@ var currentStore = null;
 
 /* ── Pharmacist auto-responses ───────────────── */
 var REPLIES = {
-    'Is this medicine available?':
-        'Please share the medicine name and I will check our stock for you right away!',
     'Do you have an alternative?':
         'Yes! Share the medicine name and I will suggest available alternatives with similar composition.',
     'What is the price?':
-        'Please tell me the medicine name and I will share the current price with MRP and any discounts.',
+        'Please tell me the medicine name and I will share the current price and any discounts.',
     'How long will delivery take?':
-        'Delivery usually takes 20-30 minutes depending on your distance. Emergency orders are prioritized!',
-    'Do you accept prescriptions online?':
+        'Delivery usually takes 15-20 minutes depending on your distance. Emergency orders are prioritized!',
+    'Is it okey if there is no Prescription?':
         'Yes, you can upload your prescription through the Order page and we will verify it before dispatching.',
     'Bulk order discount?':
         'We offer 5-10% discount on bulk medicine orders. Please share your list and I will prepare a quote!'
