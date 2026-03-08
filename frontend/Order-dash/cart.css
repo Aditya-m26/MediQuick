@@ -557,8 +557,14 @@ body {
   color: #0ea5b0;
 }
 
-.opt-fee-emergency {
-  color: #e53e3e;
+/* Emergency delivery option: slight red tint when emergency mode is on */
+body.emergency-on #optEmergency {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+body.emergency-on #optEmergency .opt-name {
+  color: #b91c1c;
 }
 
 .opt-time {
@@ -892,6 +898,14 @@ body {
   gap: 4px;
 }
 
+.pharm-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
 .pharm-name {
   font-size: 14px;
   font-weight: 700;
@@ -899,6 +913,69 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.pharm-view-details-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0ea5b0;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #e0f7f9;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.pharm-view-details-btn:hover {
+  background: #b2dfe4;
+  color: #0b8f99;
+}
+
+.pharm-view-details-btn i {
+  font-size: 11px;
+}
+
+.pharm-ask-alternatives {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0ea5b0;
+  text-decoration: none;
+  margin-top: 8px;
+  padding: 6px 0;
+  transition: color 0.15s;
+}
+
+.pharm-ask-alternatives:hover {
+  color: #0b8f99;
+}
+
+.pharm-ask-alternatives i {
+  font-size: 12px;
+}
+
+/* Store card red tint when emergency mode */
+.pharm-card.emergency-on {
+  border-color: #fca5a5;
+  background: linear-gradient(135deg, #fff 0%, #fef2f2 100%);
+}
+
+.pharm-card.emergency-on:hover {
+  box-shadow: 0 8px 24px rgba(231, 76, 60, 0.12);
+}
+
+.pharm-card.emergency-on.selected {
+  border-color: #e74c3c;
+  box-shadow: 0 4px 20px rgba(231, 76, 60, 0.18);
 }
 
 .pharm-meta-row {
@@ -1027,6 +1104,15 @@ body {
 @media (max-width: 480px) {
   .location-pill span {
     display: none;
+  }
+
+  .pharm-view-details-btn {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .pharm-ask-alternatives {
+    font-size: 11px;
   }
 }
 

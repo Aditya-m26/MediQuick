@@ -11,7 +11,7 @@ const API_BASE = (window.location.hostname === 'localhost' || window.location.ho
 
 /* ──── State ──── */
 let selectedDeliveryMode = 'standard';
-let deliveryFee = 20;
+let deliveryFee = 10;
 let uploadedPrescription = null;
 let selectedPharmacy = null;
 let allPharmacies = [];  // raw from backend
@@ -144,7 +144,7 @@ function handleDeliveryChange() {
       break;
     }
   }
-  deliveryFee = (selectedDeliveryMode === 'emergency') ? 60 : 20;
+  deliveryFee = (selectedDeliveryMode === 'emergency') ? 40 : 10;
   updateOverview();
 }
 
@@ -326,11 +326,17 @@ function renderPharmacyList(pharmacies) {
   if (!listEl) return;
   listEl.innerHTML = '';
 
+  var isEmergencyMode = selectedDeliveryMode === 'emergency';
+  var storeDetailBase = 'store-detail.html';
+
   pharmacies.forEach(function (p) {
     var isSelected = selectedPharmacy && selectedPharmacy._id === p._id;
     var card = document.createElement('div');
-    card.className = 'pharm-card' + (isSelected ? ' selected' : '');
-    card.onclick = function () { selectPharmacy(p, pharmacies); };
+    card.className = 'pharm-card' + (isSelected ? ' selected' : '') + (isEmergencyMode ? ' emergency-on' : '');
+    card.onclick = function (e) {
+      if (e.target.closest('.pharm-view-details-btn') || e.target.closest('.pharm-ask-alternatives')) return;
+      selectPharmacy(p, pharmacies);
+    };
 
     // Image or icon
     var imgContent = p.photo
@@ -347,15 +353,22 @@ function renderPharmacyList(pharmacies) {
       ? p.distanceKm + ' km'
       : p.city || '';
 
-    // Delivery time estimate
-    var deliveryTime = getDeliveryTime(p.distanceKm);
-    var deliveryLabel = selectedDeliveryMode === 'emergency' ? '10&#8211;15 min' : deliveryTime;
+    // Delivery time from distance (min 15 for standard, ~10 for emergency)
+    var deliveryLabel = getDeliveryTimeFromDistance(p.distanceKm, isEmergencyMode);
 
     // Rating stars
     var rating = parseFloat(p.rating) || 0;
     var starsHtml = '';
     for (var i = 0; i < 5; i++) {
       starsHtml += '<i class="fa-' + (i < Math.round(rating) ? 'solid' : 'regular') + ' fa-star" style="color:#f59e0b;font-size:11px;"></i>';
+    }
+
+    var storeDetailUrl = storeDetailBase + '?id=' + encodeURIComponent(p._id);
+    var viewDetailsBtn = '<a href="' + storeDetailUrl + '" class="pharm-view-details-btn" onclick="event.stopPropagation()" title="View store details"><i class="fa-solid fa-circle-info"></i> View Details</a>';
+
+    var askAlternativesHtml = '';
+    if (!p.allAvailable) {
+      askAlternativesHtml = '<a href="' + storeDetailUrl + '" class="pharm-ask-alternatives" onclick="event.stopPropagation()"><i class="fa-solid fa-comments"></i> Chat / Ask for alternatives</a>';
     }
 
     card.innerHTML = `
@@ -365,7 +378,10 @@ function renderPharmacyList(pharmacies) {
         <div class="pharm-selected-tick"><i class="fa-solid fa-check"></i></div>
       </div>
       <div class="pharm-info">
-        <div class="pharm-name">${p.storeName}</div>
+        <div class="pharm-header-row">
+          <div class="pharm-name">${p.storeName}</div>
+          ${viewDetailsBtn}
+        </div>
         <div class="pharm-meta-row">
           ${starsHtml} <span>${rating.toFixed(1)}</span>
           <span style="color:#cde8eb">|</span>
@@ -379,6 +395,7 @@ function renderPharmacyList(pharmacies) {
           <div class="avail-dot ${p.colorClass}"></div>
           <span class="avail-text ${p.colorClass}">${p.availText || ''}</span>
         </div>
+        ${askAlternativesHtml}
       </div>
     `;
 
@@ -399,13 +416,18 @@ function selectPharmacy(pharmacy, allList) {
   updateOverview();
 }
 
-/* Delivery time estimate from distance */
-function getDeliveryTime(distanceKm) {
+/* Delivery time from distance (min 15 min for standard). Emergency uses ~10 min. */
+function getDeliveryTimeFromDistance(distanceKm, isEmergency) {
+  if (isEmergency) return '~10 min';
   if (distanceKm === null || distanceKm === undefined) return '20&#8211;30 min';
-  if (distanceKm <= 2) return '10&#8211;15 min';
-  if (distanceKm <= 5) return '15&#8211;20 min';
-  if (distanceKm <= 10) return '20&#8211;25 min';
-  return '25&#8211;35 min';
+  var d = parseFloat(distanceKm);
+  if (isNaN(d)) return '20&#8211;30 min';
+  if (d <= 1) return '15&#8211;18 min';
+  if (d <= 2) return '15&#8211;20 min';
+  if (d <= 4) return '18&#8211;24 min';
+  if (d <= 7) return '22&#8211;28 min';
+  if (d <= 10) return '25&#8211;32 min';
+  return '28&#8211;35 min';
 }
 
 /* ════════════════════════════════════════════════════
@@ -491,7 +513,7 @@ function showToast(msg, isError) {
 ══════════════════════════════════════════════════════ */
 function applyEmergencyMode() {
   selectedDeliveryMode = 'emergency';
-  deliveryFee = 60;
+  deliveryFee = 40;
 
   var optEmergency = document.getElementById('optEmergency');
   var optStandard = document.getElementById('optStandard');
@@ -515,7 +537,7 @@ function applyEmergencyMode() {
 
 function clearEmergencyMode() {
   selectedDeliveryMode = 'standard';
-  deliveryFee = 20;
+  deliveryFee = 10;
   localStorage.removeItem('mq_emergency_mode');
 
   var optStandard = document.getElementById('optStandard');
