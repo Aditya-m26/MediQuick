@@ -42,11 +42,15 @@
             </a>
         </div>
 
-        <div class="header-search">
-            <i class="fa-solid fa-magnifying-glass hs-icon"></i>
-            <input id="reSearchInput" class="header-search-input" type="text" placeholder="Search another medicine…"
-                autocomplete="off" onkeydown="if(event.key==='Enter') doReSearch()" />
-            <button class="hs-go" onclick="doReSearch()">Go</button>
+        <div class="header-search-wrap">
+            <div class="header-search">
+                <i class="fa-solid fa-magnifying-glass hs-icon"></i>
+                <input id="reSearchInput" class="header-search-input" type="text" placeholder="Search another medicine…"
+                    autocomplete="off" oninput="onReSearchInput(this.value)"
+                    onkeydown="if(event.key==='Enter') doReSearch()" />
+                <button class="hs-go" onclick="doReSearch()">Go</button>
+            </div>
+            <div id="reSuggestionsBox" class="re-suggestions-box"></div>
         </div>
 
         <div class="header-right">

@@ -222,6 +222,61 @@ body {
     opacity: 0.88;
 }
 
+/* ─── SEARCH WRAP (for dropdown positioning) ── */
+.header-search-wrap {
+    flex: 1;
+    position: relative;
+}
+
+.header-search-wrap .header-search {
+    flex: unset;
+}
+
+/* ─── SEARCH SUGGESTIONS DROPDOWN ─────────────── */
+.re-suggestions-box {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10);
+    overflow: hidden;
+    display: none;
+    z-index: 950;
+}
+
+.re-suggestion-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #edf8f9;
+    transition: background 0.15s;
+}
+
+.re-suggestion-row:last-child {
+    border-bottom: none;
+}
+
+.re-suggestion-row:hover {
+    background: var(--teal-light);
+}
+
+.re-sug-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.re-sug-cat {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
 .header-right {
     flex-shrink: 0;
 }
@@ -827,7 +882,7 @@ body {
 }
 
 @media (max-width: 560px) {
-    .header-search {
+    .header-search-wrap {
         display: none;
     }
 

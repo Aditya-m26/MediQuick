@@ -301,8 +301,83 @@ function updateCartBadge() {
 function doReSearch() {
     const q = (document.getElementById("reSearchInput").value || "").trim();
     if (!q) return;
+    // Close suggestions before navigating
+    const box = document.getElementById("reSuggestionsBox");
+    if (box) { box.style.display = "none"; box.innerHTML = ""; }
     window.location.href = `medicine.html?name=${encodeURIComponent(q)}`;
 }
+
+// ── Live suggestions (autocomplete from backend) ─────────────────────────────
+let reSuggestTimeout;
+
+function onReSearchInput(val) {
+    clearTimeout(reSuggestTimeout);
+    const box = document.getElementById("reSuggestionsBox");
+    if (!box) return;
+    if (!val || val.trim().length < 2) {
+        box.style.display = "none";
+        box.innerHTML = "";
+        return;
+    }
+    reSuggestTimeout = setTimeout(function () {
+        fetchReSuggestions(val.trim());
+    }, 280);
+}
+
+function fetchReSuggestions(q) {
+    const token = localStorage.getItem("mq_token");
+    if (!token) return;
+
+    fetch(API_BASE + "/api/medicines/search?name=" + encodeURIComponent(q), {
+        headers: { Authorization: "Bearer " + token },
+    })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            renderReSuggestions(data.medicines || []);
+        })
+        .catch(function () {
+            // silently ignore network errors in autocomplete
+        });
+}
+
+function renderReSuggestions(medicines) {
+    const box = document.getElementById("reSuggestionsBox");
+    if (!box) return;
+    if (!medicines.length) {
+        box.style.display = "none";
+        box.innerHTML = "";
+        return;
+    }
+    box.innerHTML = medicines
+        .map(function (m) {
+            return (
+                '<div class="re-suggestion-row" onclick="pickReSuggestion(' +
+                "'" + m.name.replace(/'/g, "\\'") + "'" +
+                ')">' +
+                '<span class="re-sug-name">' + m.name + "</span>" +
+                '<span class="re-sug-cat">' + m.category + " · " + m.type + "</span>" +
+                "</div>"
+            );
+        })
+        .join("");
+    box.style.display = "block";
+}
+
+function pickReSuggestion(name) {
+    document.getElementById("reSearchInput").value = name;
+    const box = document.getElementById("reSuggestionsBox");
+    if (box) { box.style.display = "none"; box.innerHTML = ""; }
+    doReSearch();
+}
+
+// Close suggestions when clicking outside
+document.addEventListener("click", function (e) {
+    const box = document.getElementById("reSuggestionsBox");
+    if (box && !e.target.closest(".header-search-wrap")) {
+        box.style.display = "none";
+        box.innerHTML = "";
+    }
+});
 
 // ── Toast ────────────────────────────────────────────────────────────────────
 let toastTimer;
