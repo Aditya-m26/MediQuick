@@ -4,141 +4,331 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MediQuick – Store Manager</title>
+    <title>MediQuick – Store Manager Dashboard</title>
+    <meta name="description" content="MediQuick Store Manager — manage stock, orders, and operations for your medical store." />
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <link rel="stylesheet" href="store.css" />
-
 </head>
 
 <body>
 
-    <!-- ===== HEADER ===== -->
-    <header class="sm-header">
-        <div class="sm-header-left">
-            <div class="sm-logo">
-                <i class="fa-solid fa-store"></i>
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Brand -->
+        <div class="sidebar-brand">
+            <div class="sidebar-logo">
+                <i class="fa-solid fa-kit-medical"></i>
             </div>
-            <div>
-                <h1 class="sm-store-name">Shree Ganesh Medical</h1>
-                <p class="sm-store-loc"><i class="fa-solid fa-location-dot"></i> Akola, Maharashtra</p>
+            <div class="sidebar-brand-text">
+                <span class="sidebar-brand-name">MediQuick</span>
+                <span class="sidebar-brand-tag">Store Manager</span>
             </div>
         </div>
-        <div class="sm-header-right">
-            <!-- Open / Closed toggle -->
-            <div class="store-status-wrap">
-                <span class="store-status-label" id="statusLabel">Store Open</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="storeToggle" checked onchange="toggleStoreStatus()" />
-                    <span class="toggle-slider"></span>
-                </label>
-            </div>
-            <div class="sm-avatar"><i class="fa-solid fa-user-tie"></i></div>
-            <a href="../index.html" class="sm-logout-btn" title="Logout">
+
+        <!-- Nav -->
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="orders" onclick="switchPage('orders', this)">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span>Orders</span>
+                <span class="nav-badge" id="sidebarOrderBadge">0</span>
+            </a>
+            <a href="#" class="nav-item" data-page="stock" onclick="switchPage('stock', this)">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <span>Stock</span>
+            </a>
+            <a href="#" class="nav-item" data-page="history" onclick="switchPage('history', this)">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Order History</span>
+            </a>
+            <a href="#" class="nav-item" data-page="reporting" onclick="switchPage('reporting', this)">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Reporting</span>
+            </a>
+            <a href="#" class="nav-item" data-page="offers" onclick="switchPage('offers', this)">
+                <i class="fa-solid fa-tags"></i>
+                <span>Offers</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <a href="#" class="nav-item" data-page="finance" onclick="switchPage('finance', this)">
+                <i class="fa-solid fa-wallet"></i>
+                <span>Finance</span>
+                <i class="fa-solid fa-chevron-down nav-arrow"></i>
+            </a>
+            <a href="#" class="nav-item" data-page="storeinfo" onclick="switchPage('storeinfo', this)">
+                <i class="fa-solid fa-store"></i>
+                <span>Store Info</span>
+            </a>
+            <a href="#" class="nav-item" data-page="complaints" onclick="switchPage('complaints', this)">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Customer Complaints</span>
+            </a>
+        </nav>
+
+        <!-- Sidebar footer -->
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item nav-logout">
                 <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Log out</span>
             </a>
         </div>
-    </header>
+    </aside>
 
-    <!-- ===== MAIN LAYOUT ===== -->
-    <div class="sm-layout">
+    <!-- ===== MAIN WRAPPER ===== -->
+    <div class="main-wrapper" id="mainWrapper">
 
-        <!-- ===== LEFT: STOCK PANEL ===== -->
-        <aside class="stock-panel">
-            <div class="panel-header">
-                <h2><i class="fa-solid fa-boxes-stacked"></i> Stock Manager</h2>
-                <button class="add-stock-btn" onclick="openAddStockModal()">
-                    <i class="fa-solid fa-plus"></i> Add Item
+        <!-- ===== TOP HEADER ===== -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="sidebar-toggle-btn" id="sidebarToggleBtn" onclick="toggleSidebar()">
+                    <i class="fa-solid fa-bars"></i>
                 </button>
+                <div class="header-store-info">
+                    <h1 class="header-store-name">Shree Ganesh Medical</h1>
+                    <p class="header-store-loc"><i class="fa-solid fa-location-dot"></i> Akola, Maharashtra</p>
+                </div>
             </div>
-
-            <div class="stock-search-wrap">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="stockSearchInput" placeholder="Search stock..." oninput="filterStock()" />
+            <div class="header-right">
+                <!-- Store toggle -->
+                <div class="store-status-wrap">
+                    <span class="store-status-label" id="statusLabel">Store Open</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="storeToggle" checked onchange="toggleStoreStatus()" />
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <!-- Notifications -->
+                <button class="header-icon-btn" id="notifBtn" title="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="header-badge" id="headerNotifBadge">0</span>
+                </button>
+                <!-- Profile avatar -->
+                <div class="header-avatar">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span class="avatar-name">Rupali</span>
+                    <i class="fa-solid fa-chevron-down avatar-arrow"></i>
+                </div>
             </div>
+        </header>
 
-            <!-- Stock list -->
-            <div class="stock-list" id="stockList">
-                <!-- Populated by JS -->
-            </div>
-        </aside>
+        <!-- ===== CONTENT AREA ===== -->
+        <div class="content-area">
 
-        <!-- ===== RIGHT: ORDERS PANEL ===== -->
-        <main class="orders-panel">
+            <!-- ====== PAGE: ORDERS (default) ====== -->
+            <section class="page-section active" id="page-orders">
 
-            <!-- Stats row -->
-            <div class="stats-row">
-                <div class="stat-card stat-pending">
-                    <i class="fa-solid fa-clock"></i>
-                    <div>
-                        <p class="stat-number" id="statPending">0</p>
-                        <p class="stat-label">Pending</p>
+                <!-- Stats row -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-pending">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-number" id="statPending">0</p>
+                            <p class="stat-label">Pending</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-accepted">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-number" id="statAccepted">0</p>
+                            <p class="stat-label">Accepted</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-delivered">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-number" id="statDelivered">0</p>
+                            <p class="stat-label">Delivered</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-revenue">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-number" id="statRevenue">₹0</p>
+                            <p class="stat-label">Today's Revenue</p>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card stat-accepted">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <div>
-                        <p class="stat-number" id="statAccepted">0</p>
-                        <p class="stat-label">Accepted</p>
-                    </div>
-                </div>
-                <div class="stat-card stat-delivered">
-                    <i class="fa-solid fa-truck-fast"></i>
-                    <div>
-                        <p class="stat-number" id="statDelivered">0</p>
-                        <p class="stat-label">Delivered</p>
-                    </div>
-                </div>
-                <div class="stat-card stat-revenue">
-                    <i class="fa-solid fa-indian-rupee-sign"></i>
-                    <div>
-                        <p class="stat-number" id="statRevenue">₹0</p>
-                        <p class="stat-label">Today's Revenue</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Orders header -->
-            <div class="orders-header">
-                <h2><i class="fa-solid fa-bell"></i> Incoming Orders
-                    <span class="orders-live-dot"></span>
-                </h2>
-                <span class="orders-count-badge" id="orderCountBadge">0 new</span>
-            </div>
-
-            <!-- Order list -->
-            <div class="order-list" id="orderList">
-                <div class="orders-empty">
-                    <i class="fa-solid fa-inbox"></i>
-                    <p>Waiting for orders...</p>
-                </div>
-            </div>
-
-            <!-- ===== CUSTOMER CHAT NOTIFICATIONS ===== -->
-            <section class="chat-notifs-section">
-                <div class="chat-notifs-header">
-                    <h2><i class="fa-solid fa-comments"></i> Customer Messages
-                        <span class="chat-notif-badge" id="chatNotifBadge">0</span>
-                    </h2>
-                    <button class="clear-notifs-btn" onclick="clearChatNotifs()">
-                        <i class="fa-solid fa-broom"></i> Clear All
+                <!-- Notification banner -->
+                <div class="notif-banner" id="notifBanner">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Please enable notifications for a better experience. <a href="#">Click here to know more.</a></span>
+                    <button class="notif-banner-close" onclick="this.parentElement.style.display='none'">
+                        <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <div class="chat-notif-list" id="chatNotifList">
-                    <div class="chat-notifs-empty">
+
+                <!-- Orders header -->
+                <div class="section-title-row">
+                    <h2><i class="fa-solid fa-bell"></i> Incoming Orders
+                        <span class="live-dot"></span>
+                    </h2>
+                    <span class="orders-count-badge" id="orderCountBadge">0 new</span>
+                </div>
+
+                <!-- Order list -->
+                <div class="order-list" id="orderList">
+                    <div class="orders-empty">
                         <i class="fa-solid fa-inbox"></i>
-                        <p>No customer messages yet</p>
+                        <p>Waiting for orders...</p>
                     </div>
+                </div>
+
+                <!-- Customer Chat Notifications -->
+                <section class="chat-notifs-section">
+                    <div class="chat-notifs-header">
+                        <h2><i class="fa-solid fa-comments"></i> Customer Messages
+                            <span class="chat-notif-badge" id="chatNotifBadge">0</span>
+                        </h2>
+                        <button class="clear-notifs-btn" onclick="clearChatNotifs()">
+                            <i class="fa-solid fa-broom"></i> Clear All
+                        </button>
+                    </div>
+                    <div class="chat-notif-list" id="chatNotifList">
+                        <div class="chat-notifs-empty">
+                            <i class="fa-solid fa-inbox"></i>
+                            <p>No customer messages yet</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- ====== PAGE: STOCK ====== -->
+            <section class="page-section" id="page-stock">
+
+                <div class="stock-page-header">
+                    <div>
+                        <h2 class="stock-page-title"><i class="fa-solid fa-boxes-stacked"></i> Stock Manager</h2>
+                        <p class="stock-page-subtitle">Manage your medicine inventory and track low-stock items</p>
+                    </div>
+                    <button class="add-stock-btn" onclick="openAddStockModal()">
+                        <i class="fa-solid fa-plus"></i> Add Item
+                    </button>
+                </div>
+
+                <!-- Stock summary cards -->
+                <div class="stock-summary-row">
+                    <div class="stock-summary-card">
+                        <div class="stock-summary-icon ssi-total">
+                            <i class="fa-solid fa-capsules"></i>
+                        </div>
+                        <div>
+                            <p class="stock-summary-number" id="totalItemsCount">12</p>
+                            <p class="stock-summary-label">Total Items</p>
+                        </div>
+                    </div>
+                    <div class="stock-summary-card">
+                        <div class="stock-summary-icon ssi-low">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <div>
+                            <p class="stock-summary-number" id="lowStockCount">0</p>
+                            <p class="stock-summary-label">Low Stock</p>
+                        </div>
+                    </div>
+                    <div class="stock-summary-card">
+                        <div class="stock-summary-icon ssi-value">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+                        <div>
+                            <p class="stock-summary-number" id="stockValue">₹0</p>
+                            <p class="stock-summary-label">Stock Value</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search & filter -->
+                <div class="stock-toolbar">
+                    <div class="stock-search-wrap">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="stockSearchInput" placeholder="Search stock by name..." oninput="filterStock()" />
+                    </div>
+                    <div class="stock-filter-chips">
+                        <button class="stock-chip active" onclick="filterStockByStatus('all', this)">All</button>
+                        <button class="stock-chip" onclick="filterStockByStatus('low', this)">Low Stock</button>
+                        <button class="stock-chip" onclick="filterStockByStatus('ok', this)">In Stock</button>
+                    </div>
+                </div>
+
+                <!-- Stock grid -->
+                <div class="stock-grid" id="stockList">
+                    <!-- Populated by JS -->
                 </div>
             </section>
 
-        </main>
+            <!-- ====== PAGE: HISTORY ====== -->
+            <section class="page-section" id="page-history">
+                <div class="placeholder-page">
+                    <div class="placeholder-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <h2>Order History</h2>
+                    <p>View your past orders and delivery history. Coming soon.</p>
+                </div>
+            </section>
+
+            <!-- ====== PAGE: REPORTING ====== -->
+            <section class="page-section" id="page-reporting">
+                <div class="placeholder-page">
+                    <div class="placeholder-icon"><i class="fa-solid fa-chart-column"></i></div>
+                    <h2>Reporting</h2>
+                    <p>Revenue analytics, order trends, and stock reports. Coming soon.</p>
+                </div>
+            </section>
+
+            <!-- ====== PAGE: OFFERS ====== -->
+            <section class="page-section" id="page-offers">
+                <div class="placeholder-page">
+                    <div class="placeholder-icon"><i class="fa-solid fa-tags"></i></div>
+                    <h2>Offers</h2>
+                    <p>Create and manage promotional offers for your customers. Coming soon.</p>
+                </div>
+            </section>
+
+            <!-- ====== PAGE: FINANCE ====== -->
+            <section class="page-section" id="page-finance">
+                <div class="placeholder-page">
+                    <div class="placeholder-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <h2>Finance</h2>
+                    <p>Payouts, invoices, GST reports and financial summaries. Coming soon.</p>
+                </div>
+            </section>
+
+            <!-- ====== PAGE: STORE INFO ====== -->
+            <section class="page-section" id="page-storeinfo">
+                <div class="placeholder-page">
+                    <div class="placeholder-icon"><i class="fa-solid fa-store"></i></div>
+                    <h2>Store Info</h2>
+                    <p>Update your store details, timings, and contact information. Coming soon.</p>
+                </div>
+            </section>
+
+            <!-- ====== PAGE: COMPLAINTS ====== -->
+            <section class="page-section" id="page-complaints">
+                <div class="placeholder-page">
+                    <div class="placeholder-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+                    <h2>Customer Complaints</h2>
+                    <p>Review and resolve customer issues and complaints. Coming soon.</p>
+                </div>
+            </section>
+        </div>
     </div>
+
+    <!-- ===== SIDEBAR OVERLAY (mobile) ===== -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
     <!-- ===== ADD STOCK MODAL ===== -->
     <div class="modal-overlay hidden" id="modalOverlay" onclick="closeAddStockModal()"></div>
@@ -157,7 +347,6 @@
     </div>
 
     <script src="store.js"></script>
-
 </body>
 
 </html>

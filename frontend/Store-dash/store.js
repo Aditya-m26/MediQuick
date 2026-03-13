@@ -1,6 +1,6 @@
 /* =====================================================
    MediQuick – store.js
-   Store Manager Dashboard Logic
+   Store Manager Dashboard Logic (Redesigned)
    ===================================================== */
 
 /* =====================================================
@@ -40,6 +40,7 @@ let acceptedCount = 0;
 let deliveredCount = 0;
 let totalRevenue = 0;
 let isStoreOpen = true;
+let currentStockFilter = 'all';
 
 /* =====================================================
    INIT
@@ -47,88 +48,179 @@ let isStoreOpen = true;
 window.addEventListener('DOMContentLoaded', function () {
     renderStockList(stockItems);
     updateStats();
+    updateStockSummary();
 
-    // First order arrives after 2 seconds to feel alive
+    // First order arrives after 2 seconds
     setTimeout(spawnOrder, 2000);
 });
+
+/* =====================================================
+   SIDEBAR NAVIGATION
+   ===================================================== */
+function switchPage(pageId, el) {
+    if (el) el.preventDefault && el.preventDefault();
+
+    // Hide all page sections
+    var pages = document.querySelectorAll('.page-section');
+    for (var i = 0; i < pages.length; i++) {
+        pages[i].classList.remove('active');
+    }
+
+    // Show selected page
+    var target = document.getElementById('page-' + pageId);
+    if (target) target.classList.add('active');
+
+    // Update sidebar active state
+    var navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+    for (var j = 0; j < navItems.length; j++) {
+        navItems[j].classList.remove('active');
+    }
+    if (el) el.classList.add('active');
+
+    // Close sidebar on mobile
+    closeSidebarMobile();
+
+    return false;
+}
+
+/* =====================================================
+   SIDEBAR TOGGLE (mobile)
+   ===================================================== */
+function toggleSidebar() {
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+}
+
+function closeSidebarMobile() {
+    if (window.innerWidth <= 1024) {
+        var sidebar = document.getElementById('sidebar');
+        var overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+    }
+}
 
 /* =====================================================
    STORE OPEN / CLOSED TOGGLE
    ===================================================== */
 function toggleStoreStatus() {
     isStoreOpen = document.getElementById('storeToggle').checked;
-    const label = document.getElementById('statusLabel');
+    var label = document.getElementById('statusLabel');
+    var wrap = label.parentElement;
     label.textContent = isStoreOpen ? 'Store Open' : 'Store Closed';
     label.classList.toggle('closed', !isStoreOpen);
+    wrap.classList.toggle('is-closed', !isStoreOpen);
 }
 
 /* =====================================================
    STOCK RENDERING
    ===================================================== */
 function renderStockList(items) {
-    const list = document.getElementById('stockList');
+    var list = document.getElementById('stockList');
     if (items.length === 0) {
-        list.innerHTML = '<p style="text-align:center;color:#9aacb5;padding:20px;">No items found</p>';
+        list.innerHTML = '<div class="orders-empty"><i class="fa-solid fa-capsules"></i><p>No stock items found</p></div>';
         return;
     }
 
     list.innerHTML = items.map(function (item) {
-        const isLow = item.qty <= 10;
-        return `
-      <div class="stock-item ${isLow ? 'low-stock' : ''}" id="stock-${item.id}">
-        <div class="stock-item-info">
-          <p class="stock-item-name">
-            ${item.name}
-            ${isLow ? '<span class="low-stock-badge">Low</span>' : ''}
-          </p>
-          <p class="stock-item-price">₹${item.price} per unit</p>
-        </div>
-        <div class="stock-qty-wrap">
-          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
-          <span class="stock-qty ${isLow ? 'qty-low' : ''}" id="qty-${item.id}">${item.qty}</span>
-          <button class="qty-btn" onclick="changeQty(${item.id}, +1)">+</button>
-        </div>
-      </div>
-    `;
+        var isLow = item.qty <= 10;
+        return '<div class="stock-item ' + (isLow ? 'low-stock' : '') + '" id="stock-' + item.id + '">' +
+            '<div class="stock-item-info">' +
+            '<p class="stock-item-name">' + item.name +
+            (isLow ? ' <span class="low-stock-badge">Low Stock</span>' : '') +
+            '</p>' +
+            '<p class="stock-item-price">₹' + item.price + ' per unit</p>' +
+            '</div>' +
+            '<div class="stock-qty-wrap">' +
+            '<button class="qty-btn" onclick="changeQty(' + item.id + ', -1)">−</button>' +
+            '<span class="stock-qty ' + (isLow ? 'qty-low' : '') + '" id="qty-' + item.id + '">' + item.qty + '</span>' +
+            '<button class="qty-btn" onclick="changeQty(' + item.id + ', +1)">+</button>' +
+            '</div>' +
+            '</div>';
     }).join('');
+}
+
+/* =====================================================
+   STOCK SUMMARY
+   ===================================================== */
+function updateStockSummary() {
+    var totalEl = document.getElementById('totalItemsCount');
+    var lowEl = document.getElementById('lowStockCount');
+    var valueEl = document.getElementById('stockValue');
+
+    if (!totalEl) return;
+
+    var lowCount = 0;
+    var totalValue = 0;
+    for (var i = 0; i < stockItems.length; i++) {
+        if (stockItems[i].qty <= 10) lowCount++;
+        totalValue += stockItems[i].qty * stockItems[i].price;
+    }
+
+    totalEl.textContent = stockItems.length;
+    lowEl.textContent = lowCount;
+    valueEl.textContent = '₹' + totalValue.toLocaleString('en-IN');
 }
 
 /* =====================================================
    QTY CHANGE
    ===================================================== */
 function changeQty(id, delta) {
-    const item = stockItems.find(function (i) { return i.id === id; });
+    var item = stockItems.find(function (i) { return i.id === id; });
     if (!item) return;
     item.qty = Math.max(0, item.qty + delta);
 
-    // Re-render only this card
-    const card = document.getElementById('stock-' + id);
-    const qtyEl = document.getElementById('qty-' + id);
-    const isLow = item.qty <= 10;
+    // Re-render this card
+    var card = document.getElementById('stock-' + id);
+    var qtyEl = document.getElementById('qty-' + id);
+    var isLow = item.qty <= 10;
 
     qtyEl.textContent = item.qty;
     qtyEl.classList.toggle('qty-low', isLow);
     card.classList.toggle('low-stock', isLow);
 
-    // Update low-stock badge inside name
-    const nameEl = card.querySelector('.stock-item-name');
-    const badge = nameEl.querySelector('.low-stock-badge');
+    // Update low-stock badge
+    var nameEl = card.querySelector('.stock-item-name');
+    var badge = nameEl.querySelector('.low-stock-badge');
     if (isLow && !badge) {
-        nameEl.insertAdjacentHTML('beforeend', '<span class="low-stock-badge">Low</span>');
+        nameEl.insertAdjacentHTML('beforeend', ' <span class="low-stock-badge">Low Stock</span>');
     } else if (!isLow && badge) {
         badge.remove();
     }
+
+    updateStockSummary();
 }
 
 /* =====================================================
    STOCK SEARCH
    ===================================================== */
 function filterStock() {
-    const query = document.getElementById('stockSearchInput').value.toLowerCase();
-    const filtered = stockItems.filter(function (item) {
-        return item.name.toLowerCase().includes(query);
+    var query = document.getElementById('stockSearchInput').value.toLowerCase();
+    var filtered = stockItems.filter(function (item) {
+        var matchName = item.name.toLowerCase().includes(query);
+        if (currentStockFilter === 'low') return matchName && item.qty <= 10;
+        if (currentStockFilter === 'ok') return matchName && item.qty > 10;
+        return matchName;
     });
     renderStockList(filtered);
+}
+
+/* =====================================================
+   STOCK FILTER BY STATUS
+   ===================================================== */
+function filterStockByStatus(status, el) {
+    currentStockFilter = status;
+
+    // Update chip active state
+    var chips = document.querySelectorAll('.stock-chip');
+    for (var i = 0; i < chips.length; i++) {
+        chips[i].classList.remove('active');
+    }
+    if (el) el.classList.add('active');
+
+    filterStock();
 }
 
 /* =====================================================
@@ -148,16 +240,16 @@ function closeAddStockModal() {
 }
 
 function saveNewStockItem() {
-    const name = document.getElementById('newItemName').value.trim();
-    const qty = parseInt(document.getElementById('newItemQty').value) || 0;
-    const price = parseInt(document.getElementById('newItemPrice').value) || 0;
+    var name = document.getElementById('newItemName').value.trim();
+    var qty = parseInt(document.getElementById('newItemQty').value) || 0;
+    var price = parseInt(document.getElementById('newItemPrice').value) || 0;
 
     if (!name) {
         alert('Please enter a medicine name.');
         return;
     }
 
-    const newItem = {
+    var newItem = {
         id: stockItems.length + 1 + Date.now(),
         name: name,
         qty: qty,
@@ -165,6 +257,7 @@ function saveNewStockItem() {
     };
     stockItems.unshift(newItem);
     renderStockList(stockItems);
+    updateStockSummary();
     closeAddStockModal();
 }
 
@@ -177,62 +270,58 @@ function spawnOrder() {
         return;
     }
 
-    const isEmergency = Math.random() < 0.25; // 25% chance emergency
-    const name = random(ORDER_NAMES);
-    const area = random(ORDER_AREAS);
-    const meds = random(MEDICINE_SETS);
-    const amount = Math.floor(Math.random() * 350) + 85;
-    const orderId = 'MQ-' + String(1000 + orderCounter).padStart(4, '0');
+    var isEmergency = Math.random() < 0.25;
+    var name = random(ORDER_NAMES);
+    var area = random(ORDER_AREAS);
+    var meds = random(MEDICINE_SETS);
+    var amount = Math.floor(Math.random() * 350) + 85;
+    var orderId = 'MQ-' + String(1000 + orderCounter).padStart(4, '0');
     orderCounter++;
 
-    addOrderCard({ id: orderId, name, area, meds, amount, isEmergency });
+    addOrderCard({ id: orderId, name: name, area: area, meds: meds, amount: amount, isEmergency: isEmergency });
 
-    // Schedule next order in 8–18 seconds
-    const delay = (Math.random() * 10000) + 8000;
+    // Next order in 8–18 seconds
+    var delay = (Math.random() * 10000) + 8000;
     setTimeout(spawnOrder, delay);
 }
 
 function addOrderCard(order) {
-    const list = document.getElementById('orderList');
+    var list = document.getElementById('orderList');
 
-    // Remove the "waiting" empty state if present
-    const empty = list.querySelector('.orders-empty');
+    // Remove empty state
+    var empty = list.querySelector('.orders-empty');
     if (empty) empty.remove();
 
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    var now = new Date();
+    var timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
 
-    const card = document.createElement('div');
+    var card = document.createElement('div');
     card.className = 'order-card' + (order.isEmergency ? ' emergency' : '');
     card.id = 'order-' + order.id;
 
-    card.innerHTML = `
-    <div class="order-top">
-      <div class="order-id-wrap">
-        <span class="order-id">${order.id}</span>
-        ${order.isEmergency ? '<span class="order-emergency-tag">🚨 EMERGENCY</span>' : ''}
-      </div>
-      <span class="order-time">${timeStr}</span>
-    </div>
-    <p class="order-customer">
-      <i class="fa-solid fa-user"></i> ${order.name} &nbsp;·&nbsp;
-      <i class="fa-solid fa-location-dot"></i> ${order.area}
-    </p>
-    <div class="order-items">${order.meds}</div>
-    <div class="order-footer">
-      <span class="order-total">Total: ₹${order.amount}</span>
-      <div class="order-actions">
-        <button class="btn-accept" onclick="acceptOrder('${order.id}', ${order.amount})">
-          <i class="fa-solid fa-check"></i> Accept
-        </button>
-        <button class="btn-reject" onclick="rejectOrder('${order.id}')">
-          <i class="fa-solid fa-xmark"></i> Reject
-        </button>
-      </div>
-    </div>
-  `;
+    card.innerHTML =
+        '<div class="order-top">' +
+        '<div class="order-id-wrap">' +
+        '<span class="order-id">' + order.id + '</span>' +
+        (order.isEmergency ? '<span class="order-emergency-tag">🚨 EMERGENCY</span>' : '') +
+        '</div>' +
+        '<span class="order-time">' + timeStr + '</span>' +
+        '</div>' +
+        '<p class="order-customer">' +
+        '<i class="fa-solid fa-user"></i> ' + order.name + ' &nbsp;·&nbsp; ' +
+        '<i class="fa-solid fa-location-dot"></i> ' + order.area +
+        '</p>' +
+        '<div class="order-items">' + order.meds + '</div>' +
+        '<div class="order-footer">' +
+        '<span class="order-total">Total: ₹' + order.amount + '</span>' +
+        '<div class="order-actions">' +
+        '<button class="btn-accept" onclick="acceptOrder(\'' + order.id + '\', ' + order.amount + ')">' +
+        '<i class="fa-solid fa-check"></i> Accept</button>' +
+        '<button class="btn-reject" onclick="rejectOrder(\'' + order.id + '\')">' +
+        '<i class="fa-solid fa-xmark"></i> Reject</button>' +
+        '</div>' +
+        '</div>';
 
-    // New orders appear at top
     list.prepend(card);
 
     pendingCount++;
@@ -244,8 +333,8 @@ function addOrderCard(order) {
    ACCEPT / REJECT
    ===================================================== */
 function acceptOrder(id, amount) {
-    const card = document.getElementById('order-' + id);
-    const actions = card.querySelector('.order-actions');
+    var card = document.getElementById('order-' + id);
+    var actions = card.querySelector('.order-actions');
 
     card.classList.add('accepted');
     actions.innerHTML = '<span class="order-status-tag status-accepted">✓ Accepted – Out for delivery</span>';
@@ -254,7 +343,6 @@ function acceptOrder(id, amount) {
     acceptedCount++;
     totalRevenue += amount;
 
-    // Simulate delivery after 30 seconds
     setTimeout(function () {
         markDelivered(id);
     }, 30000);
@@ -264,8 +352,8 @@ function acceptOrder(id, amount) {
 }
 
 function rejectOrder(id) {
-    const card = document.getElementById('order-' + id);
-    const actions = card.querySelector('.order-actions');
+    var card = document.getElementById('order-' + id);
+    var actions = card.querySelector('.order-actions');
 
     card.classList.add('rejected');
     actions.innerHTML = '<span class="order-status-tag status-rejected">✗ Rejected</span>';
@@ -276,9 +364,9 @@ function rejectOrder(id) {
 }
 
 function markDelivered(id) {
-    const card = document.getElementById('order-' + id);
+    var card = document.getElementById('order-' + id);
     if (!card) return;
-    const statusTag = card.querySelector('.status-accepted');
+    var statusTag = card.querySelector('.status-accepted');
     if (statusTag) {
         statusTag.textContent = '📦 Delivered';
         statusTag.style.background = '#dbeafe';
@@ -300,9 +388,23 @@ function updateStats() {
 }
 
 function updateOrderBadge() {
-    const badge = document.getElementById('orderCountBadge');
+    var badge = document.getElementById('orderCountBadge');
     badge.textContent = pendingCount + ' new';
     badge.style.display = pendingCount === 0 ? 'none' : '';
+
+    // Sidebar badge
+    var sidebarBadge = document.getElementById('sidebarOrderBadge');
+    if (sidebarBadge) {
+        sidebarBadge.textContent = pendingCount;
+        sidebarBadge.style.display = pendingCount === 0 ? 'none' : '';
+    }
+
+    // Header notification badge
+    var headerBadge = document.getElementById('headerNotifBadge');
+    if (headerBadge) {
+        headerBadge.textContent = pendingCount;
+        headerBadge.style.display = pendingCount === 0 ? 'none' : '';
+    }
 }
 
 /* =====================================================
@@ -314,7 +416,6 @@ function random(arr) {
 
 /* =====================================================
    CUSTOMER CHAT NOTIFICATIONS
-   Reads from localStorage (set by store-detail.js)
    ===================================================== */
 function loadChatNotifs() {
     var notifs = JSON.parse(localStorage.getItem('mq_store_chat_notifs') || '[]');
@@ -330,7 +431,6 @@ function loadChatNotifs() {
         return;
     }
 
-    // Newest first
     list.innerHTML = notifs.slice().reverse().map(function (n) {
         var d = new Date(n.time);
         var timeStr = d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
@@ -349,7 +449,6 @@ function clearChatNotifs() {
     loadChatNotifs();
 }
 
-// Poll for new notifications every 3 seconds
+// Poll for notifications
 setInterval(loadChatNotifs, 3000);
-// Load on init
 loadChatNotifs();
