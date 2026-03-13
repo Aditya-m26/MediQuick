@@ -67,8 +67,12 @@ function useGPS() {
         var text = city + (pin ? " - " + pin : "");
 
         localStorage.setItem("userLocation", text);
+        if (pin) localStorage.setItem("mq_pincode", pin);
         document.getElementById("locationText").textContent = text;
         closePopup();
+        // Refresh stores with new pincode filter
+        if (typeof loadStores === 'function') loadStores();
+        if (typeof loadPharmacies === 'function') loadPharmacies();
       })
       .catch(function () {
         alert("Could not get location. Please try pincode instead.");
@@ -100,8 +104,12 @@ function usePincode() {
       var text = city + " - " + pin;
 
       localStorage.setItem("userLocation", text);
+      localStorage.setItem("mq_pincode", pin);
       document.getElementById("locationText").textContent = text;
       closePopup();
+      // Refresh stores with new pincode filter
+      if (typeof loadStores === 'function') loadStores();
+      if (typeof loadPharmacies === 'function') loadPharmacies();
     })
     .catch(function () {
       alert("Could not verify pincode. Check your internet connection.");

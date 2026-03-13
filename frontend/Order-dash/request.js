@@ -129,8 +129,17 @@ function loadStores() {
 
 function fetchStores(lat, lng, token) {
   var url = API_BASE + '/api/stores';
+  var params = [];
   if (lat !== null && lng !== null) {
-    url += '?lat=' + lat + '&lng=' + lng;
+    params.push('lat=' + lat);
+    params.push('lng=' + lng);
+  }
+  var pincode = localStorage.getItem('mq_pincode');
+  if (pincode) {
+    params.push('pincode=' + pincode);
+  }
+  if (params.length) {
+    url += '?' + params.join('&');
   }
 
   fetch(url, { headers: { Authorization: 'Bearer ' + token } })

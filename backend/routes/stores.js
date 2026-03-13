@@ -33,7 +33,11 @@ function haversine(lat1, lng1, lat2, lng2) {
 // ─────────────────────────────────────────────────────────────────────────────
 router.get("/", authenticate, async (req, res) => {
     try {
-        const stores = await Store.find({}).lean();
+        const filter = {};
+        if (req.query.pincode) {
+            filter.pincode = req.query.pincode;
+        }
+        const stores = await Store.find(filter).lean();
 
         const userLat = parseFloat(req.query.lat);
         const userLng = parseFloat(req.query.lng);
