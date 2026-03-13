@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – Doctor Appointment</title>
+    <meta name="description" content="Book an appointment with verified doctors near you. MediQuick Doctor Booking." />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="doctor.css" />
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebar" class="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="../Order-dash/request.html"><i class="fa-solid fa-magnifying-glass"></i> Search Medicines</a>
+        <a href="../Order-dash/cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="../Reminder-dash/Reminder.html"><i class="fa-solid fa-bell"></i> Reminders</a>
+        <a href="../Nurse-dash/nurse.html"><i class="fa-solid fa-user-nurse"></i> Nurse Appointment</a>
+        <a href="../Profile-dash/index.html"><i class="fa-solid fa-user"></i> Profile</a>
+    </div>
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-left">
+            <button class="icon-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="header-title-group">
+                <i class="fa-solid fa-user-doctor header-title-icon"></i>
+                <h1 class="header-title">Doctor Appointments</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="../Profile-dash/index.html" class="profile-link">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Book a Doctor Appointment</h2>
+                <p>Find the right specialist & schedule your visit in seconds</p>
+            </div>
+            <div class="hero-icon-wrap">
+                <i class="fa-solid fa-stethoscope"></i>
+            </div>
+        </div>
+        <div class="hero-blob h1"></div>
+        <div class="hero-blob h2"></div>
+    </section>
+
+    <!-- ===== SPECIALITY FILTER ===== -->
+    <section class="filter-section">
+        <div class="filter-scroll" id="filterScroll">
+            <button class="filter-chip active" data-filter="all" onclick="filterDoctors('all', this)">
+                <i class="fa-solid fa-layer-group"></i> All
+            </button>
+            <button class="filter-chip" data-filter="general" onclick="filterDoctors('general', this)">
+                <i class="fa-solid fa-user-doctor"></i> General
+            </button>
+            <button class="filter-chip" data-filter="cardiology" onclick="filterDoctors('cardiology', this)">
+                <i class="fa-solid fa-heart-pulse"></i> Cardiology
+            </button>
+            <button class="filter-chip" data-filter="dermatology" onclick="filterDoctors('dermatology', this)">
+                <i class="fa-solid fa-hand-dots"></i> Dermatology
+            </button>
+            <button class="filter-chip" data-filter="orthopedics" onclick="filterDoctors('orthopedics', this)">
+                <i class="fa-solid fa-bone"></i> Orthopedics
+            </button>
+            <button class="filter-chip" data-filter="pediatrics" onclick="filterDoctors('pediatrics', this)">
+                <i class="fa-solid fa-baby"></i> Pediatrics
+            </button>
+            <button class="filter-chip" data-filter="neurology" onclick="filterDoctors('neurology', this)">
+                <i class="fa-solid fa-brain"></i> Neurology
+            </button>
+            <button class="filter-chip" data-filter="ent" onclick="filterDoctors('ent', this)">
+                <i class="fa-solid fa-ear-listen"></i> ENT
+            </button>
+            <button class="filter-chip" data-filter="gynecology" onclick="filterDoctors('gynecology', this)">
+                <i class="fa-solid fa-person-pregnant"></i> Gynecology
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== DOCTORS GRID ===== -->
+    <section class="doctors-section">
+        <div class="section-header">
+            <h2><i class="fa-solid fa-staff-snake"></i> Available Doctors</h2>
+            <span class="doc-count" id="docCount">8 Doctors</span>
+        </div>
+        <div class="doctors-grid" id="doctorsGrid">
+            <!-- JS renders cards here -->
+        </div>
+        <!-- Empty state -->
+        <div class="empty-state hidden" id="emptyState">
+            <i class="fa-solid fa-user-doctor"></i>
+            <p>No doctors found for this speciality</p>
+        </div>
+    </section>
+
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">Appointment booked successfully!</span>
+    </div>
+
+    <script src="doctor.js"></script>
+</body>
+
+</html>

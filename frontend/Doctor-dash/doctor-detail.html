@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – Doctor Details</title>
+    <meta name="description" content="View doctor profile, full schedule, and book an appointment." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="doctor-detail.css" />
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebar" class="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="../Order-dash/request.html"><i class="fa-solid fa-magnifying-glass"></i> Search Medicines</a>
+        <a href="../Order-dash/cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="../Reminder-dash/Reminder.html"><i class="fa-solid fa-bell"></i> Reminders</a>
+        <a href="doctor.html"><i class="fa-solid fa-user-doctor"></i> All Doctors</a>
+        <a href="../Nurse-dash/nurse.html"><i class="fa-solid fa-user-nurse"></i> Nurse Appointment</a>
+        <a href="../Profile-dash/index.html"><i class="fa-solid fa-user"></i> Profile</a>
+    </div>
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-left">
+            <button class="icon-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <a href="doctor.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="../Profile-dash/index.html" class="profile-link">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== LOADING ===== -->
+    <div id="stateLoading" class="state-loading hidden">
+        <div class="spinner"></div>
+        <p>Loading doctor info…</p>
+    </div>
+
+    <!-- ===== ERROR ===== -->
+    <div id="stateError" class="state-error hidden">
+        <i class="fa-solid fa-circle-exclamation error-icon"></i>
+        <h2>Doctor not found</h2>
+        <p>We couldn't find that doctor. Please go back and try again.</p>
+        <a href="doctor.html" class="go-back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Doctors
+        </a>
+    </div>
+
+    <!-- ===== DOCTOR DETAIL ===== -->
+    <div id="docDetail" class="hidden">
+
+        <!-- Profile Hero -->
+        <section class="profile-hero">
+            <div class="profile-hero-content">
+                <div class="profile-avatar" id="profileAvatar">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-name" id="profileName">Dr. Name</h1>
+                    <p class="profile-spec" id="profileSpec">Speciality</p>
+                    <div class="profile-meta-row">
+                        <span class="meta-chip"><i class="fa-solid fa-hospital"></i> <span id="profileHospital">Hospital</span></span>
+                        <span class="meta-chip"><i class="fa-solid fa-briefcase-medical"></i> <span id="profileExp">0 yrs</span></span>
+                    </div>
+                    <div class="profile-rating" id="profileRating">
+                        <i class="fa-solid fa-star"></i> 4.9 <span class="rating-count">(312 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-blob hb1"></div>
+            <div class="hero-blob hb2"></div>
+        </section>
+
+        <!-- Content Area -->
+        <div class="detail-content">
+
+            <!-- About Card -->
+            <section class="detail-card">
+                <h2 class="card-heading"><i class="fa-solid fa-circle-info"></i> About</h2>
+                <p class="about-text" id="aboutText">
+                    Experienced specialist with extensive expertise in diagnosis and treatment.
+                </p>
+            </section>
+
+            <!-- Full Schedule Card -->
+            <section class="detail-card">
+                <h2 class="card-heading"><i class="fa-solid fa-calendar-days"></i> Weekly Schedule</h2>
+                <div class="schedule-grid" id="scheduleGrid">
+                    <!-- JS fills this -->
+                </div>
+            </section>
+
+            <!-- Available Slots Today Card -->
+            <section class="detail-card">
+                <h2 class="card-heading"><i class="fa-solid fa-clock"></i> Available Slots</h2>
+                <p class="slots-note">Select a date from the schedule above or pick from today's available slots:</p>
+                <div class="today-slots" id="todaySlots">
+                    <!-- JS fills this -->
+                </div>
+            </section>
+
+            <!-- Book Appointment Card -->
+            <section class="detail-card cta-card">
+                <h2 class="card-heading"><i class="fa-solid fa-calendar-check"></i> Book an Appointment</h2>
+                <form class="booking-form" id="bookingForm" onsubmit="confirmBooking(event)">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-user"></i> Patient Name</label>
+                        <input type="text" id="patientName" placeholder="Enter your full name" required />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="patientPhone" placeholder="10-digit mobile number" maxlength="10"
+                            pattern="[0-9]{10}" required />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-calendar-day"></i> Date</label>
+                            <input type="date" id="appointmentDate" required />
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-clock"></i> Time Slot</label>
+                            <select id="appointmentTime" required>
+                                <option value="">Select slot</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-note-medical"></i> Reason (optional)</label>
+                        <input type="text" id="appointmentReason" placeholder="e.g. Routine checkup" />
+                    </div>
+                    <button type="submit" class="btn-book">
+                        <i class="fa-solid fa-calendar-check"></i> Confirm Appointment
+                    </button>
+                </form>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">Appointment booked!</span>
+    </div>
+
+    <script src="doctor-detail.js"></script>
+</body>
+
+</html>

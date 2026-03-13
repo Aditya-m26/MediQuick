@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – Nurse Appointment</title>
+    <meta name="description"
+        content="Book a nurse for injections, wound care, physiotherapy and more. MediQuick Nurse Booking." />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="nurse.css" />
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebar" class="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="../Order-dash/request.html"><i class="fa-solid fa-magnifying-glass"></i> Search Medicines</a>
+        <a href="../Order-dash/cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="../Reminder-dash/Reminder.html"><i class="fa-solid fa-bell"></i> Reminders</a>
+        <a href="../Doctor-dash/doctor.html"><i class="fa-solid fa-user-doctor"></i> Doctor Appointment</a>
+        <a href="../Profile-dash/index.html"><i class="fa-solid fa-user"></i> Profile</a>
+    </div>
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-left">
+            <button class="icon-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="header-title-group">
+                <i class="fa-solid fa-user-nurse header-title-icon"></i>
+                <h1 class="header-title">Nurse Appointments</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="../Profile-dash/index.html" class="profile-link">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Book a Nurse Appointment</h2>
+                <p>Professional nurses for injections, wound care, daily assistance & more</p>
+            </div>
+            <div class="hero-icon-wrap">
+                <i class="fa-solid fa-user-nurse"></i>
+            </div>
+        </div>
+        <div class="hero-blob h1"></div>
+        <div class="hero-blob h2"></div>
+    </section>
+
+    <!-- ===== SERVICE FILTER ===== -->
+    <section class="filter-section">
+        <div class="filter-scroll" id="filterScroll">
+            <button class="filter-chip active" data-filter="all" onclick="filterNurses('all', this)">
+                <i class="fa-solid fa-layer-group"></i> All
+            </button>
+            <button class="filter-chip" data-filter="injections" onclick="filterNurses('injections', this)">
+                <i class="fa-solid fa-syringe"></i> Injections
+            </button>
+            <button class="filter-chip" data-filter="wound_care" onclick="filterNurses('wound_care', this)">
+                <i class="fa-solid fa-bandage"></i> Wound Care
+            </button>
+            <button class="filter-chip" data-filter="iv_drip" onclick="filterNurses('iv_drip', this)">
+                <i class="fa-solid fa-droplet"></i> IV Drip
+            </button>
+            <button class="filter-chip" data-filter="physiotherapy" onclick="filterNurses('physiotherapy', this)">
+                <i class="fa-solid fa-dumbbell"></i> Physiotherapy
+            </button>
+            <button class="filter-chip" data-filter="post_surgery" onclick="filterNurses('post_surgery', this)">
+                <i class="fa-solid fa-bed-pulse"></i> Post-Surgery
+            </button>
+            <button class="filter-chip" data-filter="elderly_care" onclick="filterNurses('elderly_care', this)">
+                <i class="fa-solid fa-wheelchair"></i> Elderly Care
+            </button>
+            <button class="filter-chip" data-filter="baby_care" onclick="filterNurses('baby_care', this)">
+                <i class="fa-solid fa-baby-carriage"></i> Baby Care
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== NURSES GRID ===== -->
+    <section class="nurses-section">
+        <div class="section-header">
+            <h2><i class="fa-solid fa-hand-holding-medical"></i> Available Nurses</h2>
+            <span class="nurse-count" id="nurseCount">8 Nurses</span>
+        </div>
+        <div class="nurses-grid" id="nursesGrid">
+            <!-- JS renders cards here -->
+        </div>
+        <!-- Empty state -->
+        <div class="empty-state hidden" id="emptyState">
+            <i class="fa-solid fa-user-nurse"></i>
+            <p>No nurses found for this service</p>
+        </div>
+    </section>
+
+
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">Booking confirmed!</span>
+    </div>
+
+    <script src="nurse.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick – Nurse Details</title>
+    <meta name="description" content="View nurse profile, services, availability, and book for multiple days." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="nurse-detail.css" />
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebar" class="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="../Order-dash/request.html"><i class="fa-solid fa-magnifying-glass"></i> Search Medicines</a>
+        <a href="../Order-dash/cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="../Reminder-dash/Reminder.html"><i class="fa-solid fa-bell"></i> Reminders</a>
+        <a href="nurse.html"><i class="fa-solid fa-user-nurse"></i> All Nurses</a>
+        <a href="../Doctor-dash/doctor.html"><i class="fa-solid fa-user-doctor"></i> Doctor Appointment</a>
+        <a href="../Profile-dash/index.html"><i class="fa-solid fa-user"></i> Profile</a>
+    </div>
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-left">
+            <button class="icon-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <a href="nurse.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="../Profile-dash/index.html" class="profile-link">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== ERROR ===== -->
+    <div id="stateError" class="state-error hidden">
+        <i class="fa-solid fa-circle-exclamation error-icon"></i>
+        <h2>Nurse not found</h2>
+        <p>We couldn't find that nurse. Please go back and try again.</p>
+        <a href="nurse.html" class="go-back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Nurses
+        </a>
+    </div>
+
+    <!-- ===== NURSE DETAIL ===== -->
+    <div id="nurseDetail" class="hidden">
+
+        <!-- Profile Hero -->
+        <section class="profile-hero">
+            <div class="profile-hero-content">
+                <div class="profile-avatar" id="profileAvatar">
+                    <i class="fa-solid fa-user-nurse"></i>
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-name" id="profileName">Nurse Name</h1>
+                    <div class="profile-services" id="profileServices"></div>
+                    <div class="profile-meta-row">
+                        <span class="meta-chip"><i class="fa-solid fa-briefcase-medical"></i> <span id="profileExp">0 yrs</span></span>
+                        <span class="meta-chip avail-chip"><i class="fa-solid fa-circle-check"></i> Available</span>
+                    </div>
+                    <div class="profile-rating" id="profileRating">
+                        <i class="fa-solid fa-star"></i> 4.8 <span class="rating-count">(120 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-blob hb1"></div>
+            <div class="hero-blob hb2"></div>
+        </section>
+
+        <!-- Content -->
+        <div class="detail-content">
+
+            <!-- About -->
+            <section class="detail-card">
+                <h2 class="card-heading"><i class="fa-solid fa-circle-info"></i> About</h2>
+                <p class="about-text" id="aboutText">Experienced nursing professional.</p>
+            </section>
+
+            <!-- Services Offered -->
+            <section class="detail-card">
+                <h2 class="card-heading"><i class="fa-solid fa-hand-holding-medical"></i> Services Offered</h2>
+                <div class="services-detail-grid" id="servicesGrid"></div>
+            </section>
+
+            <!-- Weekly Availability -->
+            <section class="detail-card">
+                <h2 class="card-heading"><i class="fa-solid fa-calendar-days"></i> Weekly Availability</h2>
+                <div class="schedule-grid" id="scheduleGrid"></div>
+            </section>
+
+            <!-- Booking Form -->
+            <section class="detail-card cta-card">
+                <h2 class="card-heading"><i class="fa-solid fa-calendar-check"></i> Book This Nurse</h2>
+                <form class="booking-form" id="bookingForm" onsubmit="confirmBooking(event)">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-user"></i> Patient Name</label>
+                        <input type="text" id="patientName" placeholder="Enter your full name" required />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="patientPhone" placeholder="10-digit mobile number" maxlength="10"
+                            pattern="[0-9]{10}" required />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-hand-holding-medical"></i> Service Needed</label>
+                        <select id="serviceType" required>
+                            <option value="">Select service</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-calendar-day"></i> Start Date</label>
+                            <input type="date" id="startDate" required />
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-calendar-week"></i> Number of Days</label>
+                            <input type="number" id="numDays" min="1" max="90" value="1" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-clock"></i> Preferred Daily Time</label>
+                        <select id="dailyTime" required>
+                            <option value="">Select time</option>
+                            <option value="08:00 AM">08:00 AM</option>
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="03:00 PM">03:00 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
+                            <option value="05:00 PM">05:00 PM</option>
+                            <option value="06:00 PM">06:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-location-dot"></i> Address / Location</label>
+                        <input type="text" id="patientAddress" placeholder="Home address for the nurse visit"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-note-medical"></i> Special Notes (optional)</label>
+                        <input type="text" id="specialNotes" placeholder="e.g. Insulin injection after meals" />
+                    </div>
+                    <button type="submit" class="btn-book">
+                        <i class="fa-solid fa-calendar-check"></i> Confirm Booking
+                    </button>
+                </form>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">Booking confirmed!</span>
+    </div>
+
+    <script src="nurse-detail.js"></script>
+</body>
+
+</html>
