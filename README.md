@@ -1,0 +1,67 @@
+ **🏆 Developed during a National Level Hackathon (Sinhgad Hackathon 2K26)**
+# 💊 MediQuick
+
+MediQuick is a healthcare web application designed to make medicine access faster, easier, and more reliable.
+
+The platform connects users with nearby pharmacies, allowing them to search medicines, upload prescriptions, place orders, and receive medicines quickly. It also includes features such as medicine reminders and pharmacy management to improve the overall healthcare experience.
+
+---
+
+## 🚀 Features
+
+### 👤 User Side
+- User Authentication (Login & Signup)
+- Search Medicines
+- View Medicine Details
+- Add Medicines to Cart
+- Manage Cart Quantity
+- Nearby Pharmacy Selection
+- Standard & Emergency Delivery Options
+- Prescription Upload
+- Order Placement
+- Medicine Reminder System
+
+### 🏪 Pharmacy Side
+- Pharmacy Login
+- Store Dashboard
+- Order Management
+- Stock Management
+- Order Status Updates
+
+---
+
+## 🧠 Project Idea
+
+Many people face difficulties in getting medicines quickly, especially during emergencies.
+Existing online pharmacy platforms often focus on larger cities and may take several hours or even days for delivery.
+
+MediQuick aims to solve this problem by connecting users with verified local pharmacies and enabling faster medicine delivery
+while also helping users manage their medications through reminders and prescription handling.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- HTML
+- CSS
+- JavaScript
+
+### Backend
+- Node.js
+- Express.js
+
+### Database
+- MongoDB Atlas
+
+### APIs & Services
+- OCR Integration (Prescription Scanning)
+- Location Services (Nearby Pharmacy Detection)
+
+### Hosting
+- Render (currently not live)
+
+---
+
+## 📂 Project Structure
+
