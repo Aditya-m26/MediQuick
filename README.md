@@ -63,5 +63,5 @@ while also helping users manage their medications through reminders and prescrip
 
 ---
 
-## 📂 Project Structure
+***WEBSITE NOT AVAILABLE*** :shipit:
 
