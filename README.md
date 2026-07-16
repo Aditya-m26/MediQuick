@@ -1,4 +1,4 @@
- **🏆 Developed during a National Level Hackathon (Sinhgad Hackathon 2K26)**
+ **🏆 Built during the Sinhgad National Level Hackathon 2K26 as a working healthcare delivery prototype.**
 # 💊 MediQuick
 
 MediQuick is a healthcare web application designed to make medicine access faster, easier, and more reliable.
@@ -62,6 +62,26 @@ while also helping users manage their medications through reminders and prescrip
 - Render (currently not live)
 
 ---
+# 🌐 Live Demo
 
-***WEBSITE NOT AVAILABLE*** :shipit:
+> ***⚠️ The live demo is currently unavailable.***
+
+The project was originally deployed for the **Sinhgad National Level Hackathon 2K26** using Render and MongoDB Atlas.
+
+The deployment has since been taken down because the hosting service and database used for the hackathon are no longer active.
+
+❤️ You can run the project locally to explore its features.
+
+Contributions, suggestions, and feedback are always welcome!
+
+
+##🚀 Future Improvements
+- Re-deploy backend and database
+- AI-powered prescription OCR
+- Real-time pharmacy inventory synchronization
+- Chat system between users and pharmacies
+- Payment gateway integration
+- Delivery partner tracking
+- Mobile application
+
 
