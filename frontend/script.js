@@ -103,96 +103,52 @@ function showAuthError(message) {
 /* =============================================
    FORM SUBMIT – LOGIN
    ============================================= */
-async function handleLogin(event, role) {
+function handleLogin(event, role) {
   event.preventDefault();
   var form = event.target;
 
   var email = form.querySelector('input[type="email"]').value.trim();
-  var password = form.querySelector('input[type="password"]').value;
 
-  // Show loading overlay
-  showRoutingOverlay(role === 'patient' ? 'Signing you in…' : 'Accessing Manager Dashboard…', function () { });
+  // Save token & user to localStorage for downstream dashboards
+  localStorage.setItem('mq_token', 'mock_token');
+  localStorage.setItem('mq_user', JSON.stringify({ role: role, email: email }));
 
-  try {
-    var res = await fetch(API_BASE + '/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ role, email, password })
-    });
-
-    var data = await res.json();
-
-    if (!res.ok) {
-      // Hide overlay and show error
-      document.getElementById('routeOverlay').classList.add('hidden');
-      showAuthError(data.message || 'Login failed. Please try again.');
-      return;
-    }
-
-    // Save token & user to localStorage
-    localStorage.setItem('mq_token', data.token);
-    localStorage.setItem('mq_user', JSON.stringify(data.user));
-
-    // Redirect to correct dashboard
+  // Show loading overlay and redirect
+  showRoutingOverlay(role === 'patient' ? 'Signing you in…' : 'Accessing Manager Dashboard…', function () {
     if (role === 'patient') {
       window.location.href = 'Order-dash/request.html';
     } else {
       window.location.href = 'Store-dash/index.html';
     }
-
-  } catch (err) {
-    document.getElementById('routeOverlay').classList.add('hidden');
-    showAuthError('Cannot connect to server. Is the backend running?');
-  }
+  });
 }
 
 /* =============================================
    FORM SUBMIT – SIGN UP
    ============================================= */
-async function handleSignup(event, role) {
+function handleSignup(event, role) {
   event.preventDefault();
   var form = event.target;
 
   // Collect all named form fields into an object
-  var formData = { role };
+  var formData = { role: role };
   var inputs = form.querySelectorAll('input[name], select[name]');
   inputs.forEach(function (el) {
     formData[el.name] = el.value.trim();
   });
 
-  // Show loading overlay
-  showRoutingOverlay(role === 'patient' ? 'Creating your account…' : 'Registering your store…', function () { });
+  // Save token & user to localStorage for downstream dashboards
+  localStorage.setItem('mq_token', 'mock_token');
+  localStorage.setItem('mq_user', JSON.stringify(formData));
 
-  try {
-    var res = await fetch(API_BASE + '/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
-
-    var data = await res.json();
-
-    if (!res.ok) {
-      document.getElementById('routeOverlay').classList.add('hidden');
-      showAuthError(data.message || 'Registration failed. Please try again.');
-      return;
-    }
-
-    // Save token & user to localStorage
-    localStorage.setItem('mq_token', data.token);
-    localStorage.setItem('mq_user', JSON.stringify(data.user));
-
-    // Redirect
+  // Show loading overlay and redirect
+  showRoutingOverlay(role === 'patient' ? 'Creating your account…' : 'Registering your store…', function () {
     if (role === 'patient') {
       window.location.href = 'Order-dash/request.html';
     } else {
       window.location.href = 'Store-dash/index.html';
     }
-
-  } catch (err) {
-    document.getElementById('routeOverlay').classList.add('hidden');
-    showAuthError('Cannot connect to server. Is the backend running?');
-  }
+  });
 }
 
 

@@ -3,7 +3,7 @@
    ============================================== */
 
 // ─── CONFIG ───────────────────────────────────
-const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:' || !window.location.hostname)
     ? 'http://localhost:5000'
     : ''; // On Render: same origin, relative paths
 
@@ -59,6 +59,33 @@ function getCategoryGradient(category) {
     return "linear-gradient(135deg,#0ea5b0,#38f9d7)";
 }
 
+// ─── CACHED MEDICINES (fetch once, filter in-memory) ──
+let cachedMedicines = null;
+let fetchMedicinesPromise = null;
+
+function getMedicines() {
+    if (cachedMedicines) {
+        return Promise.resolve(cachedMedicines);
+    }
+    if (fetchMedicinesPromise) {
+        return fetchMedicinesPromise;
+    }
+    fetchMedicinesPromise = fetch(API_BASE + "/api/medicines")
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to fetch medicines");
+            return res.json();
+        })
+        .then(data => {
+            cachedMedicines = Array.isArray(data) ? data : (data.medicines || []);
+            return cachedMedicines;
+        })
+        .catch(err => {
+            console.error("Error fetching medicines:", err);
+            return [];
+        });
+    return fetchMedicinesPromise;
+}
+
 // ── State ────────────────────────────────────────────────────────────────────
 let currentMed = null;
 let currentQty = 1;
@@ -87,35 +114,36 @@ document.addEventListener("DOMContentLoaded", () => {
 async function fetchMedicine(name, id) {
     showLoading();
 
-    const token = localStorage.getItem("mq_token");
-    if (!token) {
-        window.location.href = "../index.html";
-        return;
-    }
-
     try {
-        const url = id
-            ? `${API_BASE}/api/medicines/${encodeURIComponent(id)}`
-            : `${API_BASE}/api/medicines/detail?name=${encodeURIComponent(name)}`;
+        let med = null;
 
-        const res = await fetch(url, {
-            headers: { "Authorization": `Bearer ${token}` },
-        });
+        if (id) {
+            const res = await fetch(`${API_BASE}/api/medicines/${encodeURIComponent(id)}`);
+            if (res.status === 404) {
+                showError("Medicine not found", "We couldn't find that medicine in our database.");
+                return;
+            }
+            if (!res.ok) throw new Error(`Server error ${res.status}`);
+            med = await res.json();
+        } else if (name) {
+            const allMeds = await getMedicines();
+            const query = name.trim().toLowerCase();
+            med = allMeds.find(m => m.name && m.name.toLowerCase() === query) ||
+                  allMeds.find(m => m.name && m.name.toLowerCase().includes(query));
 
-        if (res.status === 404) {
-            showError("Medicine not found",
-                `We couldn't find "${name}" in our database. Please try a different search.`);
+            if (!med) {
+                showError("Medicine not found",
+                    `We couldn't find "${name}" in our database. Please try a different search.`);
+                return;
+            }
+        }
+
+        if (!med) {
+            showError("Medicine not found", "Please go back and search for a medicine.");
             return;
         }
-        if (res.status === 401) {
-            localStorage.removeItem("mq_token");
-            window.location.href = "../index.html";
-            return;
-        }
-        if (!res.ok) throw new Error(`Server error ${res.status}`);
 
-        const data = await res.json();
-        currentMed = data.medicine;
+        currentMed = med;
         renderDetail(currentMed);
 
     } catch (err) {
@@ -129,58 +157,66 @@ async function fetchMedicine(name, id) {
 function renderDetail(med) {
     document.title = `${med.name} – MediQuick`;
 
+    const category = med.category || med.type || "General";
+    const medType = med.type || "Tablet";
+    const isRxRequired = !!(med.requiresPrescription || med.prescription);
+
     // Breadcrumb
-    document.getElementById("bcCategory").textContent = med.category;
+    document.getElementById("bcCategory").textContent = category;
     document.getElementById("bcName").textContent = med.name;
 
     // Hero image side – gradient background + FA icon
     const heroSide = document.getElementById("heroImgSide");
-    heroSide.style.background = getCategoryGradient(med.category);
+    heroSide.style.background = getCategoryGradient(category);
 
     // Set the big medicine FA icon
     const heroIcon = document.getElementById("heroMedIcon");
-    heroIcon.className = `hero-med-icon ${getFAIcon(med.type)}`;
+    heroIcon.className = `hero-med-icon ${getFAIcon(medType)}`;
 
     // Also update the form tile icon to match
     const tileFormIcon = document.getElementById("tileFormIcon");
-    if (tileFormIcon) tileFormIcon.className = `tile-fa-icon ${getFAIcon(med.type)}`;
+    if (tileFormIcon) tileFormIcon.className = `tile-fa-icon ${getFAIcon(medType)}`;
 
     // Pack chip in image area
     const packChip = document.getElementById("heroPackChip");
     if (med.packSize) {
         packChip.textContent = med.packSize;
+        packChip.style.display = "";
     } else {
         packChip.style.display = "none";
     }
 
     // Badges ABOVE the name: Type | Rx
-    document.getElementById("badgeType").textContent = med.type;
+    document.getElementById("badgeType").textContent = medType;
 
     const rxBadge = document.getElementById("badgeRx");
     const rxNotice = document.getElementById("rxNotice");
-    if (med.prescription) {
+    if (isRxRequired) {
         rxBadge.textContent = "Rx Required";
         rxBadge.className = "badge-rx rx-required";
         rxNotice.classList.remove("hidden");
     } else {
         rxBadge.textContent = "No Rx Needed";
         rxBadge.className = "badge-rx rx-ok";
+        rxNotice.classList.add("hidden");
     }
 
     // Medicine name (clean – no badges on it)
     document.getElementById("detailName").textContent = med.name;
-    document.getElementById("detailCategorySub").textContent = med.category;
+    document.getElementById("detailCategorySub").textContent = category;
 
-    // ── Price: show "₹10–₹20" / "10 tablets" ─────────────────────
-    // estimatedPrice from DB = "₹10–₹20", packSize = "10 tablets"
+    // ── Price ─────────────────────────────────────────────────────
     const priceEl = document.getElementById("detailPrice");
     const perEl = document.getElementById("detailPer");
 
     if (med.estimatedPrice) {
         priceEl.textContent = med.estimatedPrice;
-    } else {
+    } else if (med.price !== undefined) {
         priceEl.textContent = `₹${med.price}`;
+    } else {
+        priceEl.textContent = "—";
     }
+
     if (med.packSize) {
         perEl.textContent = `/ ${med.packSize}`;
     } else {
@@ -196,20 +232,23 @@ function renderDetail(med) {
         btn.disabled = true;
     } else {
         stockBadge.textContent = "✓ In Stock";
+        stockBadge.className = "stock-badge";
+        const btn = document.getElementById("addCartBtn");
+        btn.disabled = false;
     }
 
     // Description
     document.getElementById("detailDesc").textContent =
-        med.description || "No description available.";
+        med.description || "Quality medicine dispensed as per medical standards.";
 
     // Info tiles
-    document.getElementById("infoCategory").textContent = med.category;
-    document.getElementById("infoComposition").textContent = med.type;
-    // The tileFormIcon is updated above
+    document.getElementById("infoCategory").textContent = category;
+    document.getElementById("infoComposition").textContent = medType;
 
     // Pack size tile
     if (med.packSize) {
         document.getElementById("infoPackSize").textContent = med.packSize;
+        document.getElementById("tilePackSize").style.display = "";
     } else {
         document.getElementById("tilePackSize").style.display = "none";
     }
@@ -217,7 +256,7 @@ function renderDetail(med) {
     // Rx tile
     const rxTileIcon = document.getElementById("tileRxIcon");
     const rxTileVal = document.getElementById("tileRxVal");
-    if (med.prescription) {
+    if (isRxRequired) {
         if (rxTileIcon) rxTileIcon.className = "tile-fa-icon fa-solid fa-file-prescription";
         rxTileVal.textContent = "Required";
         rxTileVal.style.color = "#b91c1c";
@@ -231,12 +270,16 @@ function renderDetail(med) {
     if (med.manufacturer) {
         document.getElementById("infoManufacturer").textContent = med.manufacturer;
         document.getElementById("tileManufacturer").style.display = "";
+    } else {
+        document.getElementById("tileManufacturer").style.display = "none";
     }
 
     // Side effects (optional)
     if (med.sideEffects) {
         document.getElementById("detailSideEffects").textContent = med.sideEffects;
         document.getElementById("sectionSideEffects").classList.remove("hidden");
+    } else {
+        document.getElementById("sectionSideEffects").classList.add("hidden");
     }
 
     showDetail();
@@ -271,17 +314,20 @@ function changeQty(delta) {
 function addToCart() {
     if (!currentMed) return;
 
-    const existing = cart.find(i => i.id === String(currentMed._id));
+    const medId = String(currentMed._id || currentMed.id || "");
+    const isRxRequired = !!(currentMed.requiresPrescription || currentMed.prescription);
+
+    const existing = cart.find(i => i.id === medId);
     if (existing) {
         existing.qty = Math.min(99, existing.qty + currentQty);
     } else {
         cart.push({
-            id: String(currentMed._id),
+            id: medId,
             name: currentMed.name,
             price: currentMed.price,
-            type: currentMed.type || 'Tablet',
-            category: currentMed.category || '',
-            requiresPrescription: !!currentMed.prescription,
+            type: currentMed.type || "Tablet",
+            category: currentMed.category || currentMed.type || "General",
+            requiresPrescription: isRxRequired,
             qty: currentQty,
         });
     }
@@ -307,7 +353,7 @@ function doReSearch() {
     window.location.href = `medicine.html?name=${encodeURIComponent(q)}`;
 }
 
-// ── Live suggestions (autocomplete from backend) ─────────────────────────────
+// ── Live suggestions (autocomplete from cached backend data) ────────────────
 let reSuggestTimeout;
 
 function onReSearchInput(val) {
@@ -325,19 +371,13 @@ function onReSearchInput(val) {
 }
 
 function fetchReSuggestions(q) {
-    const token = localStorage.getItem("mq_token");
-    if (!token) return;
-
-    fetch(API_BASE + "/api/medicines/search?name=" + encodeURIComponent(q), {
-        headers: { Authorization: "Bearer " + token },
-    })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-            renderReSuggestions(data.medicines || []);
-        })
-        .catch(function () {
-            // silently ignore network errors in autocomplete
-        });
+    getMedicines().then(function (medicines) {
+        var query = q.toLowerCase();
+        var matches = medicines.filter(function (m) {
+            return m.name && m.name.toLowerCase().includes(query);
+        }).slice(0, 10);
+        renderReSuggestions(matches);
+    });
 }
 
 function renderReSuggestions(medicines) {
@@ -350,12 +390,15 @@ function renderReSuggestions(medicines) {
     }
     box.innerHTML = medicines
         .map(function (m) {
+            var meta = (m.type || "Medicine") + (m.price ? " · ₹" + m.price : "");
+            if (m.requiresPrescription) meta += " · Rx Required";
             return (
                 '<div class="re-suggestion-row" onclick="pickReSuggestion(' +
                 "'" + m.name.replace(/'/g, "\\'") + "'" +
+                (m._id ? ",'" + m._id + "'" : "") +
                 ')">' +
                 '<span class="re-sug-name">' + m.name + "</span>" +
-                '<span class="re-sug-cat">' + m.category + " · " + m.type + "</span>" +
+                '<span class="re-sug-cat">' + meta + "</span>" +
                 "</div>"
             );
         })
@@ -363,11 +406,15 @@ function renderReSuggestions(medicines) {
     box.style.display = "block";
 }
 
-function pickReSuggestion(name) {
+function pickReSuggestion(name, id) {
     document.getElementById("reSearchInput").value = name;
     const box = document.getElementById("reSuggestionsBox");
     if (box) { box.style.display = "none"; box.innerHTML = ""; }
-    doReSearch();
+    if (id) {
+        window.location.href = `medicine.html?id=${encodeURIComponent(id)}`;
+    } else {
+        doReSearch();
+    }
 }
 
 // Close suggestions when clicking outside

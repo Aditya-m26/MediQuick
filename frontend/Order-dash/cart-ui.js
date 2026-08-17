@@ -216,7 +216,6 @@ function handlePrescriptionUpload(e) {
 ══════════════════════════════════════════════════════ */
 function loadPharmacies() {
   var token = localStorage.getItem('mq_token');
-  if (!token) return;
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -249,10 +248,32 @@ function fetchPharmacies(lat, lng, token) {
     url += '?' + params.join('&');
   }
 
-  fetch(url, { headers: { Authorization: 'Bearer ' + token } })
+  var headers = {};
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+
+  fetch(url, { headers: headers })
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      allPharmacies = data.stores || [];
+      allPharmacies = Array.isArray(data) ? data : (data.stores || []);
+
+      // If user coordinates available, calculate distance for each store
+      if (lat !== null && lng !== null) {
+        allPharmacies.forEach(function (p) {
+          var pLat = p.latitude !== undefined ? p.latitude : p.lat;
+          var pLng = p.longitude !== undefined ? p.longitude : p.lng;
+          if (pLat !== undefined && pLng !== undefined) {
+            var R = 6371;
+            var dLat = (pLat - lat) * Math.PI / 180;
+            var dLon = (pLng - lng) * Math.PI / 180;
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat * Math.PI / 180) * Math.cos(pLat * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            p.distanceKm = Math.round(R * c * 10) / 10;
+          }
+        });
+      }
+
       // Clear skeleton
       var list = document.getElementById('pharmacyList');
       if (list) list.innerHTML = '';
@@ -339,6 +360,7 @@ function renderPharmacyList(pharmacies) {
   var storeDetailBase = 'store-detail.html';
 
   pharmacies.forEach(function (p) {
+    var storeName = p.name || p.storeName || 'Partner Pharmacy';
     var isSelected = selectedPharmacy && selectedPharmacy._id === p._id;
     var card = document.createElement('div');
     card.className = 'pharm-card' + (isSelected ? ' selected' : '') + (isEmergencyMode ? ' emergency-on' : '');
@@ -349,24 +371,25 @@ function renderPharmacyList(pharmacies) {
 
     // Image or icon
     var imgContent = p.photo
-      ? '<img src="' + p.photo + '" alt="' + p.storeName + '">'
+      ? '<img src="' + p.photo + '" alt="' + storeName + '">'
       : '<i class="fa-solid fa-store-alt"></i>';
 
     // Open/Closed badge
-    var statusBadge = p.isOpen
+    var isOpen = p.isOpen !== false;
+    var statusBadge = isOpen
       ? '<span class="pharm-open-badge">Open</span>'
       : '<span class="pharm-closed-badge">Closed</span>';
 
     // Distance
     var distText = p.distanceKm !== null && p.distanceKm !== undefined
       ? p.distanceKm + ' km'
-      : p.city || '';
+      : (p.city || '');
 
     // Delivery time from distance (min 15 for standard, ~10 for emergency)
     var deliveryLabel = getDeliveryTimeFromDistance(p.distanceKm, isEmergencyMode);
 
     // Rating stars
-    var rating = parseFloat(p.rating) || 0;
+    var rating = parseFloat(p.rating) || 4.2;
     var starsHtml = '';
     for (var i = 0; i < 5; i++) {
       starsHtml += '<i class="fa-' + (i < Math.round(rating) ? 'solid' : 'regular') + ' fa-star" style="color:#f59e0b;font-size:11px;"></i>';
@@ -388,7 +411,7 @@ function renderPharmacyList(pharmacies) {
       </div>
       <div class="pharm-info">
         <div class="pharm-header-row">
-          <div class="pharm-name">${p.storeName}</div>
+          <div class="pharm-name">${storeName}</div>
           ${viewDetailsBtn}
         </div>
         <div class="pharm-meta-row">
@@ -448,8 +471,9 @@ function updateOverview() {
 
   // Pharmacy info
   if (selectedPharmacy) {
-    document.getElementById('ovPharmacyName').textContent = selectedPharmacy.storeName;
-    var distText = selectedPharmacy.distanceKm !== null
+    var selectedName = selectedPharmacy.name || selectedPharmacy.storeName || 'Partner Pharmacy';
+    document.getElementById('ovPharmacyName').textContent = selectedName;
+    var distText = (selectedPharmacy.distanceKm !== null && selectedPharmacy.distanceKm !== undefined)
       ? selectedPharmacy.distanceKm + ' km away'
       : (selectedPharmacy.city || '');
     document.getElementById('ovPharmacyMeta').textContent = distText;

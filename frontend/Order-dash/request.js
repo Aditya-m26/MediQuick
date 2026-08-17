@@ -1,5 +1,5 @@
 // ─── CONFIG ──────────────────────────────────────────
-const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:' || !window.location.hostname)
   ? 'http://localhost:5000'
   : '';  // On Render: same origin, so just use relative paths like /api/...
 
@@ -29,7 +29,34 @@ function doSearch() {
     "../Medicine-dash/medicine.html?name=" + encodeURIComponent(q);
 }
 
-// ─── LIVE SUGGESTIONS (autocomplete from backend) ─────
+// ─── CACHED MEDICINES (fetch once, filter in-memory) ──
+let cachedMedicines = null;
+let fetchMedicinesPromise = null;
+
+function getMedicines() {
+  if (cachedMedicines) {
+    return Promise.resolve(cachedMedicines);
+  }
+  if (fetchMedicinesPromise) {
+    return fetchMedicinesPromise;
+  }
+  fetchMedicinesPromise = fetch(API_BASE + "/api/medicines")
+    .then(function (r) {
+      if (!r.ok) throw new Error("Failed to fetch medicines");
+      return r.json();
+    })
+    .then(function (data) {
+      cachedMedicines = Array.isArray(data) ? data : (data.medicines || []);
+      return cachedMedicines;
+    })
+    .catch(function (err) {
+      console.error("Error fetching medicines:", err);
+      return [];
+    });
+  return fetchMedicinesPromise;
+}
+
+// ─── LIVE SUGGESTIONS (autocomplete from cached backend data) ─────
 var suggestTimeout;
 
 function onSearchInput(val) {
@@ -47,19 +74,13 @@ function onSearchInput(val) {
 }
 
 function fetchSuggestions(q) {
-  var token = localStorage.getItem("mq_token");
-  if (!token) return; // not logged in – skip suggestions silently
-
-  fetch(API_BASE + "/api/medicines/search?name=" + encodeURIComponent(q), {
-    headers: { Authorization: "Bearer " + token },
-  })
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      renderSuggestions(data.medicines || []);
-    })
-    .catch(function () {
-      // silently ignore network errors in autocomplete
-    });
+  getMedicines().then(function (medicines) {
+    var query = q.toLowerCase();
+    var matches = medicines.filter(function (m) {
+      return m.name && m.name.toLowerCase().includes(query);
+    }).slice(0, 10);
+    renderSuggestions(matches);
+  });
 }
 
 function renderSuggestions(medicines) {
@@ -72,12 +93,15 @@ function renderSuggestions(medicines) {
   }
   box.innerHTML = medicines
     .map(function (m) {
+      var metaText = (m.type || "Medicine") + (m.price ? " · ₹" + m.price : "");
+      if (m.requiresPrescription) metaText += " · Rx Required";
       return (
         '<div class="suggestion-row" onclick="pickSuggestion(' +
         "'" + m.name.replace(/'/g, "\\'") + "'" +
+        (m._id ? ",'" + m._id + "'" : "") +
         ')">' +
         '<span class="sug-name">' + m.name + "</span>" +
-        '<span class="sug-cat">' + m.category + " · " + m.type + "</span>" +
+        '<span class="sug-cat">' + metaText + "</span>" +
         "</div>"
       );
     })
@@ -85,11 +109,15 @@ function renderSuggestions(medicines) {
   box.style.display = "block";
 }
 
-function pickSuggestion(name) {
+function pickSuggestion(name, id) {
   document.getElementById("searchInput").value = name;
   var box = document.getElementById("suggestionsBox");
   if (box) { box.style.display = "none"; box.innerHTML = ""; }
-  doSearch();
+  if (id) {
+    window.location.href = "../Medicine-dash/medicine.html?id=" + encodeURIComponent(id);
+  } else {
+    doSearch();
+  }
 }
 
 // Close suggestions when clicking outside
@@ -105,48 +133,66 @@ document.addEventListener("click", function (e) {
 updateCartCount();
 loadStores();
 
+// ─── DISTANCE HELPER ─────────────────────────────────────────────────
+function calcDistanceKm(lat1, lon1, lat2, lon2) {
+  var R = 6371; // Earth radius in km
+  var dLat = (lat2 - lat1) * Math.PI / 180;
+  var dLon = (lon2 - lon1) * Math.PI / 180;
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+          Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return Math.round(R * c * 10) / 10;
+}
+
 // ─── STORES (fetched from backend, sorted by GPS distance) ───────────────────
 function loadStores() {
-  var token = localStorage.getItem('mq_token');
-  if (!token) return;
-
   // Try to get user GPS position first, then fetch stores
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       function (pos) {
-        fetchStores(pos.coords.latitude, pos.coords.longitude, token);
+        fetchStores(pos.coords.latitude, pos.coords.longitude);
       },
       function () {
         // User denied / unavailable — fetch without location (no distance sorting)
-        fetchStores(null, null, token);
+        fetchStores(null, null);
       },
       { timeout: 5000 }
     );
   } else {
-    fetchStores(null, null, token);
+    fetchStores(null, null);
   }
 }
 
-function fetchStores(lat, lng, token) {
-  var url = API_BASE + '/api/stores';
-  var params = [];
-  if (lat !== null && lng !== null) {
-    params.push('lat=' + lat);
-    params.push('lng=' + lng);
-  }
-  var pincode = localStorage.getItem('mq_pincode');
-  if (pincode) {
-    params.push('pincode=' + pincode);
-  }
-  if (params.length) {
-    url += '?' + params.join('&');
-  }
+function fetchStores(lat, lng) {
+  var url = API_BASE + "/api/stores";
 
-  fetch(url, { headers: { Authorization: 'Bearer ' + token } })
+  fetch(url)
     .then(function (r) { return r.json(); })
-    .then(function (data) { renderStores(data.stores || []); })
-    .catch(function () {
-      var grid = document.getElementById('pharmacyGrid');
+    .then(function (data) {
+      var stores = Array.isArray(data) ? data : (data.stores || []);
+
+      // If user coordinates available, calculate distance for each store and sort
+      if (lat !== null && lng !== null) {
+        stores.forEach(function (s) {
+          var sLat = s.latitude !== undefined ? s.latitude : s.lat;
+          var sLng = s.longitude !== undefined ? s.longitude : s.lng;
+          if (sLat !== undefined && sLng !== undefined) {
+            s.distanceKm = calcDistanceKm(lat, lng, sLat, sLng);
+          }
+        });
+        stores.sort(function (a, b) {
+          if (a.distanceKm === null || a.distanceKm === undefined) return 1;
+          if (b.distanceKm === null || b.distanceKm === undefined) return -1;
+          return a.distanceKm - b.distanceKm;
+        });
+      }
+
+      renderStores(stores);
+    })
+    .catch(function (err) {
+      console.error("Error loading stores:", err);
+      var grid = document.getElementById("pharmacyGrid");
       if (grid) grid.innerHTML = '<p style="color:#888;padding:20px;">Could not load stores.</p>';
     });
 }
@@ -154,27 +200,27 @@ function fetchStores(lat, lng, token) {
 // ─── DELIVERY TIME HELPER (distance → time range) ────────────────────────────
 // Exposed on window so emergency.js can reuse it
 function getDeliveryTime(distanceKm) {
-  if (distanceKm === null || distanceKm === undefined) return '20–30 min';
-  if (distanceKm <= 2) return '10–15 min';
-  if (distanceKm <= 5) return '15–20 min';
-  if (distanceKm <= 10) return '20–25 min';
-  if (distanceKm <= 15) return '25–35 min';
-  return '35–45 min';
+  if (distanceKm === null || distanceKm === undefined) return "20–30 min";
+  if (distanceKm <= 2) return "10–15 min";
+  if (distanceKm <= 5) return "15–20 min";
+  if (distanceKm <= 10) return "20–25 min";
+  if (distanceKm <= 15) return "25–35 min";
+  return "35–45 min";
 }
 window.getDeliveryTime = getDeliveryTime;
 
 // ─── SHORT ADDRESS HELPER ────────────────────────────────────────────────────
 function shortAddress(addr) {
-  if (!addr) return '';
+  if (!addr) return "";
   // Take the first meaningful part (before the first comma or up to 45 chars)
-  var parts = addr.split(',');
-  var short = parts.slice(0, 2).join(',').trim();
-  if (short.length > 45) short = short.substring(0, 42) + '…';
+  var parts = addr.split(",");
+  var short = parts.slice(0, 2).join(",").trim();
+  if (short.length > 45) short = short.substring(0, 42) + "…";
   return short;
 }
 
 function renderStores(stores) {
-  var grid = document.getElementById('pharmacyGrid');
+  var grid = document.getElementById("pharmacyGrid");
   if (!grid) return;
 
   if (!stores.length) {
@@ -183,54 +229,56 @@ function renderStores(stores) {
   }
 
   grid.innerHTML = stores.map(function (s) {
-    var isOpen = s.isOpen;
+    var storeName = s.storeName || s.name || "Partner Pharmacy";
+    var isOpen = s.isOpen !== false;
     var badge = isOpen
       ? '<span class="store-open-badge">Open</span>'
       : '<span class="store-closed-badge">Closed</span>';
 
     // Photo: use real image if available, else show icon placeholder
     var imgHtml = s.photo
-      ? '<img src="' + s.photo + '" alt="' + s.storeName + '" class="store-photo" loading="lazy">'
+      ? '<img src="' + s.photo + '" alt="' + storeName + '" class="store-photo" loading="lazy">'
       : '<div class="store-img-placeholder"><i class="fa-solid fa-capsules"></i></div>';
 
-    var distHtml = s.distanceKm !== null
+    var cityText = s.city || (s.address ? s.address.split(",").pop().trim() : "Local Area");
+    var distHtml = (s.distanceKm !== null && s.distanceKm !== undefined)
       ? '<p class="store-distance"><i class="fa-solid fa-location-dot"></i> ' + s.distanceKm + ' km away</p>'
-      : '<p class="store-distance"><i class="fa-solid fa-location-dot"></i> ' + s.city + '</p>';
+      : '<p class="store-distance"><i class="fa-solid fa-location-dot"></i> ' + cityText + '</p>';
 
     // Short address line
     var addrText = shortAddress(s.address);
     var addrHtml = addrText
       ? '<p class="store-address"><i class="fa-solid fa-map-pin"></i> ' + addrText + '</p>'
-      : '';
+      : "";
 
     // Timings (full range, not just closing time)
     var hoursHtml = '<p class="store-hours"><i class="fa-regular fa-clock"></i> ' +
-      (s.timings || 'See store for hours') + '</p>';
+      (s.timings || "9:00 AM – 10:00 PM") + '</p>';
 
     // Dynamic delivery time based on distance
-    var deliveryTime = getDeliveryTime(s.distanceKm);
-    var distAttr = s.distanceKm !== null ? s.distanceKm : '';
+    var deliveryTime = s.delivery || getDeliveryTime(s.distanceKm);
+    var distAttr = (s.distanceKm !== null && s.distanceKm !== undefined) ? s.distanceKm : "";
     var deliveryHtml = isOpen
       ? '<div class="store-delivery" data-distance="' + distAttr + '"><i class="fa-solid fa-circle-check"></i> ' + deliveryTime + ' delivery</div>'
       : '<div class="store-delivery store-delivery-inactive"><i class="fa-solid fa-ban"></i> Currently Closed</div>';
 
-    var starsHtml = '';
-    var rating = parseFloat(s.rating) || 0;
+    var starsHtml = "";
+    var rating = parseFloat(s.rating) || 4.2;
     for (var i = 0; i < 5; i++) {
-      starsHtml += '<i class="fa-solid fa-star' + (i < Math.round(rating) ? '' : ' star-empty') + '"></i>';
+      starsHtml += '<i class="fa-solid fa-star' + (i < Math.round(rating) ? "" : " star-empty") + '"></i>';
     }
 
     return (
       '<a href="store-detail.html?id=' + s._id + '" class="store-card-link">' +
-      '<div class="store-card' + (isOpen ? '' : ' store-card-closed') + '">' +
+      '<div class="store-card' + (isOpen ? "" : " store-card-closed") + '">' +
       '<div class="store-img-wrap">' +
       imgHtml +
       badge +
       '</div>' +
-      '<div class="store-info' + (isOpen ? '' : ' store-info-closed') + '">' +
-      '<h3 class="store-name">' + s.storeName + '</h3>' +
+      '<div class="store-info' + (isOpen ? "" : " store-info-closed") + '">' +
+      '<h3 class="store-name">' + storeName + '</h3>' +
       '<p class="store-rating">' + starsHtml + ' ' + rating.toFixed(1) +
-      ' <span class="review-count">(' + (s.reviews || 0) + ' reviews)</span></p>' +
+      ' <span class="review-count">(' + (s.reviews || 24) + ' reviews)</span></p>' +
       distHtml +
       addrHtml +
       hoursHtml +
@@ -239,7 +287,7 @@ function renderStores(stores) {
       '</div>' +
       '</a>'
     );
-  }).join('');
+  }).join("");
 }
 
 // ─── PRESCRIPTION UPLOAD + OCR ──────────────────────────────────────────────
